@@ -46,12 +46,12 @@ authorLink: https://www.tangkunyin.com
 authorAbout: https://about.tangkunyin.com
 authorDesc: 一个写代码的「伪文人」
 categories: 技术
-tags: 
+tags:
 - hexo
 - 网站
-keywords: 
-description: 
-photos: 
+keywords:
+description:
+photos:
 - img/2017/demo.jpg
 ---
 ```
@@ -62,7 +62,7 @@ photos:
 
 #### 2、站点分类别名和自定义URL配置
 
-关于自定义URL，请参考这篇文章：[在hexo博客中打造相对完美的URL](https://shuoit.net/tech/build-perfect-url-in-hexo.html)
+关于自定义URL，请参考这篇文章：[在hexo博客中打造相对完美的URL](https://shuoit.net/tech-notes/hexo-links-1483800845.html)
 
 **分类别名**和**标签别名**配置，站点`_config.yml`文件中，其中主题配置文件里的`menu`项需要和`category_map`键值对一致。二者顺序可以不同，但是主题中的顺序决定网站导航栏菜单的顺序。
 
@@ -84,7 +84,7 @@ tag_map:
 # 便于动态配置导航，最新版把左导航写成配置方式了。注意uri前边的"-"，这里是object类型，内层包了数组
 leftPagesMenu:
 - uri: pageName    // 这个是创建layout为page类型的页面名称，简而言之，就是独立页面名称
-  title: navName	  // 故名意思，导航名称，这在大屏幕时体现 
+  title: navName	  // 故名意思，导航名称，这在大屏幕时体现
   faName: fa-wifi  // FontAwesome样式名称，最新主题使用了4.7.0，请参考http://fontawesome.io/icons/
 ```
 
