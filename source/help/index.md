@@ -11,7 +11,7 @@ photos:
 comments: true
 ---
 
-## 这里不发表情，准备说点严肃、实在的...
+## 为保证本站良好的用户体验，你最好能科学上网...以下进入正题：
 
 ### Q: 这网站怎么弄的，还挺好看的啊？
 
@@ -19,7 +19,7 @@ comments: true
 
 ### Q: 为什么博客有时候打开速度很慢，一直在加载呢？
 
-> A: 评论组件使用的`Disqus`等资源的服务器在墙外，你懂的...(不懂问搜狗)。不过不影响文章阅读。
+> A: 评论组件使用的`Disqus`等资源的服务器在境外，加载不出来或者慢是正常的，不影响文章阅读。
 
 ### Q: 我也想用这个主题搭个博客，不知道怎么弄？
 
@@ -32,11 +32,11 @@ comments: true
 
 ### Q: 无法自由翱翔互联网咋办？
 
-> A: 着急吃饭且自甘有钱的朋友请直接购买[蓝灯](https://github.com/getlantern/lantern)。不着急就慢慢找吧，像`GreenVPN`、`www.ishadowsocks.com`都是很好的方案。另外有`hosts`方案，请前往这个项目[UsefullShells](https://github.com/tangkunyin/UsefullShells)
+> A: 着急吃饭且自甘有钱的朋友请直接购买[蓝灯](https://github.com/getlantern/lantern)等收费工具。不着急就慢慢找吧，如果是macOS系统，注册一个美国商店将是很好的方案。另外有`hosts`方案，请前往这个项目[UsefullShells](https://github.com/tangkunyin/UsefullShells)
 
-### Q: 如何找到一个靠谱的对象？
+### Q: 本站是否接受投稿或转载？
 
-> 如果你有资源，记得第一时间告诉我...
+> 原则上，我是鼓励自己搭建博客。自己存档。当然非要投稿也是可以的。找到邮箱发稿即可。转载只需保证版权即可（当然你不保证我也拿你没办法...）
 
 
 ### Q: 我觉得站长你挺有意思的，能交个朋友吗？
