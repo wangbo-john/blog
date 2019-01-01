@@ -71,6 +71,9 @@ tag_map:
   Mac必备工具: MacTools
   跨平台: CrossPlatform
   黑科技: CoolTech
+  碎碎念: Impression
+  读书: Reading
+  旅行: Traveling
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
