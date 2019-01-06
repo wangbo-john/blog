@@ -71,5 +71,3 @@ gitment:
 ## Comments settings. Disqus support only by default.
 disqus_shortname: shuoit
 
-# Analytics
-tentcentAnalyticsId: 65036274
