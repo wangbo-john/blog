@@ -7,11 +7,10 @@ authorDesc: 一个写代码的「伪文人」
 date: 2017-03-29 18:49:38
 keywords: help，qa，帮助中心，站内帮助
 description: 这里是说IT网站的站内帮助，帮助中心会尽量把一些常见问题通过自问自答的方式放出，希望真的能帮到你们。
-photos:
 comments: true
+photos:
 ---
 
-## 为保证本站良好的用户体验，你最好能科学上网...以下进入正题：
 
 ### Q: 这网站怎么弄的，还挺好看的啊？
 
@@ -30,10 +29,6 @@ comments: true
 > A: 关于使用主题出错，请先前往[JSimple-issues](https://github.com/tangkunyin/hexo-theme-jsimple/issues)寻找答案，说不定你遇到的问题，已经有人碰到而我也回答解决方式了。关于主题的任何问题，我都会在那里回复
 
 
-### Q: 无法自由翱翔互联网咋办？
-
-> A: 着急吃饭且自甘有钱的朋友请直接购买[蓝灯](https://github.com/getlantern/lantern)等收费工具。不着急就慢慢找吧，如果是macOS系统，注册一个美国商店将是很好的方案。另外有`hosts`方案，请前往这个项目[UsefullShells](https://github.com/tangkunyin/UsefullShells)
-
 ### Q: 本站是否接受投稿或转载？
 
 > 原则上，我是鼓励自己搭建博客。自己存档。当然非要投稿也是可以的。找到邮箱发稿即可。转载只需保证版权即可（当然你不保证我也拿你没办法...）
@@ -41,9 +36,11 @@ comments: true
 
 ### Q: 我觉得站长你挺有意思的，能交个朋友吗？
 
-> A: 可以，来握个手吧：[斜杠中年](http://t.me/kunyintang)
+> A: 可以，来握个手吧，**[老表](http://t.me/laobiao)**
 
 
-#### 暂时更新这些，需要什么本文底部留言......
+#### Q: 其他的...
+
+> 技术贴的疑问请直接回复文章即可。其他需要，可以本文底部留言。或者[电报](http://t.me/kunyintang)找我，我会统一整理然后发到这里......
 
 
