@@ -165,7 +165,7 @@ photos:
 关于这个架手架的源码，可以参考这里：[TypeScript](https://github.com/tangkunyin/hello-fe/tree/master/TypeScript)
 
 
-到现在为止，好像关于写TS的事情并没有记录。做了太多前置工作，内容放到part2吧...
+到现在为止，好像关于写TS的事情并没有记录。做了太多前置工作，内容放到[part2](https://shuoit.net/tech-notes/ts-study-part2-1546832521.html)吧...
 
 另外，叨叨一句，**EditorConfig**可以不用了（要了也是多余）
 
