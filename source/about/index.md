@@ -28,7 +28,7 @@ photos:
 
 简言之，**[说IT](https://shuoit.net)**是一个聚焦于技术和人文的原创IT博客。
 
-聚焦于技术、读书、生活、旅行，技术主要面向大前端，网址：**[https://shuoit.net](https://shuoit.net)**。**注意：为降低用户输入成本，故意去掉了www。**
+涉及技术、读书、生活、旅行，技术主要面向大前端，网址：**[https://shuoit.net](https://shuoit.net)**。**注意：为降低用户输入和记忆成本，故意去掉了www**
 
 本站主要作为技术笔记存档，内容主要涉及大前端（Native、ReatNative、Rax、Flutter等），偶尔可能也会有一些碎碎念、开开车。
 
