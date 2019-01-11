@@ -1,4 +1,4 @@
-title: 嘉宾推荐
+title: 优秀的资源
 author: 唐先森
 avatar: /images/favicon.png
 authorLink: https://www.tangkunyin.com
@@ -7,27 +7,42 @@ authorDesc: 一个写代码的「伪文人」
 date: 2017-02-07 13:22:22
 keywords: 嘉宾推荐，友情链接
 description: 重量级嘉宾推荐，收录有趣、有意义、有影响力、有正能量的博客、资源。欢迎推荐、自荐。
+comments: true
 photos:
-comments: false
 ---
 
 #### 以下摘录有趣、有意义、有影响力、有正能量的博客、资源
 
 > 此处不做网址导航，因此不接受以`SEO`为目的的友链。排序不分那啥...
 
-`JS`大法系
+`JS`大法
 
-[阮一峰博客](http://www.ruanyifeng.com/blog/)
-[闲情写手](http://sentsin.com/)
+[阮一峰](http://www.ruanyifeng.com/blog/)
+
+[JS-Tips](http://www.jstips.co/zh_CN/)
+
+[深入TS](https://jkchao.github.io/typescript-book-chinese/)
+
+[Flutter实战](https://book.flutterchina.club/)
+
 [腾讯AlloyTeam](http://www.alloyteam.com/)
 
+[淘宝FED](http://taobaofed.org/)
 
-`苹果`派
+
+
+`苹果`园
 
 [王巍（喵神）的博客](https://onevcat.com/)
 [Objc.io](https://www.objc.io/)
 [Swifter](http://swifter.tips/)   
 
+`工具`箱
+
+[JS Bin](http://js.jirengu.com/hanihacuna/1/edit?js,console,output)
+[类似的JSBin](http://jsfiddle.net/)
+[远程面试神器](http://collabedit.com/)
+[TS-Playground](https://www.tslang.cn/play/index.html)
 
 `娱乐`圈
 
@@ -37,6 +52,8 @@ comments: false
 
 `公众`号
 
-没有链接，请直接关注微信公众号：`涔汐(zhangcenxi99)`、`小道消息`、`MacTalk`等等
+> 没有链接，请直接搜关键词关注即可。以下是我个人常看的各个领域：
 
+
+![wechat-resources](/img/2019/wechat-resources.jpeg)
 
