@@ -40,9 +40,9 @@ For a quick start, see my [Site backup](https://github.com/shuoit/blog) may be m
 
 ### Important settings
 
-#### 1. CSPEnable: Boolean value( `true` or `false`)
+#### 1. CSP_Enable: Boolean value( `true` or `false`)
 
-Mandatory total https access. Full https model which means **Content-Security-Policy is upgrade-insecure-requests** in html meat tag. Please set `CSPEnable` false when you test on localhost or your online server not support https.Otherwise the css and js in theme reference will be error and the home page will be open error.
+Mandatory total https access. Full https model which means **Content-Security-Policy is upgrade-insecure-requests** in html meat tag. Please set `CSP_Enable` false when you test on localhost or your online server not support https.Otherwise the css and js in theme reference will be error and the home page will be open error.
 
 #### 2. menu: Map value
 
@@ -58,8 +58,8 @@ menu:
 #### 3. comment and  analytics config in your site _config.yml, please add them manually.
 
  ```
-    ## Tencent Aanalytics is default. You can update it in site-analytics.ejs file yourself
-    tentcentAnalyticsId: your siteId
+    ## Google Aanalytics is default. You can update it in analytics.ejs file yourself
+    analyticsId: your id
  ```
 
 ### The other settings
@@ -95,7 +95,12 @@ menu:
         github: https://github.com/tangkunyin
 
 
-6. Other settings please replace with your own directly.
+6. Search module. Please install and configure this plugin first.
+
+- [hexo-generator-search](https://github.com/wzpan/hexo-generator-search)
+
+
+7. Other settings please replace with your own directly.
 
 
 ## Browser support

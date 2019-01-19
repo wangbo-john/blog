@@ -9,8 +9,8 @@ keywords: 说IT，技术博客，原创IT博客
 description: 说IT，一个关注技术和人文的原创IT博客。聚焦于技术、读书、生活、旅行，技术主要面向大前端，网址：https://shuoit.net。
 author: 唐先森(https://www.tangkunyin.com)
 language:
-- zh-cn
-- en
+    - zh-cn
+    - en
 
 timezone:
 
@@ -95,6 +95,11 @@ pagination_dir: page
 theme: hexo-theme-jsimple
 #theme: hexo-theme-hipaper
 
+# Configuration for search module: hexo-generator-search 
+search:
+  path: search.json
+  field: all
+  content: true
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
