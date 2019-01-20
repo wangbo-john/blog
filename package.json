@@ -1,6 +1,6 @@
 {
   "name": "hexo-site",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "author": {
     "name": "Thomas Tang",
     "email": "iam@tangkunyin.com",
@@ -9,6 +9,10 @@
   "private": true,
   "hexo": {
     "version": "3.8.0"
+  },
+  "scripts": {
+    "prepublish": "hexo clean && hexo g && gulp",
+    "publish": "hexo d && hexo b"
   },
   "dependencies": {
     "@babel/core": "^7.2.2",
