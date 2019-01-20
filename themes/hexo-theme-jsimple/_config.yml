@@ -4,10 +4,10 @@ short_name: 说
 
 # Master info. It won't work if the one from (author|authorLink|avatar|authorDesc) be written in post.md
 webmaster:
-  name:
-  avatar:
-  home:
-  desc:
+  name: 唐先森
+  avatar: /images/favicon.png
+  home: https://www.tangkunyin.com
+  desc: 一个写代码的「伪文人」
 
 # CSP Model, true means #Content-Security-Policy = upgrade-insecure-requests# in meat tag
 csp_enable: true

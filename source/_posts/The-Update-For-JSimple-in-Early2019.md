@@ -13,10 +13,15 @@ tags: hexo,网站
 keywords: jsimple,hexo主题
 description: JSimple主题，迎来了2019年第一波大的更新。久违了！
 photos:
+- /img/2019/JSimple-Snapshot-Macbook%20Pro15.png
 ---
 
 
 ### 更新日志
+
+![JSimple-Snapshot-Macbook Pro15](/img/2019/JSimple-Snapshot-Macbook%20Pro15.png)
+
+
 
 算了，明天再写吧。。。
 
