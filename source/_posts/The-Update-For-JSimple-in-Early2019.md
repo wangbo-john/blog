@@ -26,6 +26,10 @@ photos:
 算了，明天再写吧。。。
 
 
+```
+npm install gulp-htmlclean gulp-htmlmin gulp-minify-css gulp-uglify gulp-imagemin --save
+```
+
 
 
 
