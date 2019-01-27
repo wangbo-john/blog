@@ -18,8 +18,6 @@ photos:
 
 上一篇的更新日志：[The-Update-for-JSimple-in-Early2019](https://shuoit.net/tech-notes/the-update-for-jsimple-in-early2019-1547728233.html)
 
-嗯，抽时间补完.... 😅😅😅
-
 其实关于本文主题，Google一下文章到处都是，然而我找了几篇都是`gulp3`，对于我这种忍不了旧习的人来说当然不行，于是，我一把梭的弄了`gulp4`
 
 #### 依赖情况
@@ -73,19 +71,18 @@ var imagemin = require('gulp-imagemin');
 // 引入babel，万一用了ES6呢
 var babel = require('gulp-babel');
 
-// 压缩 public 目录 html
 gulp.task('minify-html', function() {
     return gulp.src('./public/**/*.html')
         .pipe(htmlclean())
         .pipe(htmlmin({
-            removeComments: true,  //清除HTML注释
-            collapseWhitespace: true,  //压缩HTML
-            collapseBooleanAttributes: true,  //省略布尔属性的值 <input checked="true"/> ==> <input checked />
-            removeEmptyAttributes: true,  //删除所有空格作属性值 <input id="" /> ==> <input />
-            removeScriptTypeAttributes: true,  //删除<script>的type="text/javascript"
-            removeStyleLinkTypeAttributes: true,  //删除<style>和<link>的type="text/css"
-            minifyJS: true,  //压缩页面JS
-            minifyCSS: true  //压缩页面CSS
+            removeComments: true,
+            collapseWhitespace: true,
+            collapseBooleanAttributes: true,
+            removeEmptyAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            minifyJS: true,
+            minifyCSS: true
         }))
         .on('error', function(err) {
             console.log('html Error!', err.message);
@@ -93,20 +90,17 @@ gulp.task('minify-html', function() {
         })
         .pipe(gulp.dest('./public'))
 });
-// 压缩 public 目录 css
 gulp.task('minify-css', function() {
     return gulp.src('./public/**/*.css')
         .pipe(minifycss())
         .pipe(gulp.dest('./public'));
 });
-// 压缩js
 gulp.task('minify-js', function() {
-    return gulp.src('./public/js/**/*.js')
+    return gulp.src(['./public/js/**/*.js', '!./public/js/**/*.{min,mini}.js'])
         .pipe(babel())
         .pipe(uglify())
         .pipe(gulp.dest('./public/js'));
 });
-// 压缩图片
 gulp.task('minify-images', function() {
     return gulp.src('./public/img/**/*.*')
         .pipe(imagemin(
@@ -117,7 +111,6 @@ gulp.task('minify-images', function() {
         {'verbose': true}))
         .pipe(gulp.dest('./public/img'))
 });
-// 默认任务
 gulp.task('default', gulp.parallel('minify-html','minify-css','minify-js','minify-images', function(done){
     done();
 }));
