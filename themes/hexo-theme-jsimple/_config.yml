@@ -35,15 +35,15 @@ site_building_time: 01/20/2018
 ## Name order decide show index.The name also called category alias,so you must set category alias before start server.
 ## BTW,'category_map' and 'tag_map' field in site '_config.yml' file must one to one correspondence with menus below.
 menu:
-  技术: tech-notes
-  人文: humanities
-  其他: others
+   技术: tech-notes
+   人文: humanities
+   其他: others
 
 # Customize left navigation menus. faName is FontAwesome style name
 left_nav_menus:
-  - uri: help
-    title: 帮助
-    faName: fa-question-circle
+- uri: help
+  title: 帮助
+  faName: fa-question-circle
 
 
 # cover info config
@@ -87,7 +87,6 @@ adsense:
   post_right_id: 6857083436
   post_bottom_id: 3228829614
 
-
 ## Comments settings. Disqus | Gitment（Introduction: https://imsun.net/posts/gitment-introduction/）
 comments:
   enable: true
@@ -98,3 +97,6 @@ comments:
     ClientID:
     ClientSecret:
     lazy: true
+
+## Baidu ziyuan auto-commit. see https://ziyuan.baidu.com/
+baidu_auto_push: true 
