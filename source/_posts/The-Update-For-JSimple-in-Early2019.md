@@ -9,7 +9,9 @@ authorDesc: 一个写代码的「伪文人」
 categories: 技术
 timestamp: 1547728233
 date: 2019-01-17 20:30:33
-tags: hexo,网站
+tags: 
+	- Hexo
+	- 网站
 keywords: jsimple,hexo主题
 description: JSimple主题，迎来了2019年第一波大的更新。久违了！本次引入了一些细微的交互，优化了很多不合理的样式。比如更换了搜索，试试直接按F键...
 photos:

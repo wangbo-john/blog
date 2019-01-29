@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1528003174
 date: 2018-06-03 13:19:34
 tags:
-	- hexo
+	- Hexo
 	- 网站
 keywords:
 photos:
@@ -66,3 +66,5 @@ cp ./scripts/scaffold.js ../node_modules/hexo/lib/hexo
 // 是不是发现时间戳被加回来了....
 
 ```
+
+

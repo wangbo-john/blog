@@ -58,16 +58,16 @@ category_map:
    其他: others
 tag_map:
   iOS: iOS
-  hexo: hexo
-  swift: swift
-  golang: golang
-  sketch: sketch
-  zeplin: zeplin
+  Hexo: hexo
+  Swift: swift
   网站: website
-  后端: serverSide
+  后端: backend
+  前端: frontend
   JavaScript: javascript
   TypeScript: typescript
   ReactNative: RN
+  Vue: Vue
+  React: React
   Mac必备工具: MacTools
   跨平台: CrossPlatform
   黑科技: CoolTech

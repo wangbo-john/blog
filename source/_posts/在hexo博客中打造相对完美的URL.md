@@ -9,7 +9,7 @@ authorAbout: https://about.tangkunyin.com
 authorDesc: 一个写代码的「伪文人」
 categories: 技术
 tags: 
-	- hexo
+	- Hexo
 	- 网站
 keywords:
 photos:
