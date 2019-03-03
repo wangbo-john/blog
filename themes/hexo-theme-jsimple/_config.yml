@@ -9,8 +9,11 @@ webmaster:
   home: https://www.tangkunyin.com
   desc: 一个写代码的「伪文人」
 
-# CSP Model, true means #Content-Security-Policy = upgrade-insecure-requests# in meat tag
+# CSP Mode, true means #Content-Security-Policy = upgrade-insecure-requests# in meat tag
 csp_enable: true
+
+# Read Mode. day or night
+read_mode: day
 
 # favicon
 favicon: /images/favicon.png
@@ -87,7 +90,10 @@ adsense:
   post_right_id: 6857083436
   post_bottom_id: 3228829614
 
-## Comments settings. Disqus | Gitment（Introduction: https://imsun.net/posts/gitment-introduction/）
+
+## Comments settings. Disqus
+##                  | Gitment（Introduction: https://imsun.net/posts/gitment-introduction/）
+##                  | gitalk  (Official website: https://gitalk.github.io/)
 comments:
   enable: true
   disqus_shortname: shuoit
@@ -97,6 +103,20 @@ comments:
     ClientID:
     ClientSecret:
     lazy: true
+  gitalk:
+    on: true
+    owner: xx
+    repo: xx.github.io
+    admin: ['xxx']
+    clientID:
+    clientSecret:
+
+# Git-pages server info (Coding Pages|Github Pages)
+server_name:
+server_url:
+
+mathjax:
+   enable: true
 
 ## Baidu ziyuan auto-commit. see https://ziyuan.baidu.com/
 baidu_auto_push: true 
