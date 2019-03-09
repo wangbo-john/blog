@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1528020667
 date: 2018-06-03 18:11:07
 tags:
-    - 开发日常
+    - 码常规
 keywords: git, git revert
 description: 来自2017.3.10的笔记：Git回滚代码笔记
 photos:

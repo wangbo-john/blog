@@ -76,11 +76,11 @@ tag_map:
   后端: back-end
   前端: front-end
   跨端: cross-app
-  开发日常: dev-tips
-  黑科技: cool-tech
-  碎碎念: impression
   读书: reading
   旅行: traveling
+  码常规: dev-tips
+  黑科技: cool-tech
+  碎碎念: impression
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date

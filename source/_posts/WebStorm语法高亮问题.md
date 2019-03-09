@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1528025404
 date: 2018-06-03 19:30:04
 tags:
-    - 开发日常
+    - 码常规
 keywords: WebStrom, highlight-webstorm
 description: 来自2018.1.23的笔记：WebStorm语法高亮问题。一定程度上解决React-Native开发过程中，WebStorm语法高亮的问题
 photos:
