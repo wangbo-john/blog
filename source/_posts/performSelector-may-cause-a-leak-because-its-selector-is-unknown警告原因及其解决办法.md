@@ -10,6 +10,7 @@ timestamp: 1528016144
 date: 2018-06-03 16:55:44
 tags:
     - iOS
+    - Objc
 keywords: iOS, performSelector
 description: 来自2016.7.27的笔记："performSelector may cause a leak because its selector is unknown"警告原因及其解决办法
 photos:

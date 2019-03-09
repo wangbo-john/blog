@@ -8,7 +8,8 @@ authorDesc: 一个写代码的「伪文人」
 categories: 技术
 timestamp: 1546511333
 date: 2019-01-03 18:28:53
-tags: TypeScript
+tags: 
+    - TypeScript
 keywords: typescript,tsconfig,ts编译配置
 description: 一个变通的方式，解决tsc不能同时配置declaration和allowJs都为true的姿势。本文试着采用一把梭的方式编译ts文件、并生成types
 photos:

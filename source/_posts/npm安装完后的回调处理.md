@@ -11,6 +11,7 @@ date: 2018-06-03 19:34:20
 tags:
     - NodeJS
     - JavaScript
+    - 开发日常
 keywords: JavaScript, npm, nodejs
 description: 来自2018.1.19的笔记：npm安装完后的回调处理（scripts的postinstall）
 photos:

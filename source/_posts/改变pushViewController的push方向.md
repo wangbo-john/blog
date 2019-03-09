@@ -10,6 +10,7 @@ timestamp: 1528013902
 date: 2018-06-03 16:18:22
 tags:
     - iOS
+    - Objc
 keywords: iOS, pushViewController
 description: 来自2015.6.18的笔记：改变pushViewController的push方向
 photos:

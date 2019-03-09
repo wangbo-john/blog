@@ -10,6 +10,7 @@ timestamp: 1528019847
 date: 2018-06-03 17:57:27
 tags:
     - iOS
+    - Objc
 keywords: iOS, dealloc
 description: 来自2016.4.19的笔记：dealloc方法不个执行的三种最大可能
 photos:

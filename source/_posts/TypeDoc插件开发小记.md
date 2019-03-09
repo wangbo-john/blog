@@ -8,7 +8,8 @@ authorDesc: 一个写代码的「伪文人」
 categories: 技术
 timestamp: 1545808023
 date: 2018-12-26 15:07:03
-tags: TypeScript
+tags: 
+    - TypeScript
 keywords: TypeDoc,TypeScript
 description: 如何为TypeDoc文档系统开发插件？本文记录了typedoc-plugin-toc-group的开发流程。希望对有需求的朋友一定帮助。
 photos:

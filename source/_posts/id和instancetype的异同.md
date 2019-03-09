@@ -10,6 +10,7 @@ timestamp: 1528012736
 date: 2018-06-03 15:58:56
 tags:
     - iOS
+    - Objc
 keywords: iOS, id和instancetype的异同
 description: 来自2015.5.13的笔记：id和instancetype的异同。
 photos:

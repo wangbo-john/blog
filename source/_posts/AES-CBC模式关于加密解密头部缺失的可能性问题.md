@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1528016470
 date: 2018-06-03 17:01:10
 tags:
-    - iOS
+    - Objc
     - Java
 keywords: iOS, 加解密
 description: 来自2016.8.16的笔记：AES CBC模式，关于加密后，解密头部缺失的可能性问题

@@ -9,8 +9,11 @@ categories: 技术
 timestamp: 1531130418
 date: 2018-07-09 18:00:18
 tags:
-keywords:
-description:
+    - Flutter
+    - 前端
+    - 跨端
+keywords: flutter, rax
+description: 本文对现有的Flutter和Rax跨端框架进行了简单调研，并得出了一些结论。应该是可以解决初学时的What and Why...
 photos:
 ---
 

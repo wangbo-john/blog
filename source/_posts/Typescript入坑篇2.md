@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1546832521
 date: 2019-01-07 11:42:01
 tags:
-- TypeScript
+    - TypeScript
 keywords: typescript, tslang
 description: TypeScript入坑笔记第二篇。这一部分记录下编码规范和一些简单的语法问题。
 photos:

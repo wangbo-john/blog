@@ -8,7 +8,8 @@ authorDesc: 一个写代码的「伪文人」
 categories: 技术
 timestamp: 1546923599
 date: 2019-01-08 12:59:59
-tags: JavaScript
+tags: 
+    - JavaScript
 keywords: iife,自执行匿名函数,立即调用函数表达式
 description: 自执行匿名函数或立即调用函数表达式我们可能听说过，假设没听说过，也能知道大概是个什么东西。而IIFE，你造么😂，或者他的一些小技巧知道多少...
 photos:
