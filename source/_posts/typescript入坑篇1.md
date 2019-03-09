@@ -9,7 +9,8 @@ categories: 技术
 timestamp: 1528259629
 date: 2018-06-06 12:33:49
 tags:
-- TypeScript
+    - 前端
+    - TypeScript
 keywords: typescript, tslang
 description: TypeScript入坑笔记第一篇。从没有到Hello World。除此之外，还将记录使用ESLint+Prettier来统一前端代码风格。
 photos:

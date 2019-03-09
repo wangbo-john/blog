@@ -57,23 +57,34 @@ category_map:
    人文: humanities
    其他: others
 tag_map:
-  iOS: iOS
-  Hexo: hexo
+  ## language tags  
+  Dart: dart
   Swift: swift
-  网站: website
-  后端: backend
-  前端: frontend
-  JavaScript: javascript
-  TypeScript: typescript
-  ReactNative: RN
-  Vue: Vue
-  React: React
-  Mac必备工具: MacTools
-  跨平台: CrossPlatform
-  黑科技: CoolTech
-  碎碎念: Impression
-  读书: Reading
-  旅行: Traveling
+  ObjC: oc
+  Java: java
+  Python: python
+  JavaScript: js
+  TypeScript: ts
+  ## platform tags  
+  iOS: ios
+  安卓: android
+  MacOS: mac
+  WebX: web
+  ## frameworks
+  Vue: vue
+  React: react
+  Flutter: flutter
+  ReactNative: rn
+  Hexo: hexo
+  ## clients
+  后端: back-end
+  前端: front-end
+  跨端: cross-app
+  ## life and etc.
+  黑科技: cool-tech
+  碎碎念: impression
+  读书: reading
+  旅行: traveling
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
