@@ -11,7 +11,7 @@
     "version": "3.8.0"
   },
   "scripts": {
-    "prepublish": "hexo g && gulp",
+    "prepublish": "hexo clean && hexo g && gulp",
     "publish": "hexo d && hexo b"
   },
   "dependencies": {
