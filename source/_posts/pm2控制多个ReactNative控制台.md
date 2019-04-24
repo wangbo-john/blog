@@ -71,11 +71,17 @@ planB：
 
 ### 三、pm2控制多个ReactNative服务
 
-#### 启动一个名为xxName的进程，可多个一起
-> pm2 start npm --name xxName -- run start
+#### 启动一个名为xxName的进程，可多个一起。其中`start`为`scripts`中定义的命令
+
+```
+pm2 start npm --name xxName -- run start
+```
 ​
 #### 这种方式会启动一个名为npm的进程，如果不区别名称，则另外一个无法启动
-> pm2 start npm -- start
+
+```
+pm2 start npm -- start
+```
 
 
 ![](/img/2018/15280271298874.jpg)
