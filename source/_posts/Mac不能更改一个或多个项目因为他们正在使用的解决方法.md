@@ -1,6 +1,6 @@
 title: Mac不能更改一个或多个项目因为他们正在使用的解决方法
 entitle: 'extended-attri-in-mac'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

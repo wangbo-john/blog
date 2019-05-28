@@ -1,6 +1,6 @@
 title: typedoc使用笔记
 entitle: 'typedoc-notes'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

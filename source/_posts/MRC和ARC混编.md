@@ -1,6 +1,6 @@
 title: MRC和ARC混编
 entitle: 'mrc-and-arc'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

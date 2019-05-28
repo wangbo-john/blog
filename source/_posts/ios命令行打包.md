@@ -1,6 +1,6 @@
 title: iOS命令行打包
 entitle: 'ipa-command-packaging'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

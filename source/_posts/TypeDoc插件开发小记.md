@@ -1,6 +1,6 @@
 title: TypeDoc插件开发小记
 entitle: 'how-to-create-plugin-for-typedoc'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

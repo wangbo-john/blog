@@ -1,6 +1,6 @@
 title: React16的一些问题及对策
 entitle: 'react16-usage'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

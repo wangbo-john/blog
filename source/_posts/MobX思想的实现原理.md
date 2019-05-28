@@ -1,6 +1,6 @@
 title: MobX思想的实现原理
 entitle: 'mobx-core-study'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

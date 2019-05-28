@@ -2,7 +2,7 @@ title: 在hexo博客中打造相对完美的URL
 entitle: hexo-links
 timestamp: 1483800845
 date: 2017-01-07 22:54:05
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: https://www.tangkunyin.com
 authorAbout: https://about.tangkunyin.com

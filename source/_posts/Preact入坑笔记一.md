@@ -1,6 +1,6 @@
 title: Preact入坑笔记一
 entitle: 'Preact-learning-notes1'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

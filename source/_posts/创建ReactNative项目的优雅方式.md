@@ -1,6 +1,6 @@
 title: 创建ReactNative项目的优雅方式
 entitle: 'create-rn-in-better-way'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

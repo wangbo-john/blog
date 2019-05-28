@@ -2,7 +2,7 @@ title: macOS下超赞的工具推荐
 entitle: mac-tools
 timestamp: 1483804283
 date: 2017-01-07 23:51:23
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: https://www.tangkunyin.com
 authorAbout: https://about.tangkunyin.com

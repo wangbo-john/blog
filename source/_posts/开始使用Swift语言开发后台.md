@@ -1,6 +1,6 @@
 title: 开始使用Swift语言开发后台
 entitle: swift-in-serverside
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

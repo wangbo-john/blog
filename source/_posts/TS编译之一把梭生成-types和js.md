@@ -1,6 +1,6 @@
 title: TS编译之一把梭生成@types和js
 entitle: 'Allow--declaration-with--allowJs'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

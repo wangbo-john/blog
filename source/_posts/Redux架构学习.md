@@ -1,6 +1,6 @@
 title: Redux架构学习
 entitle: 'redux-study'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

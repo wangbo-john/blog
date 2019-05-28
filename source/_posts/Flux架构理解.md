@@ -1,6 +1,6 @@
 title: Flux架构理解
 entitle: 'flux-study'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

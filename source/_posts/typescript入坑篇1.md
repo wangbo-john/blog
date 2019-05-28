@@ -1,6 +1,6 @@
 title: Typescript入坑篇1
 entitle: 'ts-study-part1'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

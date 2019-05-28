@@ -1,6 +1,6 @@
 title: 将hexo博客url优化进行到底
 entitle: 'permalink-optimize-hexo'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

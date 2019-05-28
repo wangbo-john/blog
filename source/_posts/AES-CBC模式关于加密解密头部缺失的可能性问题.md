@@ -1,6 +1,6 @@
 title: AES/CBC模式关于加密解密头部缺失的可能性问题
 entitle: 'AES_CBC-iOS'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

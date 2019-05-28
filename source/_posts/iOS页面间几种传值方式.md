@@ -1,6 +1,6 @@
 title: iOS页面间几种传值方式
 entitle: 'data-pass-in-iOS'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

@@ -1,6 +1,6 @@
 title: Git回滚代码笔记
 entitle: 'git-revert'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

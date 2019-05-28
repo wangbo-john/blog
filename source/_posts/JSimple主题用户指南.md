@@ -2,7 +2,7 @@ title: JSimple主题用户指南
 entitle: jsimple-usage
 timestamp: 1492480198
 date: 2017-04-18 09:49:58
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: https://www.tangkunyin.com
 authorAbout: https://about.tangkunyin.com
@@ -40,7 +40,7 @@ photos:
 ```
 title: {{ title }}
 date: {{ date }}
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: https://www.tangkunyin.com
 authorAbout: https://about.tangkunyin.com

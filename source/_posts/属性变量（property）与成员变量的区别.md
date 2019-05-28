@@ -1,6 +1,6 @@
 title: 属性变量（property）与成员变量的区别
 entitle: 'property-and-memberVar-in-iOS'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

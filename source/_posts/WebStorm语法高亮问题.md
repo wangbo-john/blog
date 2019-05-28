@@ -1,6 +1,6 @@
 title: WebStorm语法高亮问题
 entitle: 'highlight-webstorm'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

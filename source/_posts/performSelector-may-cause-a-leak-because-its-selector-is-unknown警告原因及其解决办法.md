@@ -1,6 +1,6 @@
 title: performSelector may cause a leak because its selector is unknown警告原因及其解决办法
 entitle: 'performSelector-warning-fix'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

@@ -1,6 +1,6 @@
 title: 如果用Redux不爽的话那就试试MobX吧
 entitle: 'mobx-vs-redux'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

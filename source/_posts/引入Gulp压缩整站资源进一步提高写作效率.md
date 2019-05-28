@@ -1,6 +1,6 @@
 title: 引入Gulp压缩整站资源进一步提高写作效率
 entitle: 'use-gulp-to-speed-hexo'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

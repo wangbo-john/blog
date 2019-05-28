@@ -1,6 +1,6 @@
 title: NSScanner，扫描器
 entitle: 'NSScanner'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

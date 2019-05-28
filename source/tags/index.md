@@ -1,7 +1,7 @@
 ---
 title: 标签云
 date: 2017-02-04 15:37:12
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: https://www.tangkunyin.com
 authorAbout: https://about.tangkunyin.com

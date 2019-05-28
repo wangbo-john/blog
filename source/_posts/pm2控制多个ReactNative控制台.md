@@ -1,6 +1,6 @@
 title: pm2控制多个ReactNative控制台
 entitle: 'pm2-rn-combine'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

@@ -1,6 +1,6 @@
 title: IOS中URL编码和解码
 entitle: 'url-encoding-iOS'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'

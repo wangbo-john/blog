@@ -1,6 +1,6 @@
 title: Swift与OC混编你需要知道的事情2
 entitle: 'swift-oc-coding'
-author: 唐先森
+author: 托码思
 avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'
