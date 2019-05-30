@@ -6,8 +6,8 @@ authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'
 authorDesc: 一个写代码的「伪文人」
 categories: 技术
-timestamp: 1559047234
-date: 2019-05-28 20:40:34
+timestamp: 1559221858
+date: 2019-05-29 21:10:58
 tags:
     - JavaScript
 keywords: reduce，数组
