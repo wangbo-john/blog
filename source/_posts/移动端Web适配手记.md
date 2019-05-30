@@ -177,7 +177,7 @@ meta.setAttribute('content', 'initial-scale=' + 1/dpr + ', maximum-scale=' + 1/d
 
 对于移动端而言，最重要的是如何多终端兼容。以上介绍的响应式也好、REM也好都各有千秋，而REM使得CSS和JS耦合在了一起。**VW**和**VH**的诞生解决了这一难题，目前来看，是最趋于完美的做法。具体做法参考以下资料：
 
-###参考资料： 
+### 参考资料： 
 
 - [移动web适配利器-rem](http://www.alloyteam.com/2016/03/mobile-web-adaptation-tool-rem/)
 - [掘金：移动端/web端适配方案](https://juejin.im/post/5cbdee71f265da03b57b5866)
