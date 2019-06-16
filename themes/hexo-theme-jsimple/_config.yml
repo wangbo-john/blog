@@ -84,11 +84,12 @@ adsense:
   enable: true
   auto: true
   client_id: ca-pub-4837253996935841
+  page_tb_id: 3228829614
   archive_id: 2266978027
   tags_id: 5073050868
+  post_inner_id: 9087656062
   post_left_id: 1712444257
   post_right_id: 6857083436
-  post_bottom_id: 3228829614
 
 
 ## Comments settings. Disqus
@@ -119,4 +120,4 @@ mathjax:
    enable: true
 
 ## Baidu ziyuan auto-commit. see https://ziyuan.baidu.com/
-baidu_auto_push: true 
+baidu_auto_push: true
