@@ -9,8 +9,8 @@ categories: 技术
 timestamp: 1528003174
 date: 2018-06-03 13:19:34
 tags:
-	- Hexo
-	- WebX
+	- hexo
+	- webx
 keywords:
 photos:
 	- /img/2017/hexo-blog-basic.jpg

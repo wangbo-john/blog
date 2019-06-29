@@ -9,8 +9,8 @@ categories: 技术
 timestamp: 1528013009
 date: 2018-06-03 16:03:29
 tags:
-    - iOS
-    - Objc
+    - 苹果
+    - objective-c
 keywords: iOS, NSScanner
 description: 来自2015.5.29的笔记：NSScanner，扫描器。
 photos:

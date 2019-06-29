@@ -9,8 +9,8 @@ categories: 技术
 timestamp: 1528014051
 date: 2018-06-03 16:20:51
 tags:
-    - iOS
-    - Objc
+    - 苹果
+    - objective-c
 keywords: iOS, pushViewController
 description: 来自2015.7.29的笔记：iOS属性最佳实践
 photos:

@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1528024413
 date: 2018-06-03 19:13:33
 tags:
-    - JavaScript
+    - javascript
 keywords: JavaScript, MobX
 description: 来自2018.1.22的笔记：MobX思想的实现原理（摘录）
 photos:

@@ -9,8 +9,8 @@ categories: 技术
 timestamp: 1528013386
 date: 2018-06-03 16:09:46
 tags:
-    - iOS
-    - Objc
+    - 苹果
+    - objective-c
 keywords: iOS, 指针
 description: 来自2015.6.10的笔记：UIView事件独占
 photos:

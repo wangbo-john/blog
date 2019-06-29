@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1528014752
 date: 2018-06-03 16:32:32
 tags:
-    - iOS
+    - 苹果
     - 码常规
 keywords: iOS, ipa
 description: 来自2015.9.16的笔记：iOS命令行打包

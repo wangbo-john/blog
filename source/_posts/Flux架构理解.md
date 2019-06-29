@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1528023412
 date: 2018-06-03 18:56:52
 tags:
-    - JavaScript
+    - javascript
 keywords: JavaScript, Flux
 description: 来自2018.1.22的笔记：Flux架构理解
 photos:

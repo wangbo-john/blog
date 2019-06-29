@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1544172600
 date: 2018-12-07 16:50:00
 tags: 
-    - JavaScript
+    - javascript
 keywords:
 description: 再来总结下JavaScript模块化的问题，虽说没什么用，但要往编译层扒，这玩意也是绕不开的。
 photos:

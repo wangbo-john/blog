@@ -9,8 +9,8 @@ categories: 技术
 timestamp: 1528013719
 date: 2018-06-03 16:15:19
 tags:
-    - iOS
-    - Objc
+    - 苹果
+    - objective-c
 keywords: iOS, 随机数
 description: 来自2015.6.11的笔记：iOS随机数获取
 photos:

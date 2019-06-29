@@ -9,7 +9,7 @@ categories: 技术
 date: 2018-12-07 11:16:52
 timestamp: 1544152560
 tags: 
-    - TypeScript
+    - typescript
     - 码常规
 keywords: TypeDoc,TypeScript
 description: TypeDoc 是一款支持 TypeScript 的文档生成工具，安装、使用方便。最后生成的是静态的 HTML 文件，界面简洁，提供多个可选的配置，并且可以按照自己的需求自定义界面样式。

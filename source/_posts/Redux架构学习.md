@@ -10,7 +10,7 @@ timestamp: 1528023659
 date: 2018-06-03 19:00:59
 tags:
     - 前端
-    - JavaScript
+    - javascript
 keywords: JavaScript, Redux
 description: 来自2018.1.22的笔记：Redux架构学习笔记
 photos:

@@ -10,8 +10,8 @@ timestamp: 1548753818
 date: 2019-01-29 17:23:38
 tags:
     - 前端
-    - React
-    - TypeScript
+    - react
+    - typescript
 keywords: Preact，Preact学习，Preact和TS混用
 description: Preact，一个体积只有3kB的React替代版本。其简单易用，据资料显示性能甩React和Vue好几条街，于是便有了以本文为开始的探索。
 photos:
@@ -37,7 +37,7 @@ photos:
 #### 一. 这里记录下开发环境的配置，主要依赖情况：
 
 - Preact: ^8.2.6
-- TypeScript: ^3.2.4
+- typescript: ^3.2.4
 - Less: ^3.9.0
 - Webpack: ^4.29.0
 

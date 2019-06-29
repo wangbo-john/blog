@@ -9,8 +9,8 @@ categories: 技术
 timestamp: 1528016729
 date: 2018-06-03 17:05:29
 tags:
-    - iOS
-    - Swift
+    - 苹果
+    - swift
     - 码常规
 keywords: iOS, swift
 description: 来自2015.7.18的笔记：Swift命令行入坑

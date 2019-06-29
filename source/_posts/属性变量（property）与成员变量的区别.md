@@ -9,8 +9,8 @@ categories: 技术
 timestamp: 1528011307
 date: 2018-06-03 15:35:07
 tags:
-    - iOS
-    - Objc
+    - 苹果
+    - objective-c
 keywords: iOS, property
 description: 来自2015.4.29的笔记：属性变量（property）与成员变量的区别。
 photos:

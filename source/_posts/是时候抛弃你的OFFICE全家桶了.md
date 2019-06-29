@@ -10,7 +10,7 @@ timestamp: 1504692052
 date: 2017-09-06 18:00:52
 tags:
 	- 黑科技
-	- JavaScript
+	- javascript
 keywords: nodeppt,ppt
 description: 今天来说一个三年前的项目，于我而言算是是黑科技，给小伙伴们分享下使用心得。同时友情提示你，是时候抛弃office全家桶套餐了，这个更有营养。
 photos:

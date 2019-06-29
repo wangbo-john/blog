@@ -57,22 +57,23 @@ category_map:
    人文: humanities
    其他: others
 tag_map:
-  Dart: dart
-  Swift: swift
-  ObjC: oc
-  Java: java
-  Python: python
-  JavaScript: js
-  TypeScript: ts
-  iOS: ios
+  dart: dart
+  swift: swift
+  objective-c: oc
+  java: java
+  python: py
+  javascript: js
+  typescript: ts
+  苹果: ios
   安卓: android
-  MacOS: mac
-  WebX: web
-  Vue: vue
-  React: react
-  Flutter: flutter
-  ReactNative: rn
-  Hexo: hexo
+  麦克: mac
+  webx: web
+  vue2: vue2
+  vue3: vue3
+  react: react
+  flutter: flutter
+  react-native: rn
+  hexo: hexo
   后端: back-end
   前端: front-end
   跨端: cross-app

@@ -9,7 +9,7 @@ authorAbout: https://about.tangkunyin.com
 authorDesc: 一个写代码的「伪文人」
 categories: 其他
 tags: 
-    - MacOS
+    - 麦克
 keywords: Mac必备工具，Mac开发必备软件，免费的Mac必备工具
 description: 苹果操作系统虽然是不要钱的，但平台上几乎你认为有用并且用的爽的软件都不是免费的。这里将分享一些必备的一些软件，走过路过不要错过。
 photos:

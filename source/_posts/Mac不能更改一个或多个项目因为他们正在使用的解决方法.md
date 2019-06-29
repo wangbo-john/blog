@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1528020192
 date: 2018-06-03 18:03:12
 tags:
-    - MacOS
+    - 麦克
     - 黑科技
 keywords: macOS, extended-file-attributes
 description: 来自2016.5.27的笔记：Mac 不能更改一个或多个项目,因为他们正在使用的解决方法

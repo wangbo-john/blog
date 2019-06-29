@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1559221858
 date: 2019-05-29 21:10:58
 tags:
-    - JavaScript
+    - javascript
 keywords: reduce，数组
 description: 偶然间看到同事的代码，用reduce把一个字符串数组变成了一个带有以数组元素为Key的Object。如此骚操作，让我不得不重新看看reduce...
 photos:

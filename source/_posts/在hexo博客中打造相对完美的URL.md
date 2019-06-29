@@ -9,8 +9,8 @@ authorAbout: https://about.tangkunyin.com
 authorDesc: 一个写代码的「伪文人」
 categories: 技术
 tags: 
-	- Hexo
-	- WebX
+	- hexo
+	- webx
 keywords:
 photos:
 	- /img/2017/hexo-blog-basic.jpg

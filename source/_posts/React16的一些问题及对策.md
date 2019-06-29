@@ -10,8 +10,8 @@ timestamp: 1528027632
 date: 2018-06-03 20:07:12
 tags:
     - 前端
-    - React
-    - JavaScript
+    - react
+    - javascript
 keywords: ReactNative, React
 description: 来自2018.4.23的笔记：React16升级遇到的一些问题及对策
 photos:

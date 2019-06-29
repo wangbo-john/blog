@@ -10,7 +10,7 @@ timestamp: 1528027186
 date: 2018-06-03 19:59:46
 tags:
     - 前端
-    - ReactNative
+    - react-native
 keywords: ReactNative, React Navigation
 description: 来自2018.2.4的笔记：ReactNative导航的解决方案（Navigating Between Screens）
 photos:

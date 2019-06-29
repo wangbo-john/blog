@@ -9,8 +9,8 @@ categories: 技术
 timestamp: 1528012896
 date: 2018-06-03 16:01:36
 tags:
-    - iOS
-    - Objc
+    - 苹果
+    - objective-c
 keywords: iOS, URL编码解码
 description: 来自2015.5.13的笔记：IOS中URL编码和解码。
 photos:

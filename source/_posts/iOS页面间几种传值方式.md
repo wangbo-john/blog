@@ -9,8 +9,8 @@ categories: 技术
 timestamp: 1528013544
 date: 2018-06-03 16:12:24
 tags:
-    - iOS
-    - Objc
+    - 苹果
+    - objective-c
 keywords: iOS, 属性，代理，block，单例，通知
 description: 来自2015.6.11的笔记：iOS 页面间几种传值方式（属性，代理，block，单例，通知）
 photos:

@@ -9,8 +9,8 @@ categories: 技术
 timestamp: 1528013230
 date: 2018-06-03 16:07:10
 tags:
-    - iOS
-    - Objc
+    - 苹果
+    - objective-c
 keywords: iOS, 指针
 description: 来自2015.6.6的笔记：关于指针定义（解决 sending 'const NSString *' to parameter of type 'NSString *' ）
 photos:

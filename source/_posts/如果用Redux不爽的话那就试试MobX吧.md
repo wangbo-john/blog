@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1528024961
 date: 2018-06-03 19:22:41
 tags:
-    - JavaScript
+    - javascript
 keywords: JavaScript, MobX, Redux
 description: 来自2018.1.25的笔记：如果用Redux不爽的话，那就试试MobX吧（摘录）
 photos:

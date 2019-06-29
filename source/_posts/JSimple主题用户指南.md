@@ -9,8 +9,8 @@ authorAbout: https://about.tangkunyin.com
 authorDesc: 一个写代码的「伪文人」
 categories: 其他
 tags:
-	- Hexo
-	- WebX
+	- hexo
+	- webx
 keywords: JSimple主题用户指南
 description: 这里，我将为大家写一篇早就该写的文档，关于JSimple主题的用户使用指南。如果你下载了这个主题使用中遇到了麻烦和错误，请第一时间阅读本文。当然，主题也在持续优化和改进，本文也将跟进。方便就请保存书签。
 photos:
@@ -48,7 +48,7 @@ authorDesc: 一个写代码的「伪文人」
 categories: 技术
 tags:
     - hexo
-    - WebX
+    - webx
 keywords:
 description:
 photos:

@@ -9,8 +9,8 @@ categories: 技术
 timestamp: 1532415903
 date: 2018-07-24 15:05:03
 tags:
-    - JavaScript
-    - TypeScript
+    - javascript
+    - typescript
 keywords:
 description:
 photos:

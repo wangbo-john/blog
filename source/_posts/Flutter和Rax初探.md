@@ -9,7 +9,7 @@ categories: 技术
 timestamp: 1531130418
 date: 2018-07-09 18:00:18
 tags:
-    - Flutter
+    - flutter
     - 前端
     - 跨端
 keywords: flutter, rax
