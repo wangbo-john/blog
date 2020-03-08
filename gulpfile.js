@@ -1,5 +1,7 @@
+'use strict';
+
 var gulp = require('gulp');
-var minifycss = require('gulp-minify-css');
+var minifycss = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
 var htmlmin = require('gulp-htmlmin');
 var htmlclean = require('gulp-htmlclean');
@@ -9,8 +11,8 @@ var imagemin = require('gulp-imagemin');
 var babel = require('gulp-babel');
 
 // 压缩 public 目录 html
-gulp.task('minify-html', function() {
-    return gulp.src('./public/**/*.html')
+gulp.task('minify-html', async function() {
+    await gulp.src('./public/**/*.html')
         .pipe(htmlclean())
         .pipe(htmlmin({
             removeComments: true,  //清除HTML注释
@@ -29,29 +31,35 @@ gulp.task('minify-html', function() {
         .pipe(gulp.dest('./public'))
 });
 // 压缩 public 目录 css
-gulp.task('minify-css', function() {
-    return gulp.src('./public/**/*.css')
+gulp.task('minify-css', async function() {
+    await gulp.src('./public/**/*.css')
         .pipe(minifycss())
         .pipe(gulp.dest('./public'));
 });
 // 压缩js
-gulp.task('minify-js', function() {
-    return gulp.src(['./public/js/**/*.js', '!./public/js/**/*.{min,mini}.js'])
+gulp.task('minify-js', async function() {
+    await gulp.src(['./public/js/**/*.js', '!./public/js/**/*.{min,mini}.js'])
         .pipe(babel())
         .pipe(uglify())
         .pipe(gulp.dest('./public/js'));
 });
 // 压缩图片
-gulp.task('minify-images', function() {
-    return gulp.src('./public/img/**/*.*')
+gulp.task('minify-images', async function() {
+    await gulp.src('./public/img/**/*.*')
         .pipe(imagemin(
         [imagemin.gifsicle({'optimizationLevel': 3}),
-        imagemin.jpegtran({'progressive': true}),
+        imagemin.mozjpeg({'progressive': true}),
         imagemin.optipng({'optimizationLevel': 8}),
         imagemin.svgo()],
         {'verbose': true}))
         .pipe(gulp.dest('./public/img'))
 });
+
+process.on('unhandledRejection', error => {
+    console.error('unhandledRejection', error);
+    process.exit(1) // To exit with a 'failure' code
+});
+
 // 默认任务
 gulp.task('default', gulp.parallel('minify-html','minify-css','minify-js','minify-images', function(done){
     done();
