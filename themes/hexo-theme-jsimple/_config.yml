@@ -96,8 +96,8 @@ adsense:
 ##                  | Gitment（Introduction: https://imsun.net/posts/gitment-introduction/）
 ##                  | gitalk  (Official website: https://gitalk.github.io/)
 comments:
-  enable: true
-  disqus_shortname: shuoit
+  enable: false
+  disqus_shortname:
   gitment:
     repo:
     githubID:
