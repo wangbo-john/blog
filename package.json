@@ -10,7 +10,13 @@
   "hexo": {
     "version": "4.2.0"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "hexo g && gulp",
+    "publishOnly": "hexo d && hexo b",
+    "publish": "npm run build && npm run publishOnly",
+    "rebuild": "hexo clean && npm run build",
+    "republish": "npm run rebuild && npm run publishOnly"
+  },
   "dependencies": {
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
