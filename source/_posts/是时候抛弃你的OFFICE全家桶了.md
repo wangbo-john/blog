@@ -5,7 +5,7 @@ avatar: /images/favicon.png
 authorLink: 'https://www.tangkunyin.com'
 authorAbout: 'https://about.tangkunyin.com'
 authorDesc: 一个写代码的「伪文人」
-categories: 其他
+categories: 技术
 timestamp: 1504692052
 date: 2017-09-06 18:00:52
 tags:

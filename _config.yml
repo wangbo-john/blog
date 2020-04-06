@@ -4,9 +4,9 @@
 
 # Site
 title: 说IT
-subtitle: 关注技术和人文的原创IT博客
-keywords: 说IT，技术博客，原创IT博客
-description: 说IT，一个关注技术和人文的原创IT博客。聚焦于技术、读书、生活、旅行，技术主要面向大前端，网址：https://shuoit.net。
+subtitle: 关注技术与人文的IT博客
+keywords: 说IT，技术博客，IT技术博客
+description: 说IT，聚焦于大前端开发和人工智能方向，是一个关注技术与人文的IT博客。作者：托码思，网址：https://shuoit.net。
 author: 托码思(https://www.tangkunyin.com)
 language:
     - zh-cn
@@ -53,9 +53,8 @@ highlight:
 # Category & Tag
 default_category: 技术
 category_map:
-   技术: tech-notes
-   人文: humanities
-   其他: others
+   技术: tech
+   人文: huma
 tag_map:
   dart: dart
   swift: swift
