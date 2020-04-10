@@ -62,7 +62,7 @@ photos:
 
 #### 2、站点分类别名和自定义URL配置
 
-关于自定义URL，请参考这篇文章：[在hexo博客中打造相对完美的URL](https://shuoit.net/tech-notes/hexo-links-1483800845.html)
+关于自定义URL，请参考这篇文章：[在hexo博客中打造相对完美的URL](https://shuoit.net/tech/hexo-links-1483800845.html)
 
 **分类别名**和**标签别名**配置，站点`_config.yml`文件中，其中主题配置文件里的`menu`项需要和`category_map`键值对一致。二者顺序可以不同，但是主题中的顺序决定网站导航栏菜单的顺序。
 

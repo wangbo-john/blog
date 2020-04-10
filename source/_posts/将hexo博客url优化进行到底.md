@@ -19,7 +19,7 @@ description: 半个月前，患有强迫症晚期的我又拾起了hexo。这次
 
 ## 事件源自2017年元旦时的一篇博文
 
-[在hexo博客中打造相对完美的URL](https://shuoit.net/tech-notes/hexo-links-1483800845.html)
+[在hexo博客中打造相对完美的URL](https://shuoit.net/tech/hexo-links-1483800845.html)
 
 那篇文章，我向大家介绍了如何在hexo博客中打造一个相对好看、好用的URL链接。然而遗憾的是，**时间戳**在permalink中没法直接使用。当时说了一个笨办法，就是模板中手动去加时间戳，然后文章生成是再取出来。不知道使用过的朋友有没有喷我...
 
@@ -29,7 +29,7 @@ description: 半个月前，患有强迫症晚期的我又拾起了hexo。这次
 
 如果一切顺利，你现在就能愉快的玩耍了。比如：
 
-> https://shuoit.net/tech-notes/permalink-optimize-hexo-1528003174.html
+> https://shuoit.net/tech/permalink-optimize-hexo-1528003174.html
 
 当然别忘了配置站点**_config.yml**
 

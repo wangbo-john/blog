@@ -64,6 +64,6 @@ photos:
 > 至于插件的开发，请移步这篇文章：
 
 
-[TypeDoc插件开发小记](https://shuoit.net/tech-notes/how-to-create-plugin-for-typedoc-1545808023.html)
+[TypeDoc插件开发小记](https://shuoit.net/tech/how-to-create-plugin-for-typedoc-1545808023.html)
 
 

@@ -17,7 +17,7 @@ photos:
 
 ### 关于TypeDoc是个什么鬼及其使用，可以阅读之前那篇文章
 
-[typedoc使用笔记](https://shuoit.net/tech-notes/typedoc-notes-1544152560.html)
+[typedoc使用笔记](https://shuoit.net/tech/typedoc-notes-1544152560.html)
 
 ## 以下记录TOC二级菜单插件的开发
 

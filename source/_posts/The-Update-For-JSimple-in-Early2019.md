@@ -80,7 +80,7 @@ photos:
 
 本次将可以合并的资源，写到了一个文件。如对`JQuery`的引用不再是从CDN拉。引入`DNS-Prefetch`操作，尽可提高响应速度。
 
-关于Gulp压缩资源的操作，请参考这边文章：[引入Gulp压缩整站资源进一步提高写作效率](https://shuoit.net/tech-notes/use-gulp-to-speed-hexo-1547999542.html)
+关于Gulp压缩资源的操作，请参考这边文章：[引入Gulp压缩整站资源进一步提高写作效率](https://shuoit.net/tech/use-gulp-to-speed-hexo-1547999542.html)
 
 #### 5. 将来
 

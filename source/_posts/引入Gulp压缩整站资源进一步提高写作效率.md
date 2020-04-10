@@ -18,7 +18,7 @@ photos:
 
 ### 这篇文章基于`JSimple`最新版
 
-上一篇的更新日志：[The-Update-for-JSimple-in-Early2019](https://shuoit.net/tech-notes/the-update-for-jsimple-in-early2019-1547728233.html)
+上一篇的更新日志：[The-Update-for-JSimple-in-Early2019](https://shuoit.net/tech/the-update-for-jsimple-in-early2019-1547728233.html)
 
 其实关于本文主题，Google一下文章到处都是，然而我找了几篇都是`gulp3`，对于我这种忍不了旧习的人来说当然不行，于是，我一把梭的弄了`gulp4`
 

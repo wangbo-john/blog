@@ -22,7 +22,7 @@ photos:
 
 资料：
 
-- [入坑篇1（前置操作）](https://shuoit.net/tech-notes/ts-study-part1-1528259629.html)
+- [入坑篇1（前置操作）](https://shuoit.net/tech/ts-study-part1-1528259629.html)
 - [自定义 tslint & eslint 详细规则](https://juejin.im/post/5b3859a36fb9a00e4d53fc85)
 - [官方语法基础](https://www.tslang.cn/docs/handbook/basic-types.html)
 - [Typescript Guidelines](https://semlinker.com/ts-intro-and-guide/)
@@ -85,14 +85,14 @@ export default class Person {
 }
 ```
 
-其中这块的配置，在[part1](https://shuoit.net/tech-notes/ts-study-part1-1528259629.html)提到过，[包括同时生成头文件并允许js文件输入](https://shuoit.net/tech-notes/Allow--declaration-with--allowJs-1546511333.html)
+其中这块的配置，在[part1](https://shuoit.net/tech/ts-study-part1-1528259629.html)提到过，[包括同时生成头文件并允许js文件输入](https://shuoit.net/tech/Allow--declaration-with--allowJs-1546511333.html)
 
 这里把新增加的，简要说明下：
 
 - dev: 监听.ts文件改动，实时编译。即增加`-w`参数可避免手动编译
 - prepush: 合并了两个命令，并且`git push`时，会被触发。以此可强制推送前编译最新代码
 - prepublish: 同样合并两个命令，在即将发布上线时使用
-- typingsdoc: 生成Api文档。关于这个，不清楚的读者请看这篇文章：[Typedoc使用笔记](https://shuoit.net/tech-notes/typedoc-notes-1544152560.html)
+- typingsdoc: 生成Api文档。关于这个，不清楚的读者请看这篇文章：[Typedoc使用笔记](https://shuoit.net/tech/typedoc-notes-1544152560.html)
 
 #### 3. tslint及tsconfig
 
