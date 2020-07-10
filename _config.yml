@@ -124,3 +124,9 @@ backup:
   message: backup my blog of https://shuoit.net
   repository:
     github: https://github.com/shuoit/blog.git,master
+
+lazyload:
+  enable: true
+  onlypost: false # optional 
+  loadingImg: # optional eg ./images/loading.gif 
+  isSPA: false # optional
