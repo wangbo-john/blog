@@ -89,14 +89,16 @@ arc install-certificate http://phabricator.tangkunyin.com/
 
 执行后会提示到网站上找到对应的token，找到后粘贴输入。注意提示的网址应该是：[http://phabricator.tangkunyin.com/conduit/login/](http://phabricator.tangkunyin.com/conduit/login/)，如果不是重新登录以加载新的配置
 
-最后在项目中创建.arcconfig文件：
+最后在项目中创建**.arcconfig**文件并配置基础项，完整配置请自提自：`arc get-config --verbose`
 
 ```
 {
-  "project_id" : "your-project",
-  "conduit_uri" : "https://phabricator.tangkunyin.com/"
+  "phabricator.uri" : "https://phabricator.d.xiaomi.net/",
+  "history.immutable": false
 }
 ```
+
+
 
 ##### review步骤：
 
@@ -123,5 +125,7 @@ arc diff commit_id --update D12306  （这儿的D12306是上一次review时的re
 **需要注意的是我这里并没有提到邮件发送配置，实际过程是要配置的，不然上边的邮件肯定发不出去**
 
 具体参考这篇文章：https://cloud.tencent.com/developer/article/1609447
+
+平台操作资料：[Phabricator Code Review操作手册](https://jaycelau.github.io/2018/08/27/Phabricator-code-review-pre-push-%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/)
 
 
