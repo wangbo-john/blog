@@ -1,0 +1,29 @@
+<div id="cover">
+    <div class="cover-img"></div>
+    <div class="cover-info">
+        <% if (theme.avatar_show) { %>
+        <img class="avatar" width="72" src="<%= theme.avatar_image %>" alt="avatar"/>
+        <% } %>
+        <h1 class="cover-siteName"><%= theme.site_name %></h1>
+		<h1 class="cover-siteName"><%= theme.short_name %></h1>
+        <h2 class="cover-siteTitle"><%= theme.cover_title %></h2>
+        <!--<p class="cover-siteDesc"><%= theme.cover_description %></p>-->
+		<h2 class="cover-siteName"><%= "美" %></h2>
+		<h3 class="cover-siteName"><%= "穿透复杂的简单" %></h3>
+		<h3 class="cover-siteName"><%= "演绎丰富的纯粹" %></h3>
+		<h3 class="cover-siteName"><%= "粉碎羁绊的自主" %></h3>
+		<h3 class="cover-siteName"><%= "宇宙浩渺的孤独" %></h3>
+		<h3 class="cover-siteName"><%= "逝者如斯的无情" %></h3>
+		<h3 class="cover-siteName"><%= "人声鼎沸中全神贯注" %></h3>
+		<h3 class="cover-siteName"><%= "千夫所指时义无反顾" %></h3>
+		<h3 class="cover-siteName"><%= "无声处绽放的惊雷" %></h3>
+		<h3 class="cover-siteName"><%= "无尽绚烂后的平淡" %></h3>
+		<h3 class="cover-siteName"><%= "真心自然的笑" %></h3>
+		<h3 class="cover-siteName"><%= "以及" %></h3>
+		<h3 class="cover-siteName"><%= "一笑倾城的她" %></h3>
+		<p class="cover-siteDesc"><%= "　　　　　　　　——王波 多次涂改自娱版" %></p>
+        <div class="cover-sns">
+            <%- partial('_widget/sns-entry', null, {cache: !config.relative_link}) %>
+        </div>
+    </div>
+</div>

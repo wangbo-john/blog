@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 说IT
-subtitle: 关注技术与人文的IT博客
-keywords: 说IT，技术博客，IT技术博客
-description: 说IT，聚焦于大前端开发和人工智能方向，是一个关注技术与人文的IT博客。作者：托码思，网址：https://shuoit.net。
-author: 托码思(https://www.tangkunyin.com)
+title: the Light moved through the hazy
+subtitle: 透雾之光
+keywords: IC, 人文
+description: 
+author: John Wang
 language:
     - zh-cn
     - en
@@ -16,7 +16,8 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://shuoit.net
+#url: https://shuoit.net
+url: https://127.0.0.1
 root: /
 permalink: :category/:entitle-:timestamp.html
 permalink_defaults:
@@ -38,7 +39,7 @@ skip_render:
 new_post_name: :title.md # File name of new posts
 default_layout: post
 titlecase: true # Transform title into titlecase
-external_link: false # Open external links in new tab
+external_link.enable: false # Open external links in new tab
 filename_case: 0s
 render_drafts: false
 post_asset_folder: false
@@ -54,7 +55,8 @@ highlight:
 default_category: 技术
 category_map:
    技术: tech
-   人文: huma
+   人文: human
+   存疑: research
 tag_map:
   dart: dart
   swift: swift
@@ -102,7 +104,7 @@ pagination_dir: page
 ## Themes: http://hexo.io/themes/
 
 
-theme: hexo-theme-jsimple
+theme: jsimple
 #theme: hexo-theme-hipaper
 
 # Configuration for search module: hexo-generator-search 
@@ -115,15 +117,16 @@ search:
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
 - type: git
-  repo: https://tangkunyin@github.com/shuoit/shuoit.github.com.git
+  #repo: https://tangkunyin@github.com/shuoit/shuoit.github.com.git
+  repo: https://wangbo-john@github.com/wangbo-john/blog.git
   branch: master
 
 # Backup settings see:https://github.com/coneycode/hexo-git-backup
 backup:
   type: git
-  message: backup my blog of https://shuoit.net
+  message: backup my blog of https://wangbo-john.github.io
   repository:
-    github: https://github.com/shuoit/blog.git,master
+    github: https://github.com/wangbo-john/blog.git,master
 
 lazyload:
   enable: true

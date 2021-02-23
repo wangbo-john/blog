@@ -1,11 +1,11 @@
 title: {{ title }}
 entitle: ''
 date: {{ date }}
-author: 托码思
+author: 王波
 avatar: /images/favicon.png
-authorLink: https://www.tangkunyin.com
-authorAbout: https://about.tangkunyin.com
-authorDesc: 一个写代码的「伪文人」
+authorLink: https://wangbo-john.github.io
+authorAbout: https://wangbo-john.github.io/about
+authorDesc: a server platform architect
 categories: 技术
 tags: 
 keywords: 
