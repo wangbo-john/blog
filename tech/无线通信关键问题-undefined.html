@@ -1,0 +1,289 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head>
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://wangbo-john.github.io/blog/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta name="author" content="John Wang">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://wangbo-john.github.io/blog">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
+<link rel="shortcut icon" href="/blog/images/favicon.png">
+
+
+<title>inter-symbol interference ii - a Light moved through the hazy</title>
+
+<meta name="keywords" content="IC, 人文">
+
+<meta name="description " content="时钟同步、多径的影响">
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="inter-symbol interference ii - a Light moved through the hazy" />
+<meta property="og:description" content="时钟同步、多径的影响" />
+<meta property="og:url" content="https://wangbo-john.github.io/blog" />
+<meta property="og:site_name" content="a Light moved through the hazy" />
+
+<link rel="dns-prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prerender" href="https://wangbo-john.github.io/blog">
+<link rel="stylesheet" href="/blog/css/JSimple.min.css">
+    <script type="text/javascript">
+        (function() {
+            let jsi_config = {
+                rootUrl: 'https://wangbo-john.github.io/blog/',
+                isPost: 'true',
+                buildingTime: '12/25/2020',
+                snsQRCode: '',
+                donateImg: '',
+                readMode: 'day',
+                localSearch: { dbPath: '' }
+            };
+            
+                jsi_config.localSearch = {
+                    dbPath: '/search.json',
+                    trigger: 'auto',
+                    topN: '1',
+                    unescape: 'false'
+                }
+            
+            window.jsi_config = jsi_config;
+        })()
+    </script>
+    
+<script src="/blog/js/SimpleCore.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/blog" title="透雾之光">透雾之光</a>
+        <a class="site-index current" href="/blog"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/blog/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/blog/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/blog/help" title="说明">
+            <i class="fa fa-question-circle"></i>
+            <span>说明</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    
+</div>
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <img class="cover-img" alt="cover-img" />
+    <div class="cover-info">
+        
+        <h3 class="cover-siteName">a Light moved through the hazy</h3>
+		<h1 class="cover-siteName">透雾之光</h1>
+        <h2 class="cover-siteTitle">交流、探讨 技术、人文 之 美</h2>
+        <!--<p class="cover-siteDesc">美</p>-->
+		<h1 class="cover-siteName">美</h1>
+		<h3 class="cover-siteName">是</h3>
+		<h3 class="cover-siteName">穿透复杂的简单</h3>
+		<h3 class="cover-siteName">演绎丰富的纯粹</h3>
+		<h3 class="cover-siteName">粉碎羁绊的自主</h3>
+		<h3 class="cover-siteName">宇宙浩渺的孤独</h3>
+		<h3 class="cover-siteName">逝者如斯的无情</h3>
+		<h3 class="cover-siteName">人声鼎沸中全神贯注</h3>
+		<h3 class="cover-siteName">千夫所指时义无反顾</h3>
+		<h3 class="cover-siteName">无声处绽放的惊雷</h3>
+		<h3 class="cover-siteName">无尽绚烂后的平淡</h3>
+		<h3 class="cover-siteName">真心自然的笑</h3>
+		<h3 class="cover-siteName">以及</h3>
+		<h3 class="cover-siteName">一笑倾城的她</h3>
+		<p class="cover-siteDesc">　　　　　—— 王波涂鸦自娱，献给老婆的诗，请勿抄袭</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/wangbo-john" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/blog">最近</a></li>
+        
+            
+                <li class="">
+                    <a href="/blog/categories/tech" data-name="技术">技术</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/human" data-name="人文">人文</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/research" data-name="存疑">存疑</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text"
+               readonly="readonly"
+               id="local-search-input-tip"
+               placeholder="读物检索~" />
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://wangbo-john.github.io/blog"
+                   target="_blank">
+                    <img width="48" src="/blog/images/favicon.png" alt="avatar"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://wangbo-john.github.io/blog"
+                       target="_blank">王波</a>
+                    <span title="最后编辑于&nbsp;2020-02-01">2020-02-01</span>
+                </p>
+                <p>一个希望可以看书休闲其实永不得闲的架构师</p>
+            </div>
+            <h2 class="post-title">Inter-Symbol Interference II</h2>
+            <div class="post-meta">
+                本文共计1325个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <p>多年前觉得需要科普移动通信，但现在全民造手机，热度足够，就不详写了，反正这种枯燥文章没人看。</p>
+<h1 id="符号间干扰（ISI）的由来"><a href="#符号间干扰（ISI）的由来" class="headerlink" title="符号间干扰（ISI）的由来"></a>符号间干扰（ISI）的由来</h1><p>无线信道较之于有线信道更复杂，复杂的原因在于多径与时变。（另一个无线、有线共有的来源是前一期提过的不合格的滤波器）</p>
+<h2 id="时变"><a href="#时变" class="headerlink" title="时变"></a>时变</h2><p>通信系统的发射端和接收端需要在信号传送期间确保基础时钟的同步，这样才能高效地利用信道，不至于每个最小的信号发送单位都要经过握手、锁定、确认这样的琐碎过程。<br>对于有线通信系统，它们很容易建立发射端和接收端的时钟同步机制，比如直接将其中一端的时钟传给另一端作为参考时钟。两个系统的时钟源同步了，也就解决了信号同步的问题。</p>
+<p>可是无线系统不一样，接收端没有办法直接获得发射端的时钟。2003年我们这第一批接触3G通信的人找不到任何已有的设计作为参考，只能自己想办法。</p>
+<p>有一点是明确的，基站的时钟信息肯定包含在它所调制、发送出来的信号里。所有信息都只能从基站信号里去找去要！我几乎24小时泡在lab里玩弄 Matlab、信号发生器 和 FPGA，几个月后，边构思边尝试出从接收到的无线信号中解析出基站时钟的方法，分几个步骤逐步收敛到需要的解析精度，并专门设计了一个硬件模块（AFC，自动频率控制）来实现算法运算和状态控制，自动跟踪当前基站的时钟，解决了时变的问题。</p>
+<p>虽然理论上这个问题肯定能解，而且欧美有现成方案，但那都是别人的，不会给我们看，而且不适用于中国标准，因为无线帧结构不一样。<br>当第一个方案真的从自己手中设计、实现出来，而且心里知道将用到中国第一个商用方案上，确实是喜悦非常的。</p>
+<h2 id="多径"><a href="#多径" class="headerlink" title="多径"></a>多径</h2><p>（下面几张蓝色图截自网络，文字自己编辑）<br>由于建筑物或自然环境（如山林等）的反射或遮挡，无线信号通常不一定能够走直线，直接从发射端发射被接收端接收。这就是无线信号的多径传输。<br><img src="/blog/img/2020/inter-symbol_inteference/multi_path01.jpg" alt="多径" title="多径"></p>
+<p>因为这个原因，假如在发送端发送一个窄的脉冲信号，在接收端会接收多个脉冲，本来最短时延是沿最短路径传输所消耗的时间，现在因为多条路径长短不一，所以时延被扩展了，通常将最后一个到达的脉冲，和最先到达的脉冲的时延差，称为最大时延扩展，用Tmax来表示最大时延扩展。<br><img src="/blog/img/2020/inter-symbol_inteference/multi_path02.jpg" alt="Tmax" title="Tmax"></p>
+<p>如果这个时延扩展大于两个发送脉冲之间的时间间隔，则会对下一个脉冲的接收产生干扰。<br>如果将这两个脉冲看成符号，这称之为符号间干扰（ISI）。<br><img src="/blog/img/2020/inter-symbol_inteference/multi_path03.jpg" alt="ISI" title="ISI"></p>
+<h1 id="符号间干扰（ISI）的解决"><a href="#符号间干扰（ISI）的解决" class="headerlink" title="符号间干扰（ISI）的解决"></a>符号间干扰（ISI）的解决</h1><h2 id="时钟同步"><a href="#时钟同步" class="headerlink" title="时钟同步"></a>时钟同步</h2><p>解决时钟同步问题，是无线系统解决ISI问题的第一步。（还有个并列第一步，解决滤波器问题）</p>
+<h2 id="消除多径干扰"><a href="#消除多径干扰" class="headerlink" title="消除多径干扰"></a>消除多径干扰</h2><p>同步问题解决后，要避免接收信号中，一个符号的波形因扩展到其它符号中而造成的干扰，就要将两次发送符号之间的周期扩大，也就是把符号的宽度扩大。扩大多少呢？至少是大于最大时延扩展。<br><img src="/blog/img/2020/inter-symbol_inteference/multi_path04.jpg" alt="扩大时延" title="扩大时延"></p>
+<p>而周期扩大，就意味着速率降低了，速率降低，也就意味着带宽降低了。<br><img src="/blog/img/2020/inter-symbol_inteference/multi_path05.jpg" alt="带宽降低" title="带宽降低"></p>
+<p>所以系统设计者对于周期扩大是有个容忍极限的，这个极限可以从他们承诺的系统吞吐率参数推算出来。</p>
+<p>Path finding模块的任务就是找出同一个symbol（符号）的第一条径信号（通常是主径）和n条能量依次递减的多径接收信号，对它们的偏移量进行调整、对齐后合并，用于后续计算解析。</p>
+<p>至此，符号间干扰最直接的几个因素就解决了，其它因素因为事物普遍联系的原因还会有影响但没这么强烈。</p>
+
+            
+                
+            
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/blog/tags/silicon/">silicon</a>
+            
+            <a href="/blog/tags/inter-symbol-inteference/">inter-symbol-inteference</a>
+            
+            <a href="/blog/tags/filter/">filter</a>
+            
+            <a href="/blog/tags/jitter/">jitter</a>
+            
+            <a href="/blog/tags/quantify-precision/">quantify-precision</a>
+            
+        </div>
+        
+    </article>
+    
+        <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+    
+    
+
+
+</div>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about"  title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/blog/help" title="帮助" >帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/sitemap.xml" title="地图">地图</a>
+        </p>
+        <p>
+            本站已建立&nbsp<a href="/timeline" id="siteBuildingTime"></a>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br/>
+            ©2017-<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://wangbo-john.github.io/blog" target="_blank" rel="friend">王波</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input"
+                   spellcheck="false"
+                   type="text"
+                   autocomplete="off"
+                   placeholder="请输入查询关键词"/>
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+
+    <script type="text/javascript">
+        let bp = document.createElement('script');
+        let curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        bp.setAttribute("async", "");
+        let s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    </script>
+
+
+</body>
+</html>
