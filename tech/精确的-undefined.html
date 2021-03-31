@@ -1,0 +1,414 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head>
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://wangbo-john.github.io/blog/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta name="author" content="John Wang">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://wangbo-john.github.io/blog">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
+<link rel="shortcut icon" href="/blog/images/favicon.png">
+
+
+<title>对预测执行漏洞的一些解释 - a Light moved through the hazy</title>
+
+<meta name="keywords" content="IC, 人文">
+
+<meta name="description " content="界定预测执行术语，其实是解释为什么会出问题">
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="对预测执行漏洞的一些解释 - a Light moved through the hazy" />
+<meta property="og:description" content="界定预测执行术语，其实是解释为什么会出问题" />
+<meta property="og:url" content="https://wangbo-john.github.io/blog" />
+<meta property="og:site_name" content="a Light moved through the hazy" />
+
+<link rel="dns-prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prerender" href="https://wangbo-john.github.io/blog">
+<link rel="stylesheet" href="/blog/css/JSimple.min.css">
+    <script type="text/javascript">
+        (function() {
+            let jsi_config = {
+                rootUrl: 'https://wangbo-john.github.io/blog/',
+                isPost: 'true',
+                buildingTime: '12/25/2020',
+                snsQRCode: '',
+                donateImg: '',
+                readMode: 'day',
+                localSearch: { dbPath: '' }
+            };
+            
+                jsi_config.localSearch = {
+                    dbPath: '/search.json',
+                    trigger: 'auto',
+                    topN: '1',
+                    unescape: 'false'
+                }
+            
+            window.jsi_config = jsi_config;
+        })()
+    </script>
+    
+<script src="/blog/js/SimpleCore.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/blog" title="透雾之光">透雾之光</a>
+        <a class="site-index current" href="/blog"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/blog/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/blog/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/blog/help" title="说明">
+            <i class="fa fa-question-circle"></i>
+            <span>说明</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    
+</div>
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <img class="cover-img" alt="cover-img" />
+    <div class="cover-info">
+        
+        <h3 class="cover-siteName">a Light moved through the hazy</h3>
+		<h1 class="cover-siteName">透雾之光</h1>
+        <h2 class="cover-siteTitle">交流、探讨 技术、人文 之 美</h2>
+        <!--<p class="cover-siteDesc">美</p>-->
+		<h1 class="cover-siteName">美</h1>
+		<h3 class="cover-siteName">是</h3>
+		<h3 class="cover-siteName">穿透复杂的简单</h3>
+		<h3 class="cover-siteName">演绎丰富的纯粹</h3>
+		<h3 class="cover-siteName">粉碎羁绊的自主</h3>
+		<h3 class="cover-siteName">宇宙浩渺的孤独</h3>
+		<h3 class="cover-siteName">逝者如斯的无情</h3>
+		<h3 class="cover-siteName">人声鼎沸中全神贯注</h3>
+		<h3 class="cover-siteName">千夫所指时义无反顾</h3>
+		<h3 class="cover-siteName">无声处绽放的惊雷</h3>
+		<h3 class="cover-siteName">无尽绚烂后的平淡</h3>
+		<h3 class="cover-siteName">真心自然的笑</h3>
+		<h3 class="cover-siteName">以及</h3>
+		<h3 class="cover-siteName">一笑倾城的她</h3>
+		<p class="cover-siteDesc">　　　　　—— 王波涂鸦自娱，献给老婆的诗，请勿抄袭</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/wangbo-john" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/blog">最近</a></li>
+        
+            
+                <li class="">
+                    <a href="/blog/categories/tech" data-name="技术">技术</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/human" data-name="人文">人文</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/research" data-name="存疑">存疑</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text"
+               readonly="readonly"
+               id="local-search-input-tip"
+               placeholder="读物检索~" />
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://wangbo-john.github.io/blog"
+                   target="_blank">
+                    <img width="48" src="/blog/images/favicon.png" alt="avatar"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://wangbo-john.github.io/blog"
+                       target="_blank">王波</a>
+                    <span title="最后编辑于&nbsp;2020-02-07">2020-02-07</span>
+                </p>
+                <p>一个希望可以看书休闲其实永不得闲的架构师</p>
+            </div>
+            <h2 class="post-title">对预测执行漏洞的一些解释</h2>
+            <div class="post-meta">
+                本文共计4109个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <p>所有文章全部原创，劳动辛苦，请勿转载。</p>
+<p>这篇内容不敢自己发挥，因为通过这些描述其实可以理解攻击原理，所以本文中术语部分可能有点拗口（已经仔细斟酌但无法消除这种感觉），它们翻译自Intel严谨拗口的官方资料。</p>
+<h1 id="精确的预测执行术语"><a href="#精确的预测执行术语" class="headerlink" title="精确的预测执行术语"></a>精确的预测执行术语</h1><p>当前用来描述 <strong>预测执行 侧信道（旁道）脆弱性</strong> 的术语 在某些情况下不够精确。新发现的脆弱性用老的弱点来描述（类似熔断、类似幽灵，等等），会导致对它们的操作和影响产生误解。另外，不同含义的技术术语有时还被混用，比如侧信道（side channel）和隐藏信道（covert channel）。</p>
+<p>本文目的是介绍一组简明术语，这些术语正在和研究社区协商以达成共识（本文作者声明：请不要真期望协商结果更新）。Intel准备将本文内的术语用在将来的指导文档中，但不保证更新所有已存的指南。</p>
+<h1 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h1><p>信道是计算系统中传输或表达信息的任何介质。计算系统中根据上下文，信道有两种：<strong>合法信道</strong> 是系统设计人员计划中为传输信息而规划的，其它所有信道都是 <strong>次生信道</strong>。合法信道的例子包括以太网、共享内存和 进程间通信套接字。资源竞争、CPU cache状态、以及功耗变化，都是次生信道的例子。（作者John本人更倾向用“嫡生信道”和“庶出信道” 来区分这两者——更形象、更不带歧视色彩，但intel恨死后者，显然不准备给它合法身份）</p>
+<p>在 <strong>安全威胁模型</strong> 语境中，区分<strong>恶意对手是否正在开发次生信道</strong>的两种方法 经常会有用。如果对手同时控制住了输入和输出，一条次生信道就会变成一条隐藏信道（covert channel）。如果对手不能控制输入，只能读取输出，这条次生信道就是一条侧信道（side channel）。比如，加密算法执行时可能无意中会泄露敏感数据至某条侧信道，而对手此时正在监控这条侧信道的输出。</p>
+<p>注意，<strong>合法信道</strong>和<strong>次生信道</strong> 是计算系统的属性，而 <strong>侧信道</strong>和<strong>隐藏信道</strong> 是威胁模型中 描述对手如何利用次生信道的 术语。</p>
+<h1 id="预测执行背景知识"><a href="#预测执行背景知识" class="headerlink" title="预测执行背景知识"></a>预测执行背景知识</h1><p>当代处理器使用乱序执行指令以提高性能。这些乱序执行处理器会“推测”一条分支或一个负载将使用某个数据，在处理器确认推测值正确之前，就会暂时用推测数据提前执行该分支或负载。当执行到该分支（负载）且知道预测值是否正确时，有两种可能的处理方式：</p>
+<ol>
+<li><p>   如果预测执行所用数据正确，依赖于该数据的指令就是有效的，它们可以退出。意味着它们的结果在架构上可以被程序见到并访问了。</p>
+</li>
+<li><p>   否则，依赖于该数据的指令无效，它们必须被压出(squashed)，意味着结果不会提交给架构上运行的程序。这些指令被称为暂驻者（transient）。随着暂驻者被挤压出去，处理器可以用正确数据继续执行。</p>
+</li>
+</ol>
+<p><img src="/blog/img/2020/prediction_exe/1.png" alt="1" title="1"><br>图1：演示分支预测的示例：&gt;表示非暂驻指令；*表示暂驻指令。</p>
+<p>虽然暂驻指令不会提交给架构上运行的程序，微架构处理器状态仍会受暂驻指令的影响。比如，如果暂驻指令试图加载不存在于任何处理器cache中的数据，相应的数据就会被加载进处理器cache。这个cache的状态就形成一条次生信道。这条信道的数据通过一些分析技术可被观察到，比如“flush+reload”或“prime+probe”测量cache访问延时。</p>
+<h1 id="瞬态执行攻击"><a href="#瞬态执行攻击" class="headerlink" title="瞬态执行攻击"></a>瞬态执行攻击</h1><p>瞬态执行攻击 利用 微架构暂驻指令的侧信道，允许恶意对手访问 架构访问控制机制通常会禁止访问 的信息。为成功调用瞬态执行攻击，对手必须：</p>
+<ol>
+<li>   访问受害者的秘密；</li>
+<li>   通过隐藏信道传输该秘密；</li>
+<li>   从隐藏信道接收到该秘密。</li>
+</ol>
+<p>前两步合称泄露工具（disclosure gadget）。注意，当对手发现了潜在的次生信道，并控制了它的输入输出，该次生信道 就会充当 隐藏信道（covert channel）。</p>
+<p>瞬态执行攻击可依据其对“基于硬件的保护功能”的影响来分类。一个硬件保护领域包括 硬件执行访问控制机制定义的保护范围内的代码和数据，比如特权等级（ring）、页表、保护密钥等。领域的例子包括处理器、SGX飞地（一种intel推出的虚拟机保护机制）、虚拟机、和ring0操作系统代码。领域还可以是通过网络、总线或其它硬件接口相连的机器或设备。网络、总线上传输的内容组成了合法信道，其它可测量的传输属性（比如延迟）形成次生信道。</p>
+<p>一个瞬态执行攻击的特征 由 泄露工具和受害者/对手 领域之间的 关系 来描述：如果泄露工具在对手领域中，这种瞬态执行攻击就是“领域旁路攻击”。泄露工具在受害者领域中，就是“跨领域攻击”。如果泄露工具运行在受害者机器上由对手控制的沙箱中，就是“领域内攻击”。下面章节将详述这三种攻击。</p>
+<h1 id="域旁路（Domain-Bypass）瞬态执行攻击"><a href="#域旁路（Domain-Bypass）瞬态执行攻击" class="headerlink" title="域旁路（Domain-Bypass）瞬态执行攻击"></a>域旁路（Domain-Bypass）瞬态执行攻击</h1><p><img src="/blog/img/2020/prediction_exe/2.png" alt="2" title="2"><br>图2 剖析域旁路瞬态执行攻击：蓝框表示数据，红框表示受害者代码，箭头表示被攻击的“秘密”的数据流</p>
+<p>在瞬态执行攻击中，对手执行硬件访问控制相关的暂驻（瞬态）指令，以获许访问超出他自身领域范围的秘密。这个瞬态指令段还必须包含发送器，比如用以将机密编码到CPU cache态的内存访问。非暂驻接收码 通过使用cache分析技术比如写后重新加载（Flush+Reload），可以恢复机密。</p>
+<p>作为特例，考虑恶意数据高速缓存加载（熔断）。对手的领域是个ring3应用，受害者的领域是操作系统内核（ring 0）。当对手试图访问共享相同虚拟地址空间的内核内存，暂驻指令会允许读内核数据，并在由硬件执行的权限检查做出判断之前就把它传送出去。领域旁路暂驻执行攻击的其它例子还包括微架构数据采样（MDS)和层1终止失败（L1TF，intel CPU在页表入口检查的时候，不等检查结果就提前将虚拟地址转换成物理地址，并将物理地址的内容读入到L1 data cache中。L1TF和中文语境很象，意思是等到发现页表入口不对想终止读取的时候，已经拦都拦不住了）。</p>
+<h1 id="跨领域暂驻执行攻击"><a href="#跨领域暂驻执行攻击" class="headerlink" title="跨领域暂驻执行攻击"></a>跨领域暂驻执行攻击</h1><p><img src="/blog/img/2020/prediction_exe/3.png" alt="3" title="3"><br>图3：剖析跨域瞬态执行攻击：蓝框表示数据，红框表示对手代码，橙框表示被对手操纵的受害者代码，箭头表示攻击中的机密信息数据流</p>
+<p>一次跨领域瞬态执行攻击要求对手在受害者域中找到一个披露小工具，在它执行瞬间，可以临时访问并传输秘密至隐藏信道。</p>
+<p>跨领域瞬态执行攻击成功加载的难度通常是最大的，因为对手很难构建披露小工具。关键在于在已有的受害机程序中发现一个在被镇压之前可以成功地临时访问并传输秘密的披露小工具。如果对手在ring3态，其它进程的噪声会大大削弱隐藏信道的可靠性。与受害者同步（按踩点+窃取的要求）对于ring3态的对手也是一个挑战。</p>
+<p>一个跨域瞬态执行攻击的例子是 分支目标注入(Spectre variant 2)，一个恶意的ring 3 应用（对手）训练一个与另一ring 3应用（受害者）共享的分支预测器，以预测到对手选择的内存地址。目标地址可以是一个抢在分支误预测处理之前运行，能够临时访问内存并传输秘密的披露小工具。</p>
+<h1 id="域内瞬态执行攻击"><a href="#域内瞬态执行攻击" class="headerlink" title="域内瞬态执行攻击"></a>域内瞬态执行攻击</h1><p><img src="/blog/img/2020/prediction_exe/4.png" alt="4" title="4"><br>图4：剖析域内暂驻执行攻击：蓝框是数据，红框是攻击者代码，箭头表示攻击过程中秘密数据流动方向</p>
+<p>一次域内暂驻执行攻击可让对手规避掉基于软件的访问控制，访问到处于同一域内的秘密。比如，Javascript程序尝试随机访问一个数组对象时，该访问将接受边界条件检测，这可能会导致某个条件分支的执行。如果程序尝试翻墙访问——但是分支预测以为该程序处于墙内——访问和传送指令会被允许暂时执行，直到误预测的这段代码跑到头。这个例子就是沙箱内的软件对它域内进行的一次边界检查绕开攻击（spectre变种1）。</p>
+<p>图4试图表达域内暂驻（瞬时）执行攻击，尽管可能存在其它变体，例如，对手控制的接收方可能在本域的另一个沙箱中，甚至位于另一个域。除了软件沙箱，基于语言的加密或其它软件错误隔离技术也可用来隔离同域内的软件。这些方法也采用了基于软件的访问控制，可能会被瞬态指令所绕开。</p>
+<h1 id="结论和启示"><a href="#结论和启示" class="headerlink" title="结论和启示"></a>结论和启示</h1><p>这种精炼的术语将有助于简要传达新发现和现有漏洞的影响，从而使软件开发人员受益。例如：<br>• 如果漏洞被描述为具有域旁路影响，那么通常需要做硬件迁移，对操作系统或虚拟机（VMM）进行打上uCode补丁和/或软件更改。通常不需要对应用程序进行软件更改。</p>
+<p>• 如果漏洞描述为具有跨域影响，则可能需要对应用程序、OS或VMM代码进行软件更改以缓解漏洞。这些软件更改可能会使用或新推出或已有的处理器功能，来防止推测，或隔离不同模式间的分支预测。开发人员还应考虑到，跨域瞬时执行攻击通常比其他种类的瞬时执行攻击更难发动。因此，开发人员在决定如何减轻软件负担时应使用自己的判断力（例如，是自动插入LFENCE还是仅在确定为容易受边界检查绕过攻击的位置插入LFENCE）。</p>
+<p>• 如果漏洞被描述为具有域内影响，则使用沙盒技术的受影响软件可能会受到攻击。有关更多信息，请参考《深入托管运行时》。</p>
+<p>一致使用本文中概述的术语将使广泛的安全研究界更容易协作以识别未来的潜在威胁和缓解措施。</p>
+<h1 id="瞬态执行分类"><a href="#瞬态执行分类" class="headerlink" title="瞬态执行分类"></a>瞬态执行分类</h1><table>
+<thead>
+<tr>
+<th align="center">已披露的</th>
+<th align="center">域内</th>
+<th align="center">跨域</th>
+<th align="center">域旁路</th>
+<th align="center">缓解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">变种1：边界检查绕过 (Spectre v1) 包括边界检查绕过存储</td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td align="center"></td>
+<td align="center">关于“域内”的范围，可将下面提到的沙箱一词替换成其它技术（比如，进程隔离，保护密钥，等等）；替代沙箱的增强技术这里有讨论。通常可通过预测器隔离或在受害者中部署防御性软件技术（例如SLH，LFENCE等）来缓解跨域攻击，以防止小工具被利用。</td>
+</tr>
+<tr>
+<td align="center">变种2：分支目标注入 (Spectre v2)</td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">变种4：投机性存储绕过 (Spectre v4)</td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">加载值注错 (所有类型)</td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">投机性SWAPGS</td>
+<td align="center"></td>
+<td align="center">X</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">变种3: 恶意数据缓存加载（熔断）</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">X</td>
+<td align="center">需要更新硬件或在域转换时更新状态来缓解域旁路瞬态执行攻击</td>
+</tr>
+<tr>
+<td align="center">变种3a: 恶意读取系统寄存器</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">X</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">微架构数据采样</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">X</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">TSX异步中止</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">X</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">向量寄存器采样</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">X</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">层1终端故障</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">X</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">L1D逐出采样</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">X</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">懒惰的FPU</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">X</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">探听辅助L1D采样</td>
+<td align="center"></td>
+<td align="center">See footnote 8</td>
+<td align="center">X</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+
+            
+                
+            
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/blog/tags/prediction/">prediction</a>
+            
+        </div>
+        
+    </article>
+    
+        <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+    
+    
+
+
+</div>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about"  title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/blog/help" title="帮助" >帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/sitemap.xml" title="地图">地图</a>
+        </p>
+        <p>
+            本站已建立&nbsp<a href="/timeline" id="siteBuildingTime"></a>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br/>
+            ©2017-<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://wangbo-john.github.io/blog" target="_blank" rel="friend">王波</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input"
+                   spellcheck="false"
+                   type="text"
+                   autocomplete="off"
+                   placeholder="请输入查询关键词"/>
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+
+    <script type="text/javascript">
+        let bp = document.createElement('script');
+        let curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        bp.setAttribute("async", "");
+        let s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    </script>
+
+
+</body>
+</html>

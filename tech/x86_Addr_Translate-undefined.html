@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head>
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://wangbo-john.github.io/blog/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta name="author" content="John Wang">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://wangbo-john.github.io/blog">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
+<link rel="shortcut icon" href="/blog/images/favicon.png">
+
+
+<title>x86地址翻译 - a Light moved through the hazy</title>
+
+<meta name="keywords" content="IC, 人文">
+
+<meta name="description " content="Virtual Addr to Phy Addr">
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="x86地址翻译 - a Light moved through the hazy" />
+<meta property="og:description" content="Virtual Addr to Phy Addr" />
+<meta property="og:url" content="https://wangbo-john.github.io/blog" />
+<meta property="og:site_name" content="a Light moved through the hazy" />
+
+<link rel="dns-prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prerender" href="https://wangbo-john.github.io/blog">
+<link rel="stylesheet" href="/blog/css/JSimple.min.css">
+    <script type="text/javascript">
+        (function() {
+            let jsi_config = {
+                rootUrl: 'https://wangbo-john.github.io/blog/',
+                isPost: 'true',
+                buildingTime: '12/25/2020',
+                snsQRCode: '',
+                donateImg: '',
+                readMode: 'day',
+                localSearch: { dbPath: '' }
+            };
+            
+                jsi_config.localSearch = {
+                    dbPath: '/search.json',
+                    trigger: 'auto',
+                    topN: '1',
+                    unescape: 'false'
+                }
+            
+            window.jsi_config = jsi_config;
+        })()
+    </script>
+    
+<script src="/blog/js/SimpleCore.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/blog" title="透雾之光">透雾之光</a>
+        <a class="site-index current" href="/blog"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/blog/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/blog/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/blog/help" title="说明">
+            <i class="fa fa-question-circle"></i>
+            <span>说明</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    
+</div>
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <img class="cover-img" alt="cover-img" />
+    <div class="cover-info">
+        
+        <h3 class="cover-siteName">a Light moved through the hazy</h3>
+		<h1 class="cover-siteName">透雾之光</h1>
+        <h2 class="cover-siteTitle">交流、探讨 技术、人文 之 美</h2>
+        <!--<p class="cover-siteDesc">美</p>-->
+		<h1 class="cover-siteName">美</h1>
+		<h3 class="cover-siteName">是</h3>
+		<h3 class="cover-siteName">穿透复杂的简单</h3>
+		<h3 class="cover-siteName">演绎丰富的纯粹</h3>
+		<h3 class="cover-siteName">粉碎羁绊的自主</h3>
+		<h3 class="cover-siteName">宇宙浩渺的孤独</h3>
+		<h3 class="cover-siteName">逝者如斯的无情</h3>
+		<h3 class="cover-siteName">人声鼎沸中全神贯注</h3>
+		<h3 class="cover-siteName">千夫所指时义无反顾</h3>
+		<h3 class="cover-siteName">无声处绽放的惊雷</h3>
+		<h3 class="cover-siteName">无尽绚烂后的平淡</h3>
+		<h3 class="cover-siteName">真心自然的笑</h3>
+		<h3 class="cover-siteName">以及</h3>
+		<h3 class="cover-siteName">一笑倾城的她</h3>
+		<p class="cover-siteDesc">　　　　　—— 王波涂鸦自娱，献给老婆的诗，请勿抄袭</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/wangbo-john" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/blog">最近</a></li>
+        
+            
+                <li class="">
+                    <a href="/blog/categories/tech" data-name="技术">技术</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/human" data-name="人文">人文</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/research" data-name="存疑">存疑</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text"
+               readonly="readonly"
+               id="local-search-input-tip"
+               placeholder="读物检索~" />
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://wangbo-john.github.io/blog"
+                   target="_blank">
+                    <img width="48" src="/blog/images/favicon.png" alt="avatar"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://wangbo-john.github.io/blog"
+                       target="_blank">王波</a>
+                    <span title="最后编辑于&nbsp;2020-02-04">2020-02-04</span>
+                </p>
+                <p>一个希望可以看书休闲其实永不得闲的架构师</p>
+            </div>
+            <h2 class="post-title">x86地址翻译</h2>
+            <div class="post-meta">
+                本文共计6758个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <p>下文是站在OS的角度看的地址翻译过程，提到怎样通过页表将虚拟地址转换成物理地址，但没提到页表本身的创建过程。页表的创建是由OS调用BIOS中的address translator模块完成的，因为每一代CPU根据芯片内部模块占用地址空间都会有所调整，CPU厂家（Intel、AMD等）会向OEM、ODM等伙伴提供参考代码，没有必要强记。</p>
+<h1 id="1、概念"><a href="#1、概念" class="headerlink" title="1、概念"></a>1、概念</h1><p><strong>物理地址(physical address)</strong></p>
+<p>用于内存芯片级的单元寻址，与处理器和CPU连接的地址总线相相应。<br>——这个概念应该是这几个概念中最好理解的一个。可是值得一提的是，尽管能够直接把物理地址理解成插在机器上那根内存本身，把内存看成一个从0字节一直到最大空间逐字节编号的大数组，然后把这个数组叫做物理地址。可是其实，这仅仅是一个硬件提供给软件的抽像，内存的寻址方式并非这样。所以，说它是“与地址总线相相应”，更贴切一些。只是抛开对物理内存寻址方式的考虑，直接把物理地址与物理内存一一相应，也是能够接受的。或许错误的理解更利于形而上的抽象。</p>
+<p><strong>虚拟内存(virtual memory)</strong></p>
+<p>这是对整个内存（不要与机器上插在某个slot上的那根内存条对上号）的抽像描叙。</p>
+<p>它是相对于物理内存来讲的，能够直接理解成“不直实的”、“假的”内存。比如，一个0x08000000内存地址。它并不恰好就是物理地址上那个大数组中（0x08000000-1）那个地址元素。</p>
+<p>之所以这样，是由于现代操作系统都提供了一种内存管理的抽像，即虚拟内存（virtual memory）。进程使用虚拟内存中的地址，由操作系统协助相关硬件，把它“转换”成真正的物理地址。</p>
+<p>这个“转换”。是全部问题讨论的关键。</p>
+<p>有了这种抽像，一个程序，就能够使用比真实物理地址大得多的地址空间。</p>
+<p>（拆东墙，补西墙，银行也是这样子做的）。甚至多个进程能够使用同样的地址。不奇怪，因为转换后的物理地址不同。</p>
+<p>——把连接后的程序反编译看一下，就会发现连接器已为程序分配了一个地址。比如，要调用某个函数A，代码不是call A，而是call 0x0811111111 ，也就是说，函数A的地址已经被定下来了。没有这种“转换”，没有虚拟地址的概念，这样做是根本行不通的。<br>打住了。这个问题再说下去，就收不住了。</p>
+<p><strong>逻辑地址(logical address)</strong></p>
+<p>Intel为了兼容，将远古时代的段式内存管理方式保留了下来。</p>
+<p>逻辑地址指的是机器语言指令中，用来指定一个操作数或者是一条指令的地址。以上例，我们说的连接器为A分配的0x08111111这个地址就是逻辑地址。<br>——只是不好意思，这样说，好像又违背了Intel段式管理中，对逻辑地址的要求。“一个逻辑地址，是由一个段标识符加上一个指定段内相对地址的偏移量。表示为 [段标识符：段内偏移量]”，也就是说。上例中那个0x08111111，应该表示为[A的代码段标识符: 0x08111111]这样，才完整一些。</p>
+<p><strong>线性地址(linear address)，或也叫虚拟地址(virtual address)</strong></p>
+<p>跟逻辑地址类似，它也是一个不真实的地址。假设逻辑地址是相应硬件平台段式管理转换前的地址的话，那么线性地址则对应硬件页式内存的转换前地址。</p>
+<p>CPU将一个虚拟内存空间中的地址转换为物理地址，需要两步：首先拿到需要转换的这个逻辑地址（事实上是段内偏移量，这个一定要理解！）。CPU先利用其段式内存管理单元，将逻辑地址转换成一个线程地址，再利用其页式内存管理单元，转换为最终的物理地址。</p>
+<p>这样做两次转换，很麻烦且没必要，因为直接就能把线性地址传给进程。之所以这样冗余，Intel全然是为了兼容而已。</p>
+<h1 id="2、CPU段式内存管理，逻辑地址怎样转换为线性地址"><a href="#2、CPU段式内存管理，逻辑地址怎样转换为线性地址" class="headerlink" title="2、CPU段式内存管理，逻辑地址怎样转换为线性地址"></a>2、CPU段式内存管理，逻辑地址怎样转换为线性地址</h1><p>一个逻辑地址由两部份组成，段标识符: 段内偏移量。</p>
+<p>段标识符由一个16位字段组成，称为段选择符。</p>
+<p>当中前13位是一个索引号。</p>
+<p>后面3位包括一些硬件细节，如图：<br>Snap1.jpg<br>最后两位涉及权限检查，本贴中不包括。</p>
+<p>索引号，或者直接理解成数组下标——那它总要相应一个数组吧，它又是什么东东的索引呢？这个东东就是“段描叙符(segment descriptor)”，呵呵，段描叙符详细地址描叙了一个段（对于“段”这个字眼的理解，可以把它想像成，拿把刀，把虚拟内存砍成若干段）。这样，多个段描叙符就组成一个数组，叫“段描叙符表”。这样，能够通过段标识符的前13位，直接在段描叙符表中找到一个详细的段描叙符，这个描叙符就描叙了一个段。<br>每个段描叙符由8个字节组成。如下图：<br>Snap2.jpg<br>这些东东非常复杂，尽管能够利用一个数据结构来定义它，只是。我这里只关心一样，就是Base字段，它描叙一个段的起始位置的线性地址。</p>
+<p>Intel设计的本意是。一些全局的段描叙符，就放在“全局段描叙符表(GDT)”中。一些局部的，比如每个进程自己的，就放在所谓的“局部段描叙符表(LDT)”中。</p>
+<p>那到底什么时候该用GDT。什么时候该用LDT呢？这是由段选择符中的T1字段表示的，=0。表示用GDT，=1表示用LDT。</p>
+<p>GDT在内存中的地址和大小存放在CPU的gdtr控制寄存器中。而LDT则在ldtr寄存器中。</p>
+<p>好多概念。像绕口令一样。</p>
+<p>这张图看起来要直观些：<br>Snap3.jpg<br>首先，给定一个完整的逻辑地址[段选择符：段内偏移地址]，<br>1、看段选择符的T1=0还是1，知道当前要转换是GDT中的段，还是LDT中的段，再依据对应寄存器，得到其地址和大小。我们就有了一个数组了。<br>2、取出段选择符中前13位，查找到相应的段描叙符。这样，它的Base即基地址就知道了。<br>3、把Base + offset，就是要转换的线性地址了。</p>
+<p>还是挺简单的，对于软件来讲，原则上就须要把硬件转换所需的信息准备好，就能够让硬件来完毕这个转换了。OK。来看看Linux怎么做的。</p>
+<h1 id="3、Linux的段式管理"><a href="#3、Linux的段式管理" class="headerlink" title="3、Linux的段式管理"></a>3、Linux的段式管理</h1><p>Intel要求两次转换。这样虽说兼容了，可是却非常冗余。<br>对于其他某些硬件平台，没有二次转换的概念，Linux也需要提供一个高层抽象，来提供一个统一的接口。这时的Linux段式管理仅仅“哄骗”了一下硬件而已。</p>
+<p>依照Intel本意，全局用GDT，每个进程自己的用LDT——只是Linux对全部进程都使用同样的段来对指令和数据寻址。即用户数据段、用户代码段。相应的，内核中是内核数据段和内核代码段。这样做没什么奇怪的，本来就是个封装形式嘛。<br>include/asm-i386/segment.h<br>#define GDT_ENTRY_DEFAULT_USER_CS        14<br>#define __USER_CS (GDT_ENTRY_DEFAULT_USER_CS * 8 + 3)</p>
+<p>#define GDT_ENTRY_DEFAULT_USER_DS        15<br>#define __USER_DS (GDT_ENTRY_DEFAULT_USER_DS * 8 + 3)</p>
+<p>#define GDT_ENTRY_KERNEL_BASE        12</p>
+<p>#define GDT_ENTRY_KERNEL_CS                (GDT_ENTRY_KERNEL_BASE + 0)<br>#define __KERNEL_CS (GDT_ENTRY_KERNEL_CS * 8)</p>
+<p>#define GDT_ENTRY_KERNEL_DS                (GDT_ENTRY_KERNEL_BASE + 1)<br>#define __KERNEL_DS (GDT_ENTRY_KERNEL_DS * 8)</p>
+<p>把当中的宏替换成数值。则为：<br>#define __USER_CS 115        [00000000 1110  0  11]<br>#define __USER_DS 123        [00000000 1111  0  11]<br>#define __KERNEL_CS 96      [00000000 1100  0  00]<br>#define __KERNEL_DS 104    [00000000 1101  0  00]</p>
+<p>方括号后是这四个段选择符的16bit二进制表示，它们的索引号和T1字段值也能够算出来了<br>__USER_CS              index= 14   T1=0<br>__USER_DS              index= 15   T1=0<br>__KERNEL_CS           index=  12  T1=0<br>__KERNEL_DS           index= 13   T1=0</p>
+<p>T1均为0。则表示都使用了GDT。再来看初始化GDT的内容中对应的12-15项(arch/i386/head.S)：<br>        .quad 0x00cf9a000000ffff        /* 0x60 kernel 4GB code at 0x00000000 <em>/<br>        .quad 0x00cf92000000ffff        /</em> 0x68 kernel 4GB data at 0x00000000 <em>/<br>        .quad 0x00cffa000000ffff        /</em> 0x73 user 4GB code at 0x00000000 <em>/<br>        .quad 0x00cff2000000ffff        /</em> 0x7b user 4GB data at 0x00000000 */</p>
+<p>依照前面段描叙符表中的描叙，把它们展开，发现其16-31位全为0，即四个段的基地址全为0。</p>
+<p>这样。给定一个段内偏移地址。依照前面转换公式。0 + 段内偏移，转换为线性地址。能够得出重要的结论，<br><strong>在Linux下，逻辑地址与线性地址总是一致（是一致，而不是有些人说的“同样”）的，即逻辑地址的偏移量字段的值与线性地址的值总是相等的。</strong></p>
+<p>忽略了太多的细节，比如段的权限检查。</p>
+<p>Linux中，绝大部份进程并不使用LDT，除非使用Wine仿真Windows程序的时候。</p>
+<h1 id="4、CPU的页式内存管理"><a href="#4、CPU的页式内存管理" class="headerlink" title="4、CPU的页式内存管理"></a>4、CPU的页式内存管理</h1><p>CPU的页式内存管理单元，负责把一个线性地址，最终翻译为一个物理地址。从管理和效率的角度出发，线性地址被分为以固定长度为单位的组，称为页(page)。比如一个32位的机器，线性地址最大可为4G，能够用4KB一个页来划分，整个线性地址被划分为一个total_page[2^20]的大数组，共同拥有2的20次方个页。这个大数组我们称之为页文件夹。文件夹中的每个文件夹项，就是一个物理地址——相应的页地址的对应。</p>
+<p>还有一类“页”，我们称之为物理页，或者是页框、页桢的。是分页单元把全部的物理内存也划分为固定长度的管理单位，它的长度一般与内存页是一一相应的。</p>
+<p>这里注意到，这个total_page数组有2^20个成员，每个成员是一个地址（32位机，一个地址4字节）。那么要单单要表示这个数组，就要占去4MB内存空间。</p>
+<p>为了节省空间，引入了一个二级管理机制来组织分页单元。文字描叙太累，看图直观一些：<br>Snap1.jpg<br>如上图。</p>
+<p>1、分页单元中，页文件夹是唯一的，它的地址放在CPU的CR3寄存器中，是进行地址转换的起始点。万里长征从此长始了。<br>2、每个活动进程，由于都有其独立的相应的虚似内存（页文件夹也是唯一的），那么它也对应一个独立的页文件夹地址。<br>——执行一个进程，需要将它的页文件夹地址放到CR3寄存器中，将别人的保存下来。<br>3、每个32位线性地址被划分为三部份，文件夹索引(10位)：页表索引(10位)：偏移(12位)</p>
+<p>根据下面步骤进行转换：<br>1、从CR3中取出进程的页文件夹地址（操作系统负责在调度进程的时候，把这个地址装入相应寄存器）；<br>2、依据线性地址前十位，在数组中，找到相应的索引项。由于引入了二级管理模式，页文件夹中的项，不再是页地址，而是一个页表的地址（又引入了一个数组）。页地址被放到页表中去了。<br>3、依据线性地址的中间十位，在页表（也是数组）中找到页的起始地址；<br>4、将页起始地址与线性地址中最后12位相加，就得到最终我们想要的物理地址。</p>
+<p>这个转换过程，应该说还是很easy的。</p>
+<p>全部由硬件完成，尽管多道手续，可是节约了大量内存，还是值得的。那么再简单地验证一下：<br>1、这种二级模式是否仍可以表示4G的地址；<br>页文件夹共同拥有：2^10项，也就是说有这么多个页表<br>每一个页表对应了：2^10页<br>每一个页中可寻址：2^12个字节。<br>还是2^32 = 4GB</p>
+<p>2、这种二级模式是否真的节约了空间：<br>也就是算一下页文件夹项和页表项共占空间 (2^10 * 4 + 2 ^10 *4) = 8KB。</p>
+<p>按《深入理解计算机系统》中的解释，二级模式空间的节约是从两个方面实现的:<br>A、假设一级页表中的一个页表条目为空，那么它所指的二级页表就根本不会存在。这表现出一种巨大的潜在节约，对于一个典型程序，4GB虚拟地址空间的大部份都是未分配的。<br>B、只有一级页表才需要常驻主存。虚拟内存系统能够在需要时创建、调入或调出二级页表，这就降低了主存的压力，只有最常使用的二级页表才需要缓存在主存中。——只是Linux并没有全然享受这样的福利，它的页表文件夹和与已分配页相关的页表都是常驻内存的。</p>
+<p>本文仅介绍一般性转换原理，扩展分页、页的保护机制、PAE模式的分页这些麻烦点的东东就不啰嗦了……需要用到时再参考其他专业书籍。</p>
+<h1 id="5、Linux的页式内存管理"><a href="#5、Linux的页式内存管理" class="headerlink" title="5、Linux的页式内存管理"></a>5、Linux的页式内存管理</h1><p>原理上来讲。Linux只需要为每个进程分配好所需数据结构，放到内存中。然后在调度进程的时候，切换寄存器cr3，剩下的就交给硬件来完成了（其实要复杂得多，只是这里仅分析最主要的流程）。</p>
+<p>前面说了i386的二级页管理架构。只是有些CPU，还有三级、甚至四级架构。Linux为了在更高层次提供抽象，为所有CPU提供统一接口，提供了一个四层页管理架构，来兼容这些二级、三级、四级管理架构的CPU。这四级分别为：<br>页全局文件夹PGD（相应刚才的页文件夹）<br>页上级文件夹PUD（新引进的）<br>页中间文件夹PMD（新引进的）<br>页表PT（相应刚才的页表）。</p>
+<p>整个转换依据硬件转换原理，只是多了2次数组的索引罢了。如下图：<br>Snap2.jpg<br>对于使用二级管理架构32位的硬件，如今又是四级转换了。它们怎么可以协调工作呢？嗯，来看这样的情况下，怎么来划分线性地址吧！</p>
+<p>从硬件的角度，32位地址被分成了三部份——也就是说，无论软件怎么做，最终落实到硬件，也只认识这三位老大。</p>
+<p>从软件的角度，因为多引入了两部份，也就是说，共同拥有五部份。——要让二层架构的硬件认识五部份也非常easy，在地址划分的时候，将页上级文件夹和页中间文件夹的长度设置为0就够了。</p>
+<p>这样，操作系统见到的是五部份，硬件还是按它死板的三部份划分，也不会出错，大家共建了和谐计算机系统。</p>
+<p>3部分就能做到的事非要分5部分，虽说是多此一举，可是考虑到64位地址、使用四层转换架构的CPU时，我们就不用再把中间两个设为0了，软硬件依然和谐——抽象就是强大呀！</p>
+<p>比如。一个逻辑地址已经被转换成了线性地址，0x08147258，换成二进制，就是：<br>0000100000 0101000111 001001011000<br>内核对这个地址进行划分<br>PGD = 0000100000<br>PUD = 0<br>PMD = 0<br>PT = 0101000111<br>offset = 001001011000</p>
+<p>如今来理解Linux针对硬件的花招，由于硬件根本看不到所谓PUD、PMD，所以，本质上要求PGD索引，直接就对应了PT地址，而不是再到PUD和PMD中去查数组（尽管它们两个在线性地址中，长度为0，2^0 =1，也就是说，它们都是有一个数组元素的数组），那么，内核怎样合理安排地址呢？<br>由于它只有一项，32位，刚好能够存放与PGD中长度一样的地址指针。那么所谓先到PUD，再到PMD中做映射转换，就变成了保持原值不变。一转手就够了。<br>这样，就实现了“逻辑上指向一个PUD，再指向一个PDM，但在物理上是直接指向对应的PT”的这个抽象。因为硬件根本不知道有PUD、PMD这两个东西。</p>
+<p>然后交给硬件，硬件对这个地址进行划分，看到的是：<br>页文件夹 = 0000100000<br>PT = 0101000111<br>offset = 001001011000<br>嗯。先依据0000100000(32)，在页文件夹数组中索引，找到其元素中的地址，取其高20位。找到页表的地址，页表的地址是由内核动态分配的，接着，再加一个offset，就是最终的物理地址了。</p>
+
+            
+                
+            
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/blog/tags/memory/">memory</a>
+            
+        </div>
+        
+    </article>
+    
+        <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+    
+    
+
+
+</div>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about"  title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/blog/help" title="帮助" >帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/sitemap.xml" title="地图">地图</a>
+        </p>
+        <p>
+            本站已建立&nbsp<a href="/timeline" id="siteBuildingTime"></a>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br/>
+            ©2017-<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://wangbo-john.github.io/blog" target="_blank" rel="friend">王波</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input"
+                   spellcheck="false"
+                   type="text"
+                   autocomplete="off"
+                   placeholder="请输入查询关键词"/>
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+
+    <script type="text/javascript">
+        let bp = document.createElement('script');
+        let curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        bp.setAttribute("async", "");
+        let s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    </script>
+
+
+</body>
+</html>

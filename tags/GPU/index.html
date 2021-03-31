@@ -18,16 +18,16 @@
 <link rel="shortcut icon" href="/blog/images/favicon.png">
 
 
-<title>pcie retimer &amp; redriver - a Light moved through the hazy</title>
+<title>标签 - gpu - a Light moved through the hazy</title>
 
 <meta name="keywords" content="IC, 人文">
 
-<meta name="description " content="Retimer和Redriver卡">
+<meta name="description " content="">
 
 <!-- Jetpack Open Graph Tags -->
 <meta property="og:type" content="article" />
-<meta property="og:title" content="pcie retimer &amp; redriver - a Light moved through the hazy" />
-<meta property="og:description" content="Retimer和Redriver卡" />
+<meta property="og:title" content="标签 - gpu - a Light moved through the hazy" />
+<meta property="og:description" content="" />
 <meta property="og:url" content="https://wangbo-john.github.io/blog" />
 <meta property="og:site_name" content="a Light moved through the hazy" />
 
@@ -39,7 +39,7 @@
         (function() {
             let jsi_config = {
                 rootUrl: 'https://wangbo-john.github.io/blog/',
-                isPost: 'true',
+                isPost: 'false',
                 buildingTime: '12/25/2020',
                 snsQRCode: '',
                 donateImg: '',
@@ -125,21 +125,21 @@
 
             <div class="page-title">
     <ul>
-        <li><a href="/blog">最近</a></li>
+        <li class="">
+            <a href="/blog" data-name="最近">最近</a>
+        </li>
         
-            
-                <li class="">
-                    <a href="/blog/categories/tech" data-name="技术">技术</a>
-                </li>
-            
-                <li class="">
-                    <a href="/blog/categories/human" data-name="人文">人文</a>
-                </li>
-            
-                <li class="">
-                    <a href="/blog/categories/research" data-name="存疑">存疑</a>
-                </li>
-            
+        <li class="">
+            <a href="/blog/categories/tech" data-name="技术">技术</a>
+        </li>
+        
+        <li class="">
+            <a href="/blog/categories/human" data-name="人文">人文</a>
+        </li>
+        
+        <li class="">
+            <a href="/blog/categories/research" data-name="存疑">存疑</a>
+        </li>
         
         <li class="page-search">
     <form id="search" class="search-form">
@@ -154,65 +154,44 @@
     </ul>
 </div>
 <div class="main-inner">
-    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-        <div class="post-header">
-            <div class="post-author clearfix">
-                <a class="avatar fleft" href="https://wangbo-john.github.io/blog"
-                   target="_blank">
-                    <img width="48" src="/blog/images/favicon.png" alt="avatar"/>
-                </a>
-                <p><span class="label">作者</span>
-                    <a href="https://wangbo-john.github.io/blog"
-                       target="_blank">王波</a>
-                    <span title="最后编辑于&nbsp;2020-03-01">2020-03-01</span>
-                </p>
-                <p>一个希望可以看书休闲其实永不得闲的架构师</p>
-            </div>
-            <h2 class="post-title">PCIe Retimer & Redriver</h2>
-            <div class="post-meta">
-                本文共计1032个字 |
-                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
-            </div>
-        </div>
-        <div class="post-content markdown-body">
-            <h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>Retimer 和 Redriver是从PCIe 3.0开始引入的。这两种卡通常用在服务器和存储系统中，用来支持更长的物理通道。目前PCIe4规范正在完善，PCIe5规范也已发布，面对高速连接方面的新挑战，这些扩展工具将如何堆叠起来？</p>
-<h2 id="Redriver"><a href="#Redriver" class="headerlink" title="Redriver"></a>Redriver</h2><p>Redriver是一种大多数为模拟信号的扩展设备，旨在增强信号的高频部分，以抵消由互连模块（中央处理器（CPU）封装，系统板，连接器等）引起的与频率相关的衰减。 Redriver的数据路径通常包括一个连续时间线性均衡器（CTLE），一个宽带增益级和一个线性驱动器。 另外，Redriver通常具有按设定阈值检测输入信号丢失、和输出信号接收器（output receiver，就是一个把输出的差分信号重新接收/镜像回来的反馈电路，用于控制）检测功能。 图1给出了典型的Redriver框图。<br><img src="/blog/img/2020/Retimer_and_Redriver/Redriver_block_diagram.jpg" alt="Redriver" title="Redriver"><br>图1：Redriver框图</p>
-<h2 id="Retimer"><a href="#Retimer" class="headerlink" title="Retimer"></a>Retimer</h2><p>Retimer是一种可识别PCIe协议的模拟/数字混合信号设备，能够完全恢复数据，提取嵌入式时钟并使用干净的时钟重新传输数据的新副本。 除了在Redriver中也在使用的CTLE和宽带增益级之外，Retimer还包括时钟和数据恢复（CDR）电路，判决反馈均衡器（DFE）和发送（Tx）有限冲激响应（FIR）驱动器。 有限状态机（FSM）和/或微控制器通常管理CTLE、宽带增益、DFE和FIR驱动程序的自动适配，并实现PCIe的链路训练状态机（LTSSM）。 图2给出了典型的Retimer框图。<br><img src="/blog/img/2020/Retimer_and_Redriver/Retimer_block_diagram.jpg" alt="Retimer" title="Retimer"><br>图2：Retimer框图</p>
-<p>简单来说，Redriver会放大信号，而Retimer则会重新传输信号的新副本。 图3对此进行了说明，并显示了如何通过Redriver增强衰减的眼图张开度以及如何通过Retimer完全重新生成。<br><img src="/blog/img/2020/Retimer_and_Redriver/eye_after_redriver_retimer.jpg" alt="eyeRedriverRetimer" title="eyeRedriverRetimer"><br>图3：示例，被信道衰减后信号的眼图（左），衰减信号通过redriver后（中），衰减信号通过retimer后（右）</p>
-<p>PCIe 4.0正式定义了术语“Retimer”（重定时器），“Redriver”（转接驱动器）和它们的超集“repeater”（中继器），所有这些都属于扩展设备或组件，目的是扩展链路的物理长度。定义是：<br>Repeater 中继器：扩展设备的不精确术语。 （此词会引起混乱……请不要使用它！）<br>Redriver 转接驱动器：一种非协议可识别的软件透明扩展设备。<br>Retimer 重定时器：物理层协议感知、软件透明的扩展设备，形成两个单独的电气链路段。</p>
-
+    
+        
             
-                
-            
-        </div>
-        <div class="post-tool">
-            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
-                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+<article class="post">
+    
+    <div class="post-header">
+        <div class="post-meta">
+            <a href="https://wangbo-john.github.io/blog" target="_blank">
+                <strong>王波</strong>
             </a>
-        </div>
-        
-        <div class="post-tags">标签：
-            
-            <a href="/blog/tags/PCIe/">PCIe</a>
+            <em>·</em>2020-02-02
             
         </div>
+        <a class="post-title" href="/blog/tech/a_memory_of_2014-undefined.html" target="_blank" title="Android GPU当前实现及其问题(2014年旧事)">Android GPU当前实现及其问题(2014年旧事)</a>
+        <div class="post-meta">
+            <a href="/blog/tags" target="_blank"><i class="fa fa-tags"></i></a>
+            
+                <em>·</em>
+                <a href="https://wangbo-john.github.io/blog/tags/GPU/" target="_blank">GPU</a>
+            
+        </div>
+    </div>
+    <div class="post-desc">
+        UMD直传command buffer在某些情况会有问题
+    </div>
+</article>
+
+
+
         
-    </article>
     
-        <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
-    
-    
-    
-    
-
-
 </div>
 
 
         </div><!-- end #main-->
     </div><!-- end #body -->
     <footer class="footer">
-    <div class="footer-inner" style="text-align: center">
+    <div class="footer-inner" style="text-align: left">
         <p>
             <a href="/about"  title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
             <!-- 自定义链接 -->

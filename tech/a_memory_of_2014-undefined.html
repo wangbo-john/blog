@@ -1,0 +1,279 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head>
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://wangbo-john.github.io/blog/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta name="author" content="John Wang">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://wangbo-john.github.io/blog">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
+<link rel="shortcut icon" href="/blog/images/favicon.png">
+
+
+<title>android gpu当前实现及其问题(2014年旧事) - a Light moved through the hazy</title>
+
+<meta name="keywords" content="IC, 人文">
+
+<meta name="description " content="UMD直传command buffer在某些情况会有问题">
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="android gpu当前实现及其问题(2014年旧事) - a Light moved through the hazy" />
+<meta property="og:description" content="UMD直传command buffer在某些情况会有问题" />
+<meta property="og:url" content="https://wangbo-john.github.io/blog" />
+<meta property="og:site_name" content="a Light moved through the hazy" />
+
+<link rel="dns-prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prerender" href="https://wangbo-john.github.io/blog">
+<link rel="stylesheet" href="/blog/css/JSimple.min.css">
+    <script type="text/javascript">
+        (function() {
+            let jsi_config = {
+                rootUrl: 'https://wangbo-john.github.io/blog/',
+                isPost: 'true',
+                buildingTime: '12/25/2020',
+                snsQRCode: '',
+                donateImg: '',
+                readMode: 'day',
+                localSearch: { dbPath: '' }
+            };
+            
+                jsi_config.localSearch = {
+                    dbPath: '/search.json',
+                    trigger: 'auto',
+                    topN: '1',
+                    unescape: 'false'
+                }
+            
+            window.jsi_config = jsi_config;
+        })()
+    </script>
+    
+<script src="/blog/js/SimpleCore.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/blog" title="透雾之光">透雾之光</a>
+        <a class="site-index current" href="/blog"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/blog/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/blog/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/blog/help" title="说明">
+            <i class="fa fa-question-circle"></i>
+            <span>说明</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    
+</div>
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <img class="cover-img" alt="cover-img" />
+    <div class="cover-info">
+        
+        <h3 class="cover-siteName">a Light moved through the hazy</h3>
+		<h1 class="cover-siteName">透雾之光</h1>
+        <h2 class="cover-siteTitle">交流、探讨 技术、人文 之 美</h2>
+        <!--<p class="cover-siteDesc">美</p>-->
+		<h1 class="cover-siteName">美</h1>
+		<h3 class="cover-siteName">是</h3>
+		<h3 class="cover-siteName">穿透复杂的简单</h3>
+		<h3 class="cover-siteName">演绎丰富的纯粹</h3>
+		<h3 class="cover-siteName">粉碎羁绊的自主</h3>
+		<h3 class="cover-siteName">宇宙浩渺的孤独</h3>
+		<h3 class="cover-siteName">逝者如斯的无情</h3>
+		<h3 class="cover-siteName">人声鼎沸中全神贯注</h3>
+		<h3 class="cover-siteName">千夫所指时义无反顾</h3>
+		<h3 class="cover-siteName">无声处绽放的惊雷</h3>
+		<h3 class="cover-siteName">无尽绚烂后的平淡</h3>
+		<h3 class="cover-siteName">真心自然的笑</h3>
+		<h3 class="cover-siteName">以及</h3>
+		<h3 class="cover-siteName">一笑倾城的她</h3>
+		<p class="cover-siteDesc">　　　　　—— 王波涂鸦自娱，献给老婆的诗，请勿抄袭</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/wangbo-john" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/blog">最近</a></li>
+        
+            
+                <li class="">
+                    <a href="/blog/categories/tech" data-name="技术">技术</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/human" data-name="人文">人文</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/research" data-name="存疑">存疑</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text"
+               readonly="readonly"
+               id="local-search-input-tip"
+               placeholder="读物检索~" />
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://wangbo-john.github.io/blog"
+                   target="_blank">
+                    <img width="48" src="/blog/images/favicon.png" alt="avatar"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://wangbo-john.github.io/blog"
+                       target="_blank">王波</a>
+                    <span title="最后编辑于&nbsp;2020-02-02">2020-02-02</span>
+                </p>
+                <p>一个希望可以看书休闲其实永不得闲的架构师</p>
+            </div>
+            <h2 class="post-title">Android GPU当前实现及其问题(2014年旧事)</h2>
+            <div class="post-meta">
+                本文共计739个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <h1 id="1-当前实现"><a href="#1-当前实现" class="headerlink" title="1. 当前实现"></a>1. 当前实现</h1><p>   <img src="/blog/img/2020/AndroidGPU/androidCurrentSolution.jpg" alt="AndroidCurrentImp"><br>   图1 当前的Android GPU实现</p>
+<p>   UMD直接通过KMD将cmmand buffer传至DMA buffer。</p>
+<p>   DMA buffer和应用之间没有多媒体缓冲队列。</p>
+<p>   比如图1中，上方黄绿色的两个APP没有拥堵的话会直接发送到下方DMA buffer。</p>
+<h1 id="2-问题"><a href="#2-问题" class="headerlink" title="2. 问题"></a>2. 问题</h1><h2 id="2-1-硬件需等待GPU流水线同步"><a href="#2-1-硬件需等待GPU流水线同步" class="headerlink" title="2.1  硬件需等待GPU流水线同步"></a>2.1  硬件需等待GPU流水线同步</h2><p>如下图，假设有应用APP1发起一次编码请求，它会向UMD发出两个命令ENC和PAK。</p>
+<p>这两个命令会直接、同时发送给对应的DMA buffer，如下图所示。<br><img src="/blog/img/2020/AndroidGPU/androidCurrentSolution_prob01.jpg" alt="problem1"></p>
+<p>可是在当前实现下，即便PAK自己已经在DMA buffer中做好准备，因为它的前提条件ENC还没结束，PAK会挂起（Engine Stall），直到ENC命令执行完毕。影响GPU性能。</p>
+<h2 id="2-2-APP没有优先级设定。多个APP同时运行时，很耗资源的背景APP可能会影响硬件和谐"><a href="#2-2-APP没有优先级设定。多个APP同时运行时，很耗资源的背景APP可能会影响硬件和谐" class="headerlink" title="2.2 APP没有优先级设定。多个APP同时运行时，很耗资源的背景APP可能会影响硬件和谐"></a>2.2 APP没有优先级设定。多个APP同时运行时，很耗资源的背景APP可能会影响硬件和谐</h2><p>如下图，APP1是时间敏感的应用比如UI，APP2是个占用GPGPU的应用。<br><img src="/blog/img/2020/AndroidGPU/androidCurrentSolution_prob02.jpg" alt="Problem2"></p>
+<p>当APP1发出一条命令时，APP2可能已经发出很多条命令了。</p>
+<p>KMD可能需要等处理完现有的几条APP2命令后，才能发送APP1的请求，这时对于APP1来说，延时已经产生，可能会影响用户体验，严重时甚至产生拒绝服务（Denial-Of-Service）。</p>
+<h1 id="3-解决方法"><a href="#3-解决方法" class="headerlink" title="3. 解决方法"></a>3. 解决方法</h1><p>如下图，在UMD和KMD直接插入上下文缓冲队列，根据命令优先级和运行时间调度命令送入DMA buffer。<br><img src="/blog/img/2020/AndroidGPU/androidCurrentSolution_solution.jpg" alt="insBuf"></p>
+<p>如前面的例1这种情况下，有了这个队列，在暂时block PAK命令的同时，APP2就发送命令给DMA buffer，充分利用VDBOX引擎硬件资源。<br><img src="/blog/img/2020/AndroidGPU/androidCurrentSolution_solution2.jpg" alt="2Apps"></p>
+<p>同样，这个调度器按优先级处理队列，在例2这种情况下，仍可保证高优先级的App1获得足够硬件资源。</p>
+
+            
+                
+            
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/blog/tags/GPU/">GPU</a>
+            
+        </div>
+        
+    </article>
+    
+        <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+    
+    
+
+
+</div>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about"  title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/blog/help" title="帮助" >帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/sitemap.xml" title="地图">地图</a>
+        </p>
+        <p>
+            本站已建立&nbsp<a href="/timeline" id="siteBuildingTime"></a>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br/>
+            ©2017-<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://wangbo-john.github.io/blog" target="_blank" rel="friend">王波</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input"
+                   spellcheck="false"
+                   type="text"
+                   autocomplete="off"
+                   placeholder="请输入查询关键词"/>
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+
+    <script type="text/javascript">
+        let bp = document.createElement('script');
+        let curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        bp.setAttribute("async", "");
+        let s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    </script>
+
+
+</body>
+</html>

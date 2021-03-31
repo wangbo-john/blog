@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head>
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://wangbo-john.github.io/blog/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta name="author" content="John Wang">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://wangbo-john.github.io/blog">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
+<link rel="shortcut icon" href="/blog/images/favicon.png">
+
+
+<title>缓存cache，末级缓存llc 和 缓存一致性 - a Light moved through the hazy</title>
+
+<meta name="keywords" content="IC, 人文">
+
+<meta name="description " content="名词解释远超正文^-^">
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="缓存cache，末级缓存llc 和 缓存一致性 - a Light moved through the hazy" />
+<meta property="og:description" content="名词解释远超正文^-^" />
+<meta property="og:url" content="https://wangbo-john.github.io/blog" />
+<meta property="og:site_name" content="a Light moved through the hazy" />
+
+<link rel="dns-prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prerender" href="https://wangbo-john.github.io/blog">
+<link rel="stylesheet" href="/blog/css/JSimple.min.css">
+    <script type="text/javascript">
+        (function() {
+            let jsi_config = {
+                rootUrl: 'https://wangbo-john.github.io/blog/',
+                isPost: 'true',
+                buildingTime: '12/25/2020',
+                snsQRCode: '',
+                donateImg: '',
+                readMode: 'day',
+                localSearch: { dbPath: '' }
+            };
+            
+                jsi_config.localSearch = {
+                    dbPath: '/search.json',
+                    trigger: 'auto',
+                    topN: '1',
+                    unescape: 'false'
+                }
+            
+            window.jsi_config = jsi_config;
+        })()
+    </script>
+    
+<script src="/blog/js/SimpleCore.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/blog" title="透雾之光">透雾之光</a>
+        <a class="site-index current" href="/blog"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/blog/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/blog/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/blog/help" title="说明">
+            <i class="fa fa-question-circle"></i>
+            <span>说明</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    
+</div>
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <img class="cover-img" alt="cover-img" />
+    <div class="cover-info">
+        
+        <h3 class="cover-siteName">a Light moved through the hazy</h3>
+		<h1 class="cover-siteName">透雾之光</h1>
+        <h2 class="cover-siteTitle">交流、探讨 技术、人文 之 美</h2>
+        <!--<p class="cover-siteDesc">美</p>-->
+		<h1 class="cover-siteName">美</h1>
+		<h3 class="cover-siteName">是</h3>
+		<h3 class="cover-siteName">穿透复杂的简单</h3>
+		<h3 class="cover-siteName">演绎丰富的纯粹</h3>
+		<h3 class="cover-siteName">粉碎羁绊的自主</h3>
+		<h3 class="cover-siteName">宇宙浩渺的孤独</h3>
+		<h3 class="cover-siteName">逝者如斯的无情</h3>
+		<h3 class="cover-siteName">人声鼎沸中全神贯注</h3>
+		<h3 class="cover-siteName">千夫所指时义无反顾</h3>
+		<h3 class="cover-siteName">无声处绽放的惊雷</h3>
+		<h3 class="cover-siteName">无尽绚烂后的平淡</h3>
+		<h3 class="cover-siteName">真心自然的笑</h3>
+		<h3 class="cover-siteName">以及</h3>
+		<h3 class="cover-siteName">一笑倾城的她</h3>
+		<p class="cover-siteDesc">　　　　　—— 王波涂鸦自娱，献给老婆的诗，请勿抄袭</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/wangbo-john" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/blog">最近</a></li>
+        
+            
+                <li class="">
+                    <a href="/blog/categories/tech" data-name="技术">技术</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/human" data-name="人文">人文</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/research" data-name="存疑">存疑</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text"
+               readonly="readonly"
+               id="local-search-input-tip"
+               placeholder="读物检索~" />
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://wangbo-john.github.io/blog"
+                   target="_blank">
+                    <img width="48" src="/blog/images/favicon.png" alt="avatar"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://wangbo-john.github.io/blog"
+                       target="_blank">王波</a>
+                    <span title="最后编辑于&nbsp;2020-02-05">2020-02-05</span>
+                </p>
+                <p>一个希望可以看书休闲其实永不得闲的架构师</p>
+            </div>
+            <h2 class="post-title">缓存cache，末级缓存LLC 和 缓存一致性</h2>
+            <div class="post-meta">
+                本文共计3602个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <p>所有文章全部原创，劳动辛苦，请勿转载。</p>
+<p>恕我词汇贫乏后面有几个词一时想不出对应的汉语词汇，为保持一致性，有些词会直接使用英文原词。</p>
+<p>没想到还没写完第一句话，就发现需要大堆的名词解释，能忍受的估计都是同行哈哈。</p>
+<p>===============================</p>
+<h1 id="名词解释："><a href="#名词解释：" class="headerlink" title="名词解释："></a>名词解释：</h1><p><strong>cache block 高速缓存块</strong>：    缓存存储的基本单位。可能包含多个字节/字的数据。<br><strong>cache line 缓存行</strong>：    与缓存块相同（case line = case block）。 请注意，这与高速缓存的“Row（行）”不同，那个。<br><strong>cache set 缓存集</strong>：    缓存中的“行（row）”（再罗嗦一下不要和cache line弄混了，应该把case line这个历史名词去掉）。 每组的块数由高速缓存的布局确定（例如，直接映射，组关联或完全关联）。<br><strong>tag 标记（或标签）</strong>：    一组数据的唯一标识符。 由于不同的内存区域可能会映射到同一个块中，因此使用标签来区分它们。<br><strong>valid bit 有效位</strong>：    指示块中数据有效（1）还是无效（0）的信息位。<br><strong>Snoop filter 探听过滤器</strong>:<br>当特定缓存块上有总线事件时，所有侦听器（snoopers）都必须侦听总线事务。然后，侦听器查找其相应的缓存标记，以检查其是否具有相同的缓存块。在大多数情况下，缓存没有该缓存块，因为优化良好的并行程序不会在线程之间共享大量数据，这样的缓存依然进行标记查找就没必要了。除了没这个必要，更进一步的，标签查找会干扰处理器对缓存的访问，并导致额外的功耗。<br>减少不必要的监听的一种方法是使用探听过滤器。探听过滤器确定窥探者是否需要检查其缓存标签。探听过滤器是基于目录的结构，它监视所有一致性流量，以便跟踪高速缓存块的一致性状态。这意味着探听过滤器知道具有缓存块副本的缓存。因此，它可以防止不具有缓存块副本的缓存进行不必要的监听（因为没有必要又耗电）。<br>取决于侦听过滤器的位置，有三种类型的过滤器。一种是位于高速缓存侧的源过滤器，它在相干流量到达共享总线之前执行过滤。另一个是目标过滤器，它位于接收器缓存中，可以防止在接收器核心进行不必要的缓存标记查找，但是这种类型的过滤无法阻止来自源的初始一致性消息。最后，网络内过滤器可在共享总线内部动态修剪相干通信。<br>探听过滤器也分为包容性和独占性。包含性探听过滤器可跟踪高速缓存中高速缓存块的<strong>存在</strong>。但是，排他探听过滤器监视高速缓存中高速缓存块的<strong>不存在</strong>。换句话说，包含性探听过滤器中的命中意味着相应的缓存块由缓存保存（来吧，我这里有）。另一方面，排他侦听过滤器中的命中意味着没有缓存具有请求的缓存块(没有，不要再找我了)。</p>
+<p><strong>Mesh 网格</strong>: 英文解释为织物（fabric），您可以想象为经纬纵横的类似于纱布那样的二维阵列，形成全系统范围的互连网格。现在您将纱布里的纱换成电线更贴近一点，里面传递的是总线信号。<br><strong>Tile 磁性贴</strong>：　模块化IP块，可以在大型网格上多次复制。您直接理解为积木块也可以，它是小心调整后设计组合在一起的一组硬件IP，可以批量复制。<br><strong>Core Tile 内核磁性贴</strong>：　一种特定类型的硬件ＩＰ块，它融合了Intel的x86核心。<br><strong>IMC Tile ＩＭＣ（Intel Memory Controller）磁性贴</strong>：　一种特定类型的磁贴，包含了集成的内存控制器<br><strong>Caching/Home Agent (CHA) 缓存/本地代理</strong>: 位于核心磁贴中的一个单元，用于维持磁贴之间的缓存一致性。 CHA还与CMS（ＣＭＳ见下面）交互。<br><strong>Converged/Common Mesh Stop (CMS)　聚合/公用网格停靠站</strong>：　网格停靠站，用于连接磁性贴（Ｔｉｌｅ）和结构（ｆａｂｒｉｃ）</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>最新设计中，缓存IP从CHA IP中分离出来。CHA含有缓存控制器和缓存一致性引擎，管理所有socket上的所有cache。CHA IP是SCF（Scalable Coherent Fabric）IP的一部分，SCF（可伸缩一致性结构）用于支持芯片设计（搭积木时的）结构一致性和即插即用。</p>
+<p>缓存IP（cache）是拥有下列功能模块的硬件IP，包括： 末级缓存（Last Layer Cache），探听过滤器（Snoop Filter）【SF又包含本地探听过滤器（LSF）和远程探听过滤器（RSF）】，以及相关逻辑。用于为SCF（Scalable Coherent Fabric）和 CHA IP之间提供数据缓存。</p>
+<p>每个数据entry包含数据阵列中的一个高速缓存块（64字节的block or line，这两个词在这里等价，详见前面名词解释部分），该缓存行（cache line，==缓存块）分两笔在两个连续周期中从数据接口CHA发送到LLC。</p>
+<p>LLC（末级缓存，Last Layer Cache，在Intel CPU中通常是指第3级缓存）的每个entry保存6种信息：data, tag, state, core valid, 2lm 和 LRU。<br>　　tag信息存储在Tag数组中。<br>　　MESI状态和Core　Valid信息存储在StateCV数组中。<br>　　TwoLM位存储在2LM阵列中。<br>　　LRU信息存储在LRU阵列中。 </p>
+<p>其中MESI就涉及到常说的缓存一致性的问题。</p>
+<p>临时还要再加一个名词解释<br><strong>cache coherence 缓存一致性</strong>：系统中存在多个本地缓存时，最终存储在这些本地缓存中的共享资源数据需要保证一致性。当系统中有多个客户端分别维护公用内存资源的在它自己本地的缓存时，数据不一致可能会出现问题，在多处理器CPU中尤其如此。</p>
+<p>在下图中，考虑两个客户端都具有先前读取的特定内存块的缓存副本。假设底部的客户端更新/更改了该内存块，则顶部的客户端可能留下无效的内存缓存，而没有任何更改通知。 高速缓存一致性旨在通过在多个高速缓存中维护数据值的一致性视图来管理此类冲突。<br><img src="/blog/img/2020/Cache_Coherency/Cache_Coherency_Generic.png" alt="Cache_Coherency" title="Cache_Coherency"></p>
+<p>可见缓存一致性问题通常出现在有内存写入的情况下。有两种方案可以应对：</p>
+<ol>
+<li><p>Write Invalidate 写无效<br>动作：<br>–想要写的CPU，将地址发送到总线，占用总线周期发送一个“写无效”消息<br>–所有侦听缓存均使该地址对应的缓存行副本无效<br>–CPU写入其缓存的副本（现在假设它也写入内存）<br>–现在，其它CPU中任何共享读取都将丢失高速缓存并重新获取新数据。</p>
+</li>
+<li><p>Write Update 写更新<br>–想要写入的CPU会获取总线周期并在更新自己的副本时广播新数据<br>–所有侦听缓存均更新其副本</p>
+</li>
+</ol>
+<p>请注意，在两种方案中，都假设总线仲裁器可以解决并发写入的问题——任一时间只有一个CPU可以使用该总线。</p>
+<p>第二种方案（更新），看起来最简单，最明显，最快，但是：<br>–对同一数据的多次写入（无中间读取），若用无效（Invalidate）消息，仅需要在最后一笔写入时更新，但现在用Update机制，每个消息都需要更新。<br>–写入多个字节的地址段（通常）位于高速缓存块中的同一块范围内时，若用无效（Invalidate）消息，仅需要一次操作，但若用Update机制，则要做多次更新。</p>
+<p>由于（计算机系统常见的）时空局部性原理，上述情况经常发生。<br>• 总线带宽是共享内存多处理器中的宝贵财富<br>• 经验表明，无效（Invalidate）协议使用的带宽要少得多<br>于是下面仅考虑无效协议（Invalidate）的实施细节。</p>
+<p>在Invalidate和Update两种方案中，如果知道某个（些）缓存的值是否在别的缓存中有共享（复制），就可以避免发送不必要的消息。<br>无效描述假定高速缓存值更新已写入内存。如果我们使用“拷回”方案，则其他处理器可能会在缓存未命中时重新获取旧值。<br>我们需要一个协议来处理所有这一切。</p>
+<p>MESI就是这样一种实用的多处理器无效协议，该协议试图将总线使用率降到最低。<br>• 允许使用“回写”方案——即直到“脏”高速缓存行被替换之前才更新至主存<br>• 扩展常用的缓存标签，即无效标签和普通回写缓存中的“脏”标签。</p>
+<p>任何高速缓存行都可以处于4种状态之一（2比特）<br>• Modified 已修改 ——缓存行已修改，与主内存不同——是唯一的缓存副本。（多处理器“脏”）<br>• Exclusive 独占  ——高速缓存行与主内存相同，且是唯一的高速缓存副本<br>• Shared    共享  ——与主内存相同，但其他缓存中可能存在副本。<br>• Invalid   无效  ——行数据无效（就象在简单缓存中那样）</p>
+<p>高速缓存行的状态随内存访问事件而变化。<br>事件可能是<br>–由于本地处理器活动（即缓存访问）<br>–由于总线活动<br>-由于监听<br>仅当地址匹配时，缓存行的状态才会受到影响</p>
+<p>可以通过查看本地处理器的动作来非正式地描述操作<br>–读命中<br>–读未命中<br>–写命中<br>–写未命中</p>
+<p>正式的MESI操作请看状态转换图。</p>
+<p><img src="/blog/img/2020/Cache_Coherency/MESI_local.png" alt="local" title="local"><br>本地访问</p>
+<p><img src="/blog/img/2020/Cache_Coherency/MESI_remote.png" alt="remote" title="remote"><br>远程访问</p>
+
+            
+                
+            
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/blog/tags/memory/">memory</a>
+            
+            <a href="/blog/tags/cache/">cache</a>
+            
+        </div>
+        
+    </article>
+    
+        <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+    
+    
+
+
+</div>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about"  title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/blog/help" title="帮助" >帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/sitemap.xml" title="地图">地图</a>
+        </p>
+        <p>
+            本站已建立&nbsp<a href="/timeline" id="siteBuildingTime"></a>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br/>
+            ©2017-<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://wangbo-john.github.io/blog" target="_blank" rel="friend">王波</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input"
+                   spellcheck="false"
+                   type="text"
+                   autocomplete="off"
+                   placeholder="请输入查询关键词"/>
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+
+    <script type="text/javascript">
+        let bp = document.createElement('script');
+        let curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        bp.setAttribute("async", "");
+        let s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    </script>
+
+
+</body>
+</html>

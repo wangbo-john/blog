@@ -18,16 +18,16 @@
 <link rel="shortcut icon" href="/blog/images/favicon.png">
 
 
-<title>hardware abstract layer - a Light moved through the hazy</title>
+<title>标签 - security - a Light moved through the hazy</title>
 
 <meta name="keywords" content="IC, 人文">
 
-<meta name="description " content="最大目的是为了让手机厂商自己的驱动源代码避开GPL开源协议">
+<meta name="description " content="">
 
 <!-- Jetpack Open Graph Tags -->
 <meta property="og:type" content="article" />
-<meta property="og:title" content="hardware abstract layer - a Light moved through the hazy" />
-<meta property="og:description" content="最大目的是为了让手机厂商自己的驱动源代码避开GPL开源协议" />
+<meta property="og:title" content="标签 - security - a Light moved through the hazy" />
+<meta property="og:description" content="" />
 <meta property="og:url" content="https://wangbo-john.github.io/blog" />
 <meta property="og:site_name" content="a Light moved through the hazy" />
 
@@ -39,7 +39,7 @@
         (function() {
             let jsi_config = {
                 rootUrl: 'https://wangbo-john.github.io/blog/',
-                isPost: 'true',
+                isPost: 'false',
                 buildingTime: '12/25/2020',
                 snsQRCode: '',
                 donateImg: '',
@@ -125,21 +125,21 @@
 
             <div class="page-title">
     <ul>
-        <li><a href="/blog">最近</a></li>
+        <li class="">
+            <a href="/blog" data-name="最近">最近</a>
+        </li>
         
-            
-                <li class="">
-                    <a href="/blog/categories/tech" data-name="技术">技术</a>
-                </li>
-            
-                <li class="">
-                    <a href="/blog/categories/human" data-name="人文">人文</a>
-                </li>
-            
-                <li class="">
-                    <a href="/blog/categories/research" data-name="存疑">存疑</a>
-                </li>
-            
+        <li class="">
+            <a href="/blog/categories/tech" data-name="技术">技术</a>
+        </li>
+        
+        <li class="">
+            <a href="/blog/categories/human" data-name="人文">人文</a>
+        </li>
+        
+        <li class="">
+            <a href="/blog/categories/research" data-name="存疑">存疑</a>
+        </li>
         
         <li class="page-search">
     <form id="search" class="search-form">
@@ -154,69 +154,44 @@
     </ul>
 </div>
 <div class="main-inner">
-    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-        <div class="post-header">
-            <div class="post-author clearfix">
-                <a class="avatar fleft" href="https://wangbo-john.github.io/blog"
-                   target="_blank">
-                    <img width="48" src="/blog/images/favicon.png" alt="avatar"/>
-                </a>
-                <p><span class="label">作者</span>
-                    <a href="https://wangbo-john.github.io/blog"
-                       target="_blank">王波</a>
-                    <span title="最后编辑于&nbsp;2020-03-01">2020-03-01</span>
-                </p>
-                <p>一个希望可以看书休闲其实永不得闲的架构师</p>
-            </div>
-            <h2 class="post-title">Hardware Abstract Layer</h2>
-            <div class="post-meta">
-                本文共计578个字 |
-                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
-            </div>
-        </div>
-        <div class="post-content markdown-body">
-            <h1 id="HAL存在的意义"><a href="#HAL存在的意义" class="headerlink" title="HAL存在的意义"></a>HAL存在的意义</h1><p>硬件抽象层是介于android内核kernel和上层之间的抽象出来的一层结构。他是对linux驱动的一个封装，对上层提供统一接口，上层应用不必知道下层硬件具体怎么工作的，它屏蔽了底层的实现细节。</p>
-<p>它在整个android架构中的位置如下图所示：<br><img src="/blog/img/2020/android_HAL.png" alt="HAL" title="HAL"></p>
-<p>传统的linux对硬件的操作基本上在内核空间的linux驱动程序中实现，那么现在为什么要多此一举把对硬件的操作分为HAL和linux驱动两部分呢？而且HAL是属于用户空间，linux驱动属于内核空间。<br>其实并不多余，理由是很多的：<br>1、Google搭好了HAL的框架，为上层framework通过JNI调用HAL提供了统一的API，硬件开发商或者移植人员只需要按照框架开发即可，无需花费精力在与上层的交互上的实现上，将精力放在HAL层本身的实现上即可。<br>2、（更主要的）从商业角度，许多硬件厂商不愿意将自己硬件相关一些核心的东西开源出去，假如将对自己硬件的驱动程序全部放入内核空间驱动程序实现，那么必须遵循GPL协议，是必需开源的。有了HAL层之后，他们可以把一些核心的算法之类的东西的实现放在HAL层，而HAL层位于用户空间，不属于linux内核，和android源码一样遵循的是Apache协议，这个是可以不用开源的。</p>
-<p>以上就是HAL层存在的意义。</p>
-<p>现在Linux的驱动也有往用户空间转移的趋势。</p>
-
+    
+        
             
-                
-            
-        </div>
-        <div class="post-tool">
-            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
-                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+<article class="post">
+    
+    <div class="post-header">
+        <div class="post-meta">
+            <a href="https://wangbo-john.github.io/blog" target="_blank">
+                <strong>王波</strong>
             </a>
-        </div>
-        
-        <div class="post-tags">标签：
-            
-            <a href="/blog/tags/Android/">Android</a>
-            
-            <a href="/blog/tags/driver/">driver</a>
-            
-            <a href="/blog/tags/userspace/">userspace</a>
+            <em>·</em>2020-02-06
             
         </div>
+        <a class="post-title" href="/blog/tech/meltdown-undefined.html" target="_blank" title="缓解熔断与幽灵威胁的3种新的执行预测控制机制：IBRS, IBPB &amp; STIBP">缓解熔断与幽灵威胁的3种新的执行预测控制机制：IBRS, IBPB &amp; STIBP</a>
+        <div class="post-meta">
+            <a href="/blog/tags" target="_blank"><i class="fa fa-tags"></i></a>
+            
+                <em>·</em>
+                <a href="https://wangbo-john.github.io/blog/tags/security/" target="_blank">security</a>
+            
+        </div>
+    </div>
+    <div class="post-desc">
+        meltdown和spectre相关指令
+    </div>
+</article>
+
+
+
         
-    </article>
     
-        <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
-    
-    
-    
-    
-
-
 </div>
 
 
         </div><!-- end #main-->
     </div><!-- end #body -->
     <footer class="footer">
-    <div class="footer-inner" style="text-align: center">
+    <div class="footer-inner" style="text-align: left">
         <p>
             <a href="/about"  title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
             <!-- 自定义链接 -->

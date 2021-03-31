@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head>
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://wangbo-john.github.io/blog/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta name="author" content="John Wang">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://wangbo-john.github.io/blog">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
+<link rel="shortcut icon" href="/blog/images/favicon.png">
+
+
+<title>虚拟机与容器 - a Light moved through the hazy</title>
+
+<meta name="keywords" content="IC, 人文">
+
+<meta name="description " content="略谈一下虚拟机和容器的异同">
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="虚拟机与容器 - a Light moved through the hazy" />
+<meta property="og:description" content="略谈一下虚拟机和容器的异同" />
+<meta property="og:url" content="https://wangbo-john.github.io/blog" />
+<meta property="og:site_name" content="a Light moved through the hazy" />
+
+<link rel="dns-prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prerender" href="https://wangbo-john.github.io/blog">
+<link rel="stylesheet" href="/blog/css/JSimple.min.css">
+    <script type="text/javascript">
+        (function() {
+            let jsi_config = {
+                rootUrl: 'https://wangbo-john.github.io/blog/',
+                isPost: 'true',
+                buildingTime: '12/25/2020',
+                snsQRCode: '',
+                donateImg: '',
+                readMode: 'day',
+                localSearch: { dbPath: '' }
+            };
+            
+                jsi_config.localSearch = {
+                    dbPath: '/search.json',
+                    trigger: 'auto',
+                    topN: '1',
+                    unescape: 'false'
+                }
+            
+            window.jsi_config = jsi_config;
+        })()
+    </script>
+    
+<script src="/blog/js/SimpleCore.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/blog" title="透雾之光">透雾之光</a>
+        <a class="site-index current" href="/blog"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/blog/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/blog/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/blog/help" title="说明">
+            <i class="fa fa-question-circle"></i>
+            <span>说明</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    
+</div>
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <img class="cover-img" alt="cover-img" />
+    <div class="cover-info">
+        
+        <h3 class="cover-siteName">a Light moved through the hazy</h3>
+		<h1 class="cover-siteName">透雾之光</h1>
+        <h2 class="cover-siteTitle">交流、探讨 技术、人文 之 美</h2>
+        <!--<p class="cover-siteDesc">美</p>-->
+		<h1 class="cover-siteName">美</h1>
+		<h3 class="cover-siteName">是</h3>
+		<h3 class="cover-siteName">穿透复杂的简单</h3>
+		<h3 class="cover-siteName">演绎丰富的纯粹</h3>
+		<h3 class="cover-siteName">粉碎羁绊的自主</h3>
+		<h3 class="cover-siteName">宇宙浩渺的孤独</h3>
+		<h3 class="cover-siteName">逝者如斯的无情</h3>
+		<h3 class="cover-siteName">人声鼎沸中全神贯注</h3>
+		<h3 class="cover-siteName">千夫所指时义无反顾</h3>
+		<h3 class="cover-siteName">无声处绽放的惊雷</h3>
+		<h3 class="cover-siteName">无尽绚烂后的平淡</h3>
+		<h3 class="cover-siteName">真心自然的笑</h3>
+		<h3 class="cover-siteName">以及</h3>
+		<h3 class="cover-siteName">一笑倾城的她</h3>
+		<p class="cover-siteDesc">　　　　　—— 王波涂鸦自娱，献给老婆的诗，请勿抄袭</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/wangbo-john" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/blog">最近</a></li>
+        
+            
+                <li class="">
+                    <a href="/blog/categories/tech" data-name="技术">技术</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/human" data-name="人文">人文</a>
+                </li>
+            
+                <li class="active">
+                    <a href="/blog/categories/research" data-name="存疑">存疑</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text"
+               readonly="readonly"
+               id="local-search-input-tip"
+               placeholder="读物检索~" />
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://wangbo-john.github.io/blog"
+                   target="_blank">
+                    <img width="48" src="/blog/images/favicon.png" alt="avatar"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://wangbo-john.github.io/blog"
+                       target="_blank">王波</a>
+                    <span title="最后编辑于&nbsp;2020-04-01">2020-04-01</span>
+                </p>
+                <p>一个希望可以看书休闲其实永不得闲的架构师</p>
+            </div>
+            <h2 class="post-title">虚拟机与容器</h2>
+            <div class="post-meta">
+                本文共计2392个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <h1 id="虚拟机Virtual-Machine"><a href="#虚拟机Virtual-Machine" class="headerlink" title="虚拟机Virtual Machine"></a>虚拟机Virtual Machine</h1><p>虚拟机（VM）是用于构建虚拟化计算环境的技术。它们已经存在很久了，被认为是第一代云计算的基础。<br>简而言之，虚拟机是物理计算机的仿真。VM可让一台计算机看似多台独立机器，可运行多个相同或不同的操作系统。 VM通过使用称为管理程序的轻量级软件层与物理计算机进行交互。 虚拟机管理程序可以将虚拟机彼此分开，并给它们分配处理器、内存和存储。</p>
+<h2 id="管理程序-hypervisor"><a href="#管理程序-hypervisor" class="headerlink" title="管理程序 hypervisor"></a>管理程序 hypervisor</h2><p>没有hypervisor，就不可能有虚拟化。系统管理程序或虚拟机监视器是使多个操作系统能够并行运行的软件或固件层，所有这些操作系统都可以访问相同的物理服务器资源。 系统管理程序协调并分离可用资源（计算能力，内存，存储等），并根据需要将分离组合而成的各部分分配给每个虚拟机。<br>hypervisor虚拟的是硬件资源。<br><img src="/blog/img/2020/build_service/VM.jpg" alt="VM" title="VM"><br>虚拟机架构示意图</p>
+<h2 id="虚拟机的一些限制："><a href="#虚拟机的一些限制：" class="headerlink" title="虚拟机的一些限制："></a>虚拟机的一些限制：</h2><p>1、资源消耗。由于每个VM都包含一个OS和该OS所需所有硬件的虚拟副本，因此VM需要大量的RAM和CPU资源。<br>2、由于虚拟副本和所需资源的增加，虚拟机的软件开发生命周期更加复杂。<br>3、在公有云、私有云和传统数据中心之间移动虚拟机可能是一个挑战。</p>
+<h1 id="容器Container"><a href="#容器Container" class="headerlink" title="容器Container"></a>容器Container</h1><p>容器是一种更轻量，更敏捷的虚拟化方法。容器不打包整个虚拟机，而是将运行某段软件所需的一切打包在一起。容器包含所有应用程序、其依赖项、甚至包括操作系统本身。 这使应用程序几乎可以在任何地方运行——PC、传统的IT设备或云。<br>容器虚拟化的是操作系统（OS）。简而言之，它们利用操作系统的功能来隔离进程并控制进程对CPU、内存和桌面空间的访问。<br>容器也已经存在了数十年，但是普遍的共识是，现代容器时代始于2013年Docker的引入。<br><img src="/blog/img/2020/build_service/Container.jpg" alt="Container" title="Container"><br>容器架构示意图</p>
+<h2 id="容器与微服务架构"><a href="#容器与微服务架构" class="headerlink" title="容器与微服务架构"></a>容器与微服务架构</h2><p>容器很适合用来部署微服务架构组件。<br>下面是我们（练手）将一个原来在虚拟机中部署的普通编译发布服务改造成微服务架构，然后换用容器部署的例子：<br><img src="/blog/img/2020/build_service/Pre-microservice_AzureKube.png" alt="Before" title="Before"><br>改造前，实现服务的各部分软件按一个整体(monolith)实现</p>
+<p><img src="/blog/img/2020/build_service/Post_microservice_AzureKube.png" alt="After" title="After"><br>改造后，服务由一堆时髦的微服务组成</p>
+<p>既然有docker，和它形影不离的<strong>kubernetes</strong>当然也不能少，用它配置个邮件服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps&#x2F;v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: emailservice</span><br><span class="line">spec:</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: emailservice</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: emailservice</span><br><span class="line">    spec:</span><br><span class="line">      terminationGracePeriodSeconds: 5</span><br><span class="line">      containers:</span><br><span class="line">      - name: server</span><br><span class="line">        image: xxxxxx&#x2F;emailservice:v0.2.0</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 8080</span><br><span class="line">        env:</span><br><span class="line">        - name: PORT</span><br><span class="line">          value: &quot;8080&quot;</span><br><span class="line">        - name: DISABLE_PROFILER</span><br><span class="line">          value: &quot;1&quot;</span><br><span class="line">        readinessProbe:</span><br><span class="line">          periodSeconds: 5</span><br><span class="line">          exec:</span><br><span class="line">            command: [&quot;&#x2F;bin&#x2F;grpc_health_probe&quot;, &quot;-addr&#x3D;:8080&quot;]</span><br><span class="line">        livenessProbe:</span><br><span class="line">          periodSeconds: 5</span><br><span class="line">          exec:</span><br><span class="line">            command: [&quot;&#x2F;bin&#x2F;grpc_health_probe&quot;, &quot;-addr&#x3D;:8080&quot;]</span><br><span class="line">        resources:</span><br><span class="line">          requests:</span><br><span class="line">            cpu: 100m</span><br><span class="line">            memory: 64Mi</span><br><span class="line">          limits:</span><br><span class="line">            cpu: 200m</span><br><span class="line">            memory: 128Mi</span><br><span class="line">---</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: emailservice</span><br><span class="line">spec:</span><br><span class="line">  type: ClusterIP</span><br><span class="line">  selector:</span><br><span class="line">    app: emailservice</span><br><span class="line">  ports:</span><br><span class="line">  - name: grpc</span><br><span class="line">    port: 5000</span><br><span class="line">    targetPort: 8080</span><br></pre></td></tr></table></figure>
+
+<p>至于monolith和microservice的差异和好处，感觉不大明显，维护起来都很方便。</p>
+<h2 id="容器技术的一些限制："><a href="#容器技术的一些限制：" class="headerlink" title="容器技术的一些限制："></a>容器技术的一些限制：</h2><ol>
+<li>特定主机上的所有容器必须设计为与主机同一类型的OS上运行。基于不同操作系统的容器将需要不同的主机。</li>
+<li>由于OS在容器间是共享的，OS内核安全漏洞会对主机上的所有容器造成威胁。<br>第2点可以用enclave技术将风险降低。</li>
+</ol>
+<p>写到这里，发现需要介绍点安全相关内容。这个领域说起来和所有人都有关，但其实大多数人却不感兴趣。安全是个很深的领域，绝大多数研发活动都在软件算法上。不过前几年幽灵和熔断事件闹得很大，下一篇就介绍点芯片安全相关的简单内容吧。</p>
+
+            
+                
+            
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/blog/tags/silicon/">silicon</a>
+            
+            <a href="/blog/tags/virtualization/">virtualization</a>
+            
+        </div>
+        
+    </article>
+    
+        <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+    
+    
+
+
+</div>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about"  title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/blog/help" title="帮助" >帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/sitemap.xml" title="地图">地图</a>
+        </p>
+        <p>
+            本站已建立&nbsp<a href="/timeline" id="siteBuildingTime"></a>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br/>
+            ©2017-<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://wangbo-john.github.io/blog" target="_blank" rel="friend">王波</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input"
+                   spellcheck="false"
+                   type="text"
+                   autocomplete="off"
+                   placeholder="请输入查询关键词"/>
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+
+    <script type="text/javascript">
+        let bp = document.createElement('script');
+        let curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        bp.setAttribute("async", "");
+        let s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    </script>
+
+
+</body>
+</html>
