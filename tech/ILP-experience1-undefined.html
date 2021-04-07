@@ -170,7 +170,7 @@
             </div>
             <h2 class="post-title">并行性实验一：指令级并行性（ILP），QVNNI指令集简介</h2>
             <div class="post-meta">
-                本文共计2566个字 |
+                本文共计2574个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
@@ -184,7 +184,7 @@
 <h1 id="支持的神经网络"><a href="#支持的神经网络" class="headerlink" title="支持的神经网络"></a>支持的神经网络</h1><p>这种最基本的加速指令单元没有也不需要针对哪种深度神经网络结构做优化，所以除了少数比较极端的情况，可以支持几乎任何网络的加速。</p>
 <h1 id="相对性能改善"><a href="#相对性能改善" class="headerlink" title="相对性能改善"></a>相对性能改善</h1><p>下面是在VNNI（QVNNI的简化版，仅支持int8和bf16,不支持单精度浮点）测得的int8相对fp32的性能改善。如果使用QVNNI，可让单精度浮点矩阵计算也得到同等程度的加速。</p>
 <p>基于以下三点原因：1）现代模型不再使用LRN（Local Response Normalization），可将部分较旧模型修改为使用批量规一化（Batch Normalization）。 2）softmax函数和BN需要全精度，因为它不能以8位精度保持原有的准确性。另外，3）不要在BN推理层后再进行卷积，因为它可以通过缩放权重值并修改“偏差”被其前一层吸收。英特尔MKL-DNN仅使用fp32，而没有以8位精度实现LRN，softmax或BN层。</p>
-<p>突然写了上面一大段有点莫名奇妙吧。自我翻译一下，这句话的意思是：下面的int8都是“天然无优化”结果，而MKL-DNN针对fp32有一定优化，所以如果双方待遇相同，结果应该更好。</p>
+<p>突然写了上面一大段有点莫名奇妙吧。自我翻译一下，这句话的意思是：下面的int8都是“天然无优化”结果，而MKL-DNN针对fp32有一定优化，所以如果双方待遇相同，int8能得到更好的优化结果。</p>
 <p>使用VNNI，简单测得的深度学习性能提升：</p>
 <table>
 <thead>

@@ -181,15 +181,15 @@
 <h1 id="NNP-I推理加速器"><a href="#NNP-I推理加速器" class="headerlink" title="NNP-I推理加速器"></a>NNP-I推理加速器</h1><p>取一颗PC级8核Ice Lake处理器，去掉其中6核，换成6x2=12路NNP-I，就成了一种新的神经网络加速器架构，另取名Spring Hill。</p>
 <p>因为新架构过于简单，两种组件都是成熟产品，流片前流程相对轻松简单。重点关注LLC和ICE（推理引擎）之间的ACF模块和总线连接，无悬念直接流片成功。</p>
 <p>Spring Hill是英特尔用于神经处理器的第一代SoC微架构，目标是加快数据中心的<strong>推理</strong>速度。该设计针对数据中心推理负载，在10至50 W的功率范围内具有接近5 TOPS / w的性能/功效（实际为4.8），以维持轻巧的PCIe加速卡外形尺寸，例如M.2。选择形状因数和功率范围是因为它易于集成到现有基础架构中，而无需额外的冷却/功率容量。</p>
-<p><img src="/blog/img/2020/ILPDLP/spring_hill_overview.svg"><br>图1 Spring Hill框图</p>
+<p><img src="/blog/img/2020/ILPDLP/spring_hill_overview.png" alt="sph_overview"><br>图1 Spring Hill框图</p>
 <h2 id="推理计算引擎（ICE）"><a href="#推理计算引擎（ICE）" class="headerlink" title="推理计算引擎（ICE）"></a>推理计算引擎（ICE）</h2><p>推理计算引擎（ICE）是推理负载的处理单元。 每个ICE包括四个主要组件——深度学习计算网格、可编程向量处理器、高带宽数据便笺存储器和大型本地SRAM。 向量处理器是VP6 DSP，旨在为ICE提供计算网格所不能提供的其他可编程性支持。向量处理器和计算网格使用纵贯整个引擎的同步总线进行通信和同步。 此外，两个处理元件还通过256 KiB的紧密耦合内存（TCM）紧密连接。</p>
-<p><img src="/blog/img/2020/ILPDLP/sph_ice.svg"><br>图2 推理引擎架构</p>
+<p><img src="/blog/img/2020/ILPDLP/sph_ice.png" alt="ice"><br>图2 推理引擎架构</p>
 <h2 id="深度学习计算网格"><a href="#深度学习计算网格" class="headerlink" title="深度学习计算网格"></a>深度学习计算网格</h2><p>深度学习计算网格是一个大型4D结构，可提供4种并行方式。网格本身被组织为能够执行4K-MAC / 周期（int8）的32x32x4 4D网格 (MAC: multiply–accumulate，乘加)。它本身支持半精度浮点（FP16）以及8位，4位，2位甚至1位精度运算。网格的设计旨在通过将输入数据一次性广播至整个网格，来最大程度地减少数据移动。同样，在网格内，根据需要左右移动数据，可最大限度地提高数据重用性。这些计算网格可在编译时转换部分网格，来得到更好的硬件布局。</p>
 <p>计算网格将后处理单元与硬件强化的支持集成在一起，以支持各种非线性操作和池化。计算网格由可编程控制单元管理，该可编程控制单元可以跨网格以各种方式映射模型。网络映射的确切方式是在编译时静态预先确定的。另外，控制单元可以执行各种其他存储器和处理操作。</p>
-<p><img src="/blog/img/2020/ILPDLP/sph_dl_compute_grid.svg"><br>图3 DL计算网格</p>
+<p><img src="/blog/img/2020/ILPDLP/sph_dl_compute_grid.png" alt="grid"><br>图3 DL计算网格</p>
 <h2 id="可编程向量处理器"><a href="#可编程向量处理器" class="headerlink" title="可编程向量处理器"></a>可编程向量处理器</h2><p>为了获得更大的灵活性，每个ICE都配备了定制的Cadence Tensilica Vision P6 DSP。这是一个配置有两个512位矢量加载端口的5插槽VLIW 512位矢量处理器。它支持FP16以及8-32b整数运算。添加此DSP的目的是为了对计算网格以外的操作提供可编程支持。</p>
 <h1 id="NNP-T训练加速器"><a href="#NNP-T训练加速器" class="headerlink" title="NNP-T训练加速器"></a>NNP-T训练加速器</h1><p>Spring Crest（SCR）是Lake Crest的后继产品，架构上变化不大。Lake Crest是Nervana的首款商用神经处理器，已量产。该芯片本身是为数据中心DL训练而设计的。为此，它被设计为PCIe Gen 4 x16加速器卡和OCP加速器模块（OAM），作为150-250W典型工作负荷功率范围内的风冷设备。</p>
-<p><img src="/blog/img/2020/ILPDLP/spring_crest_block_diagram.svg"><br>图4 Spring Crest框图</p>
+<p><img src="/blog/img/2020/ILPDLP/spring_crest_block_diagram.png" alt="diagram"><br>图4 Spring Crest框图</p>
 <p>Spring Crest是数据中心训练加速器，针对最快训练时间和最高功效进行了优化。重点放在对片上数据和批量负载的重用上。</p>
 <p>该芯片具有24个高性能张量处理器集群（TPC），每个集群都包含两个MAC处理单元（MPU）以及大量的高带宽内存池。每个MPU对集成一个32x32阵列，每个周期总共98,304个FLOP，总共可进行119 TOPS的计算。MPU由60 MiB的分布式SRAM供电。Spring Crest使用带32位（SP FP）累加的bfloat16。使用2D网格NoC链接整个芯片时，带宽在任何地方都比延迟更受青睐。</p>
 <p>Spring Crest采用台积电（TSMC）16纳米工艺制造，并利用其CoWoS 2.5D封装技术将四层HBM2（8Hi）集成在插入器上，总容量为32 GiB，工作速度为2400 MT / s。</p>
@@ -204,7 +204,7 @@
 <p>除了片上存储器外，Spring Crest还包括四层8-hi HBM2存储器。内存以2.4 GT / s的速度运行，总带宽为1.23 TB / s，容量为32 GiB。</p>
 <h2 id="卷积引擎"><a href="#卷积引擎" class="headerlink" title="卷积引擎"></a>卷积引擎</h2><p>作为内存子系统的一部分，有数据转换卷积引擎。该引擎用于重新格式化卷积数据，并执行其他一些更常规的操作，例如张量整形。</p>
 <h2 id="片上网络（NoC）"><a href="#片上网络（NoC）" class="headerlink" title="片上网络（NoC）"></a>片上网络（NoC）</h2><p>Spring Crest集成了二维网格体系结构。 该芯片有四个吊舱，每象限一个。吊舱可用于本地化数据移动和重用。 每个吊舱包括六个TPC，并直接链接到最近的物理HBM。 共有三个全速双向网格——用于HBM，外部芯片间互连和相邻的吊舱。针对不同类型业务，设计不同的总线以减少相互间干扰。 每个方向上总共有1.3 TB / s的带宽，网络上总共有2.6 TB / s的横截面带宽。</p>
-<p><img src="/blog/img/2020/ILPDLP/spring_crest_mesh.svg.png"><br>图5 NoC</p>
+<p><img src="/blog/img/2020/ILPDLP/spring_crest_mesh.png" alt="NoC"><br>图5 NoC</p>
 
             
                 
