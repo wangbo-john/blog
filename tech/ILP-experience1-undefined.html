@@ -18,16 +18,16 @@
 <link rel="shortcut icon" href="/blog/images/favicon.png">
 
 
-<title>inter-symbol interference i - a Light moved through the hazy</title>
+<title>并行性实验一：指令级并行性（ilp），qvnni指令集简介 - a Light moved through the hazy</title>
 
 <meta name="keywords" content="IC, 人文">
 
-<meta name="description " content="打工人第一次制定标准 | 滤波器的影响">
+<meta name="description " content="研究CPU微架构演进的实验">
 
 <!-- Jetpack Open Graph Tags -->
 <meta property="og:type" content="article" />
-<meta property="og:title" content="inter-symbol interference i - a Light moved through the hazy" />
-<meta property="og:description" content="打工人第一次制定标准 | 滤波器的影响" />
+<meta property="og:title" content="并行性实验一：指令级并行性（ilp），qvnni指令集简介 - a Light moved through the hazy" />
+<meta property="og:description" content="研究CPU微架构演进的实验" />
 <meta property="og:url" content="https://wangbo-john.github.io/blog" />
 <meta property="og:site_name" content="a Light moved through the hazy" />
 
@@ -164,34 +164,202 @@
                 <p><span class="label">作者</span>
                     <a href="https://wangbo-john.github.io/blog"
                        target="_blank">王波</a>
-                    <span title="最后编辑于&nbsp;2020-01-21">2020-01-21</span>
+                    <span title="最后编辑于&nbsp;2020-02-08">2020-02-08</span>
                 </p>
                 <p>一个希望可以看书休闲其实永不得闲的架构师</p>
             </div>
-            <h2 class="post-title">Inter-Symbol Interference I</h2>
+            <h2 class="post-title">并行性实验一：指令级并行性（ILP），QVNNI指令集简介</h2>
             <div class="post-meta">
-                本文共计2457个字 |
+                本文共计2566个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
         <div class="post-content markdown-body">
             <p>所有文章全部原创，劳动辛苦，请勿转载。</p>
-<p>成龙大哥的大哥带头用起一种大砖头似的电话，“大哥大”带火了土豪圈。<br>这时中国人连手机的生产都不是主力。几年后，电话变薄时，中国工厂变成手机制造主力了，开始关注上游标准。</p>
-<p>1998年，3GPP征求3G协议截稿时间的前一刻，原邮电部电信科技研究院出人意料地向3GPP提交了第一份代表中国的移动通信协议，TD-SCDMA。<br><em>说实话，虽然曾经做得那么深，现在回头查到是1998年提交的这么“老”的一个协议的时候，有些意外，又似乎有那么点印象。现在只记得10年后开始商用。</em></p>
-<p>不得不说，当时为了能有所突破，争取被接受，这个方案做了些取舍。类似于买东西的性价比，大家现在一听都知道是什么意思。<br>比如，当时为了显示出中国方案的独特性和技术突破，做的最大改变就是信号带宽，中国方案只需要1.28MHz，而欧洲和美国方案都是3.84MHz。<br>中国其实没有发明新的无线通信原理，和西方同原理不同带宽，技术实现上肯定有硬伤，无可厚非，这时别想着一步登天技术领先，先露下脸比较重要。<br>打工人都已经做好了迎接国外黑的准备。<br>可是，真的使劲黑的，却是“自己”人。<br>有家老大运营商，觉得自己头铁，这种窄带宽的方案自己肯定不会接，就使劲在各种媒体黑。肯定以为自己在提前黑未来的竞争对手。<br>当然，几年后，牌照砸到他家，直接指定他来运营TDD，不知道他们当时是什么心情。</p>
-<p>回到技术上，真正的质疑声音中，最关键的一个问题是，这套协议的瓶颈，<br>##符号间干扰，中国人能克服吗？<br>当然提交标准之前，我们老早在实验室里就验证过了，不至于在原则上出问题。在计算机上这个符号间干扰理论上是可以解决的，人家问的是工程上，毕竟就算今天也没人拿CPU来做手机。这个问题有两层含义:<br>1）有没有手机芯片来支持解决ISI问题？国外不会帮中国标准设计芯片，只能自己来。<br>2）如果这种芯片有了，经济吗？若是需要很高规格，制造成本、功耗很高，用户买不起、用不起，没有实用价值，这个标准就变成面子工程了。</p>
-<p>芯片设计与制造直到现在还在被美国卡脖子，十几年前情况只会更差，当时连芯片设计从业者都不多。中国人连2G芯片都没有设计过，上来就直接要参与3G，能玩得起吗？</p>
-<p>我当时误打误撞进了上海莘庄的凯明信息，这个全是海归但比较“土”只知道搞技术的公司。后来这家公司第一颗芯片已经流片出来测试成功，准备开发布会的头天晚上，被另一家连FPGA都没跑（注意不是跑“通”哦）的公司抢了新闻，宣布他们已经设计出中国第一颗3G芯片，公开的指标和我们验证中途的数据一样。</p>
-<p>在这里，我最初被分配的是匹配滤波器和AFC，path finding这些基础模块。</p>
-<p>Match filter准备采用的是6阶butterworth滤波器，这个很好说，可问题这是模拟电路，不是分立元件，需要采用特定工艺实现芯片设计。<br>当时拿到德州仪器的据说是当时性能最好的ABB（模拟基带）芯片，在仪器上测过它的频响曲线发现应该也是6阶butterworth，但是不够平坦，带宽也比中国标准宽（3.84M vs 1.28M）,需要修改。<br>仿真结果显示TI设计这款滤波器没有理论支持，参数是拟合butterworth的频响tuning出来的，对于WCDMA，带内纹波可以接受，可是TDD的话，尤其带宽收窄后，纹波（inband ripple）不能接受。<br>这其实就涉及到老外的质疑，符号间干扰的问题了，因为这个滤波器是主要的过滤掉符号带外杂波的技术手段，它的性能直接影响带内信号质量和带外干扰。<br>如果能有理论支持，就能够得到理想的频响曲线，ISI问题就解决一半了。<br>但几位大牛帮忙查阅了那几年的paper，发现就连这种Bi-CMOS本身都属于很新的技术，有文章提到用这种工艺设计放大器，但这时的OTA还远不是理想放大器，基于它来设计滤波器，显然不能生拉硬套现成理论，不然修正起来还不如直接tuning。<br>当时年轻，完全没有考虑难度地，就决定自己动手，丰衣足食。</p>
-<p><img src="/blog/img/2020/inter-symbol_inteference/OTA_circuit1.png" alt="OTA" title="OTA"><br>图1 其中一路跨导放大器电路</p>
-<p><img src="/blog/img/2020/inter-symbol_inteference/BiCMOS_Filter_circuit1.png" alt="3rdOrderFilter" title="3rdOrderFilter"><br>图2 这是从网上拷贝的一个3阶elliptic滤波器电路<br>6阶butterworth和这个电路形式相似，复杂度增加一倍。其中的Gm模块就是图1里的跨导放大器电路</p>
-<p>发扬愚公移山的精神，把6阶滤波器的所有电路都转换成了一堆数学公式，结果原始公式需要两张A4纸才能写下，方程次数达到几十次。<br>兴致勃勃帮忙查资料、分析电路的两位海归博士看看两张A4，互喵一眼，无声地问我：“？”<br>这时的理智做法是学习德州仪器，也用仿真软件去tune，简单又没有风险。也不可能有人跳出来说这样做技术不够牛——你牛你上啊。</p>
-<p>自己挖的坑，含泪也要坚持，我说：“我打算继续。”看到我对自己数学能力的迷之自信，他们就撤了。</p>
-<p>之后一个月，就在两件几乎没什么进展的事情上来回切换：大伤脑筋地想AFC（自动频率控制）方案，想不出来就去解公式。<br>公式慢慢解，说不定就能解开呢？<br>一个月后，方程次数降到了8阶，形式也简化多了，变成六元8次方程组。然后在一次突发的灵感下，真的解开了。<br>两张纸最后变成了两层结构的方程组，顶层是六元一次方程组，用它得到的参数结合芯片制程工艺文件，可以进一步确定滤波器包括跨导放大器内部各个器件的size。离最初猜想的麦克斯韦方程的形式相差十万八千里。但那一瞬间就是有种“我是数学家”的错觉。</p>
-<p>之后就和美国TI交流了一番，无条件地告诉了他们这个公式，他们态度180度大转弯，热情得不得了。<br>后来还答应直接在他们芯片排期中给我们预留部分产能，帮我们生产同款但滤波器改成中国标准的模拟基带芯片。</p>
-<p>滤波器的事情解决了，下一步就是AFC（自动频率控制）和path finding，这也是符号间干扰问题的两个关键影响因素。</p>
-<p>（十几年后的现在写这篇回想，有些奇怪当时怎么分配任务的，为什么给我这个新人分配的全是比较基础却和 符号间干扰 这种神级问题相关的模块，而大牛们去做看起来非常复杂但肯定确定以及一定能做出来的turbo解码器、联合检测这样的算法模块？估计是因为我加入得最晚。）</p>
+<p>QVNNI指令集 是基于传统CPU架构，关于提升指令级并行性（ILP）的一种尝试。<br>亚马逊的AWS已经公开部署这套指令集。</p>
+<h1 id="QVNNI是什么？"><a href="#QVNNI是什么？" class="headerlink" title="QVNNI是什么？"></a>QVNNI是什么？</h1><p>这是一个新的指令集，考虑到资源占用，复用了AVX-512的部分资源，于是变成了AVX-512的扩展。<br>从名字就可以大致猜出它是什么，比如原名 512-bit wide Fused Multiply Add (FMA) core instructions （512比特宽度的乘加熔合核心指令），还有有相对正常点的曾用名，Vector Neural Network Instructions Word variable precision（可变精度向量神经网络指令）。如果客户反响好，它还有扩展到1024的打算，以支持更高精度。<br>有了QVNNI指令集，只需要发射一条微码进FIT和OOO，执行单元就可以进行一系列的定点或浮点运算，完成一次矩阵乘法。它含有好几种不同指令，用来支持不同的数据格式，所以称为指令集。</p>
+<h1 id="支持的数据类型"><a href="#支持的数据类型" class="headerlink" title="支持的数据类型"></a>支持的数据类型</h1><p>QVNNI指令集有一个单独设计的执行单元，全流水，含4个浮点数学运算单元。<br>它只需要一条微码，就可以计算出矩阵乘加运算 A * B + c 的结果。<br>这是一个QVNNI微码的例子：VQVNNI dest, zmm0, m128，其中dest初始时存放上式中的c，全部计算结束后保存最终累加结果。</p>
+<p>QVNNI支持最常见的16位数字格式和8位数字格式，分别是16位IEEE浮点（fp16），bfloat16（bf16），16位整数（int16），8位整数（int8）和 8位微软浮点（ms-fp8）。 图1显示了其中某些格式之间的差异。</p>
+<p><img src="/blog/img/2020/ILPDLP/numerical-formats-754765.png" alt="Data_Format"><br>图1 各种数字格式表示。s表示符号位。可以注意到， FP32和BF16拥有相同的动态范围，而FP32提供了更高的精度，因为它的尾数较长。</p>
+<h1 id="支持的神经网络"><a href="#支持的神经网络" class="headerlink" title="支持的神经网络"></a>支持的神经网络</h1><p>这种最基本的加速指令单元没有也不需要针对哪种深度神经网络结构做优化，所以除了少数比较极端的情况，可以支持几乎任何网络的加速。</p>
+<h1 id="相对性能改善"><a href="#相对性能改善" class="headerlink" title="相对性能改善"></a>相对性能改善</h1><p>下面是在VNNI（QVNNI的简化版，仅支持int8和bf16,不支持单精度浮点）测得的int8相对fp32的性能改善。如果使用QVNNI，可让单精度浮点矩阵计算也得到同等程度的加速。</p>
+<p>基于以下三点原因：1）现代模型不再使用LRN（Local Response Normalization），可将部分较旧模型修改为使用批量规一化（Batch Normalization）。 2）softmax函数和BN需要全精度，因为它不能以8位精度保持原有的准确性。另外，3）不要在BN推理层后再进行卷积，因为它可以通过缩放权重值并修改“偏差”被其前一层吸收。英特尔MKL-DNN仅使用fp32，而没有以8位精度实现LRN，softmax或BN层。</p>
+<p>突然写了上面一大段有点莫名奇妙吧。自我翻译一下，这句话的意思是：下面的int8都是“天然无优化”结果，而MKL-DNN针对fp32有一定优化，所以如果双方待遇相同，结果应该更好。</p>
+<p>使用VNNI，简单测得的深度学习性能提升：</p>
+<table>
+<thead>
+<tr>
+<th><strong>Model</strong></th>
+<th><strong>Framework</strong></th>
+<th><strong>Tuning Strategy</strong></th>
+<th><strong>INT8 Tuning Accuracy</strong></th>
+<th><strong>FP32 Accuracy Baseline</strong></th>
+<th><strong>INT8/FP32 Acc Ratio</strong>   <strong>[(INT8-FP32)/FP32]</strong></th>
+<th><strong>INT8/FP32 Perf Ratio</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ResNet50 V1</td>
+<td>TensorFlow</td>
+<td>mse</td>
+<td>73.28%</td>
+<td>73.54%</td>
+<td>-0.35%</td>
+<td>2.99x</td>
+</tr>
+<tr>
+<td>ResNet50 V1.5</td>
+<td>TensorFlow</td>
+<td>bayesian</td>
+<td>75.70%</td>
+<td>76.26%</td>
+<td>-0.73%</td>
+<td>1.95x</td>
+</tr>
+<tr>
+<td>ResNet101</td>
+<td>TensorFlow</td>
+<td>basic</td>
+<td>76.68%</td>
+<td>75.58%</td>
+<td>1.46%</td>
+<td>3.03x</td>
+</tr>
+<tr>
+<td>Inception V1</td>
+<td>TensorFlow</td>
+<td>basic</td>
+<td>69.54%</td>
+<td>69.48%</td>
+<td>0.09%</td>
+<td>2.18x</td>
+</tr>
+<tr>
+<td>Inception V2</td>
+<td>TensorFlow</td>
+<td>basic</td>
+<td>74.32%</td>
+<td>74.38%</td>
+<td>-0.08%</td>
+<td>1.69x</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>Model</strong></th>
+<th><strong>Framework</strong></th>
+<th><strong>Tuning Strategy</strong></th>
+<th><strong>INT8 Tuning Accuracy</strong></th>
+<th><strong>FP32 Accuracy Baseline</strong></th>
+<th><strong>INT8/FP32 Acc Ratio</strong>   <strong>[(INT8-FP32)/FP32]</strong></th>
+<th><strong>INT8/FP32 Perf Ratio</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DLRM</td>
+<td>PyTorch</td>
+<td>basic</td>
+<td>80.21%</td>
+<td>80.27%</td>
+<td>-0.08%</td>
+<td>1.87x</td>
+</tr>
+<tr>
+<td>BERT-Large MRPC</td>
+<td>PyTorch</td>
+<td>basic</td>
+<td>87.90%</td>
+<td>88.30%</td>
+<td>-0.45%</td>
+<td>2.38x</td>
+</tr>
+<tr>
+<td>BERT-Large SQUAD</td>
+<td>PyTorch</td>
+<td>basic</td>
+<td>92.15%</td>
+<td>93.05%</td>
+<td>-0.96%</td>
+<td>1.42x</td>
+</tr>
+<tr>
+<td>BERT-Large CoLA</td>
+<td>PyTorch</td>
+<td>basic</td>
+<td>62.10%</td>
+<td>62.60%</td>
+<td>-0.80%</td>
+<td>1.76x</td>
+</tr>
+<tr>
+<td>BERT-Base STS-B</td>
+<td>PyTorch</td>
+<td>basic</td>
+<td>88.50%</td>
+<td>89.30%</td>
+<td>-0.90%</td>
+<td>3.05x</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>Model</strong></th>
+<th><strong>Framework</strong></th>
+<th><strong>Tuning Strategy</strong></th>
+<th><strong>INT8 Tuning   Accuracy</strong></th>
+<th><strong>FP32 Accuracy   Baseline</strong></th>
+<th><strong>INT8/FP32 Acc   Ratio</strong>   <strong>[(INT8-FP32)/FP32]</strong></th>
+<th><strong>INT8/FP32 Perf   Ratio</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ResNet50 V1</td>
+<td>MXNet</td>
+<td>mse</td>
+<td>76.40%</td>
+<td>76.80%</td>
+<td>-0.52%</td>
+<td>3.73x</td>
+</tr>
+<tr>
+<td>MobileNet V1</td>
+<td>MXNet</td>
+<td>mse</td>
+<td>71.60%</td>
+<td>72.10%</td>
+<td>-0.69%</td>
+<td>3.02x</td>
+</tr>
+<tr>
+<td>MobileNet V2</td>
+<td>MXNet</td>
+<td>mse</td>
+<td>71.00%</td>
+<td>71.10%</td>
+<td>-0.14%</td>
+<td>3.88x</td>
+</tr>
+<tr>
+<td>SSD-ResNet50</td>
+<td>MXNet</td>
+<td>basic</td>
+<td>29.50%</td>
+<td>29.70%</td>
+<td>-0.67%</td>
+<td>1.86x</td>
+</tr>
+<tr>
+<td>SqueezeNet V1</td>
+<td>MXNet</td>
+<td>mse</td>
+<td>57.30%</td>
+<td>57.20%</td>
+<td>0.18%</td>
+<td>2.88x</td>
+</tr>
+</tbody></table>
 
             
                 
@@ -205,13 +373,7 @@
         
         <div class="post-tags">标签：
             
-            <a href="/blog/tags/silicon/">silicon</a>
-            
-            <a href="/blog/tags/3GPP/">3GPP</a>
-            
-            <a href="/blog/tags/%E7%A7%BB%E5%8A%A8%E9%80%9A%E4%BF%A1/">移动通信</a>
-            
-            <a href="/blog/tags/%E5%8D%8F%E8%AE%AE/">协议</a>
+            <a href="/blog/tags/parallelism/">parallelism</a>
             
         </div>
         

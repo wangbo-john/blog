@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head>
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://wangbo-john.github.io/blog/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta name="author" content="John Wang">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://wangbo-john.github.io/blog">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
+<link rel="shortcut icon" href="/blog/images/favicon.png">
+
+
+<title>并行性实验二：数据级并行性（dlp），nnp-i/nnp-t简介 - a Light moved through the hazy</title>
+
+<meta name="keywords" content="IC, 人文">
+
+<meta name="description " content="研究CPU微架构演进的实验">
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="并行性实验二：数据级并行性（dlp），nnp-i/nnp-t简介 - a Light moved through the hazy" />
+<meta property="og:description" content="研究CPU微架构演进的实验" />
+<meta property="og:url" content="https://wangbo-john.github.io/blog" />
+<meta property="og:site_name" content="a Light moved through the hazy" />
+
+<link rel="dns-prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prefetch" href="https://wangbo-john.github.io/blog">
+<link rel="prerender" href="https://wangbo-john.github.io/blog">
+<link rel="stylesheet" href="/blog/css/JSimple.min.css">
+    <script type="text/javascript">
+        (function() {
+            let jsi_config = {
+                rootUrl: 'https://wangbo-john.github.io/blog/',
+                isPost: 'true',
+                buildingTime: '12/25/2020',
+                snsQRCode: '',
+                donateImg: '',
+                readMode: 'day',
+                localSearch: { dbPath: '' }
+            };
+            
+                jsi_config.localSearch = {
+                    dbPath: '/search.json',
+                    trigger: 'auto',
+                    topN: '1',
+                    unescape: 'false'
+                }
+            
+            window.jsi_config = jsi_config;
+        })()
+    </script>
+    
+<script src="/blog/js/SimpleCore.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/blog" title="透雾之光">透雾之光</a>
+        <a class="site-index current" href="/blog"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/blog/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/blog/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/blog/help" title="说明">
+            <i class="fa fa-question-circle"></i>
+            <span>说明</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    
+</div>
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <img class="cover-img" alt="cover-img" />
+    <div class="cover-info">
+        
+        <h3 class="cover-siteName">a Light moved through the hazy</h3>
+		<h1 class="cover-siteName">透雾之光</h1>
+        <h2 class="cover-siteTitle">交流、探讨 技术、人文 之 美</h2>
+        <!--<p class="cover-siteDesc">美</p>-->
+		<h1 class="cover-siteName">美</h1>
+		<h3 class="cover-siteName">是</h3>
+		<h3 class="cover-siteName">穿透复杂的简单</h3>
+		<h3 class="cover-siteName">演绎丰富的纯粹</h3>
+		<h3 class="cover-siteName">粉碎羁绊的自主</h3>
+		<h3 class="cover-siteName">宇宙浩渺的孤独</h3>
+		<h3 class="cover-siteName">逝者如斯的无情</h3>
+		<h3 class="cover-siteName">人声鼎沸中全神贯注</h3>
+		<h3 class="cover-siteName">千夫所指时义无反顾</h3>
+		<h3 class="cover-siteName">无声处绽放的惊雷</h3>
+		<h3 class="cover-siteName">无尽绚烂后的平淡</h3>
+		<h3 class="cover-siteName">真心自然的笑</h3>
+		<h3 class="cover-siteName">以及</h3>
+		<h3 class="cover-siteName">一笑倾城的她</h3>
+		<p class="cover-siteDesc">　　　　　—— 王波涂鸦自娱，献给老婆的诗，请勿抄袭</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/wangbo-john" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/blog">最近</a></li>
+        
+            
+                <li class="">
+                    <a href="/blog/categories/tech" data-name="技术">技术</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/human" data-name="人文">人文</a>
+                </li>
+            
+                <li class="">
+                    <a href="/blog/categories/research" data-name="存疑">存疑</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text"
+               readonly="readonly"
+               id="local-search-input-tip"
+               placeholder="读物检索~" />
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://wangbo-john.github.io/blog"
+                   target="_blank">
+                    <img width="48" src="/blog/images/favicon.png" alt="avatar"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://wangbo-john.github.io/blog"
+                       target="_blank">王波</a>
+                    <span title="最后编辑于&nbsp;2020-02-09">2020-02-09</span>
+                </p>
+                <p>一个希望可以看书休闲其实永不得闲的架构师</p>
+            </div>
+            <h2 class="post-title">并行性实验二：数据级并行性（DLP），NNP-I/NNP-T简介</h2>
+            <div class="post-meta">
+                本文共计3457个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <p>所有文章全部原创，劳动辛苦，请勿转载。</p>
+<p>Spring Hill 是基于传统CPU架构，关于提升数据级并行性（DLP）线程级并行性(TLP)的一种尝试。<br>FB已经部署SPH。</p>
+<h1 id="Nervana的神经网络处理器和Spring-Hill"><a href="#Nervana的神经网络处理器和Spring-Hill" class="headerlink" title="Nervana的神经网络处理器和Spring Hill"></a>Nervana的神经网络处理器和Spring Hill</h1><p>Nervana 是一家总部位于加州的人工智能软件初创公司，提供全栈SaaS平台，帮企业开发定制的深度学习软件。 2016年8月9日，它被英特尔以约4.08亿美元的价格收购。<br>神经网络处理器NNP就是这次收购的成果，当年号称运行速度10倍于当时的Nvidia Maxwell 架构GPUs。刚刚查了一下，Maxwell 架构是nVidia 2014-2015年的主流产品。</p>
+<h1 id="NNP-I推理加速器"><a href="#NNP-I推理加速器" class="headerlink" title="NNP-I推理加速器"></a>NNP-I推理加速器</h1><p>取一颗PC级8核Ice Lake处理器，去掉其中6核，换成6x2=12路NNP-I，就成了一种新的神经网络加速器架构，另取名Spring Hill。</p>
+<p>因为新架构过于简单，两种组件都是成熟产品，流片前流程相对轻松简单。重点关注LLC和ICE（推理引擎）之间的ACF模块和总线连接，无悬念直接流片成功。</p>
+<p>Spring Hill是英特尔用于神经处理器的第一代SoC微架构，目标是加快数据中心的<strong>推理</strong>速度。该设计针对数据中心推理负载，在10至50 W的功率范围内具有接近5 TOPS / w的性能/功效（实际为4.8），以维持轻巧的PCIe加速卡外形尺寸，例如M.2。选择形状因数和功率范围是因为它易于集成到现有基础架构中，而无需额外的冷却/功率容量。</p>
+<p><img src="/blog/img/2020/ILPDLP/spring_hill_overview.svg"><br>图1 Spring Hill框图</p>
+<h2 id="推理计算引擎（ICE）"><a href="#推理计算引擎（ICE）" class="headerlink" title="推理计算引擎（ICE）"></a>推理计算引擎（ICE）</h2><p>推理计算引擎（ICE）是推理负载的处理单元。 每个ICE包括四个主要组件——深度学习计算网格、可编程向量处理器、高带宽数据便笺存储器和大型本地SRAM。 向量处理器是VP6 DSP，旨在为ICE提供计算网格所不能提供的其他可编程性支持。向量处理器和计算网格使用纵贯整个引擎的同步总线进行通信和同步。 此外，两个处理元件还通过256 KiB的紧密耦合内存（TCM）紧密连接。</p>
+<p><img src="/blog/img/2020/ILPDLP/sph_ice.svg"><br>图2 推理引擎架构</p>
+<h2 id="深度学习计算网格"><a href="#深度学习计算网格" class="headerlink" title="深度学习计算网格"></a>深度学习计算网格</h2><p>深度学习计算网格是一个大型4D结构，可提供4种并行方式。网格本身被组织为能够执行4K-MAC / 周期（int8）的32x32x4 4D网格 (MAC: multiply–accumulate，乘加)。它本身支持半精度浮点（FP16）以及8位，4位，2位甚至1位精度运算。网格的设计旨在通过将输入数据一次性广播至整个网格，来最大程度地减少数据移动。同样，在网格内，根据需要左右移动数据，可最大限度地提高数据重用性。这些计算网格可在编译时转换部分网格，来得到更好的硬件布局。</p>
+<p>计算网格将后处理单元与硬件强化的支持集成在一起，以支持各种非线性操作和池化。计算网格由可编程控制单元管理，该可编程控制单元可以跨网格以各种方式映射模型。网络映射的确切方式是在编译时静态预先确定的。另外，控制单元可以执行各种其他存储器和处理操作。</p>
+<p><img src="/blog/img/2020/ILPDLP/sph_dl_compute_grid.svg"><br>图3 DL计算网格</p>
+<h2 id="可编程向量处理器"><a href="#可编程向量处理器" class="headerlink" title="可编程向量处理器"></a>可编程向量处理器</h2><p>为了获得更大的灵活性，每个ICE都配备了定制的Cadence Tensilica Vision P6 DSP。这是一个配置有两个512位矢量加载端口的5插槽VLIW 512位矢量处理器。它支持FP16以及8-32b整数运算。添加此DSP的目的是为了对计算网格以外的操作提供可编程支持。</p>
+<h1 id="NNP-T训练加速器"><a href="#NNP-T训练加速器" class="headerlink" title="NNP-T训练加速器"></a>NNP-T训练加速器</h1><p>Spring Crest（SCR）是Lake Crest的后继产品，架构上变化不大。Lake Crest是Nervana的首款商用神经处理器，已量产。该芯片本身是为数据中心DL训练而设计的。为此，它被设计为PCIe Gen 4 x16加速器卡和OCP加速器模块（OAM），作为150-250W典型工作负荷功率范围内的风冷设备。</p>
+<p><img src="/blog/img/2020/ILPDLP/spring_crest_block_diagram.svg"><br>图4 Spring Crest框图</p>
+<p>Spring Crest是数据中心训练加速器，针对最快训练时间和最高功效进行了优化。重点放在对片上数据和批量负载的重用上。</p>
+<p>该芯片具有24个高性能张量处理器集群（TPC），每个集群都包含两个MAC处理单元（MPU）以及大量的高带宽内存池。每个MPU对集成一个32x32阵列，每个周期总共98,304个FLOP，总共可进行119 TOPS的计算。MPU由60 MiB的分布式SRAM供电。Spring Crest使用带32位（SP FP）累加的bfloat16。使用2D网格NoC链接整个芯片时，带宽在任何地方都比延迟更受青睐。</p>
+<p>Spring Crest采用台积电（TSMC）16纳米工艺制造，并利用其CoWoS 2.5D封装技术将四层HBM2（8Hi）集成在插入器上，总容量为32 GiB，工作速度为2400 MT / s。</p>
+<p>四个芯片间链接（ICL）包括x16（4×4）SerDes，总共64个SerDes。 ICL端口以112 Gbps的速度运行，总双向带宽为3.58 Tbps。由于采用了OAM标准，因此具有多个节点的系统扩展在很大程度上是无胶合的。一个完整的系统，最多包含1024个Spring Crest处理器，具有针对数据和模型并行性设计的一致编程模型。</p>
+<h2 id="张量处理集群（TPC）"><a href="#张量处理集群（TPC）" class="headerlink" title="张量处理集群（TPC）"></a>张量处理集群（TPC）</h2><p>Spring Crest的主要组件是Tensor Processing Cluster（TPC）。芯片上有24个相同的TPC实例。 TPC包含四个主要子系统：片上路由器（OCR），控件，MAC处理单元（MPU）和内存子系统。</p>
+<p>片上路由器有助于TPC之间以及共享外围设备（如PCIe和ICL接口）之间的数据通信。</p>
+<h2 id="控制"><a href="#控制" class="headerlink" title="控制"></a>控制</h2><p>控制路径负责指令的解码，操作的调度和退出指令。控制还协调TPC中的计算块。 Spring Crest ISA是基于张量的有限指令集ISA。换句话说，所有操作数都被视为张量。 ISA附带许多本机张量操作（包括更专门的操作，例如转置和张量切片）。控制包括一个微控制器，该微控制器允许使用自定义微控制器指令扩展ISA。</p>
+<h2 id="MAC处理单元（MPU）"><a href="#MAC处理单元（MPU）" class="headerlink" title="MAC处理单元（MPU）"></a>MAC处理单元（MPU）</h2><p>每个TPC内都有两个计算块。该处理单元包括一个大型矩阵乘法数组以及矢量运算和专门的深度学习功能。矩阵乘法核心是一个32x32阵列，使用bfloat16进行乘法，使用FP32进行累加。阵列内的部分乘积缓冲区会累积部分乘积，以减少内存访问和功耗。英特尔之所以选择32x32，是因为它可以实现良好的数据重用，同时又要使其足够小，以免由于量化效应而损失很多性能。</p>
+<p>复合矢量流水线位于矩阵核心之外，该流水线可以对一组输入和中间值执行多项操作，从而减少了内存带宽和功耗。整个复合矢量流水线均支持FP32和BF16，还允许根据网络精度要求优化非GEMM操作。此外，矢量流水线还包括针对诸如激活函数、随机数生成、约简和累加之类的事物的专门优化。还支持可编程FP32查找表。</p>
+<h2 id="内存子系统"><a href="#内存子系统" class="headerlink" title="内存子系统"></a>内存子系统</h2><p>内存子系统负责通过计算块以及路由网格来获取和接收数据。每个TPC都包含2.5 MiB的本地暂存器内存。芯片上总共24个TPC，有60 MiB便笺存储器。该存储器具有高度划分内存的能力和多端口性，以便同时进行读写访问。作为内存端口的一部分，支持就地张量转置。换句话说，张量转置可以直接通过简单地读取和写入内存来完成，而无需任何额外的开销。计算模块和便笺存储区之间总共有1.4 Tbps的带宽。</p>
+<p>内存由软件明确管理，以优化数据局部性和数据驻留性——这适用于片上内存和片外HBM内存。为了不干扰软件优化，已将内存的硬件管理保持在最低限度。消息传递、内存分配和内存管理都在软件控制之下。该软件还可以在TPC以及HBM和内存bank之间直接传输内存内容。</p>
+<p>除了片上存储器外，Spring Crest还包括四层8-hi HBM2存储器。内存以2.4 GT / s的速度运行，总带宽为1.23 TB / s，容量为32 GiB。</p>
+<h2 id="卷积引擎"><a href="#卷积引擎" class="headerlink" title="卷积引擎"></a>卷积引擎</h2><p>作为内存子系统的一部分，有数据转换卷积引擎。该引擎用于重新格式化卷积数据，并执行其他一些更常规的操作，例如张量整形。</p>
+<h2 id="片上网络（NoC）"><a href="#片上网络（NoC）" class="headerlink" title="片上网络（NoC）"></a>片上网络（NoC）</h2><p>Spring Crest集成了二维网格体系结构。 该芯片有四个吊舱，每象限一个。吊舱可用于本地化数据移动和重用。 每个吊舱包括六个TPC，并直接链接到最近的物理HBM。 共有三个全速双向网格——用于HBM，外部芯片间互连和相邻的吊舱。针对不同类型业务，设计不同的总线以减少相互间干扰。 每个方向上总共有1.3 TB / s的带宽，网络上总共有2.6 TB / s的横截面带宽。</p>
+<p><img src="/blog/img/2020/ILPDLP/spring_crest_mesh.svg.png"><br>图5 NoC</p>
+
+            
+                
+            
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/blog/tags/parallelism/">parallelism</a>
+            
+        </div>
+        
+    </article>
+    
+        <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+    
+    
+
+
+</div>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about"  title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/blog/help" title="帮助" >帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/sitemap.xml" title="地图">地图</a>
+        </p>
+        <p>
+            本站已建立&nbsp<a href="/timeline" id="siteBuildingTime"></a>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br/>
+            ©2017-<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://wangbo-john.github.io/blog" target="_blank" rel="friend">王波</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input"
+                   spellcheck="false"
+                   type="text"
+                   autocomplete="off"
+                   placeholder="请输入查询关键词"/>
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+
+    <script type="text/javascript">
+        let bp = document.createElement('script');
+        let curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        bp.setAttribute("async", "");
+        let s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    </script>
+
+
+</body>
+</html>
