@@ -170,15 +170,19 @@
             </div>
             <h2 class="post-title">并行性实验三：异构架构，VPU简介</h2>
             <div class="post-meta">
-                本文共计304个字 |
+                本文共计672个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
         <div class="post-content markdown-body">
             <p>所有文章全部原创，劳动辛苦，请勿转载。</p>
 <p>Movidius的Myriad视觉处理单元 (VPU) 是从头到脚按异构架构(heterogeneous soc architectures)设计的一款视频、AI处理加速器——就连目标任务都是异构的。</p>
-<p>这块单元上，我厂终于不再坚持使用x86核心，沿用了原有的sparc内核。<br>这么不起眼的一步来之不易。前几年在NTG、MCG做平板和手机的时候，全力推动公司另行开发一条以功耗为首要目标的芯片产品线，结果被告知已经有人在做了，然后满心欢喜地发现是x86的Atom……好歹Atom现在要上火星了，不再说它。</p>
-<p>今天已经写了两篇，还不错。转钟了，睡觉去，后续具体内容TBD……</p>
+<p>插播一条广告，Intel的CPU现在其实也是异构架构的了，而且不仅仅是芯片微架构层面的异构，连制程、封装都是各种异构、立体堆叠。</p>
+<p>在VPU这块单元上，我厂终于不再坚持使用x86核心，沿用了原有的sparc内核。<br>这么不起眼的一步来之不易。前几年在NTG、MCG做平板和手机的时候，全力推动公司另行开发一条以功耗为首要目标的芯片产品线，结果被告知已经有人在做了，然后满心欢喜地等来了x86的Atom……好歹Atom现在已经上火星了，不再说它。</p>
+<p>这是早期的VPU系统框图，没有ISP，vision和CNN子系统（加速器），shave单元也只有8个：<br><img src="/blog/img/2020/ILPDLP/shave_v2_soc_block.png" alt="vpu_initdiagram"></p>
+<p>其中一路Shave core:<br><img src="/blog/img/2020/ILPDLP/shave_v2_block_diagram.png" alt="shave_diagram"><br>在架构上，SHAVE的组织方式类似于IBM的CELL架构，有独立的SHAVE内核，可以有8到16个内核链接在一起。 内核受益于两个紧邻单元的零损失，这是这种架构的固有属性，大多数代码可从中受益。 该芯片具有一个由所有内核共享的L2高速缓存，以及一个集成的DDR内存控制器，该控制器连接到封装在8至64 MiB的SDRAM的KGD堆叠裸片上。</p>
+<p>总体管理控制器核心是可综合的SPARC V8 LEON3。</p>
+<p>这是架构升级以后的一个版本，将上图中的全局AXI总线改成了异步总线，增加了ISP，vision和CNN三个子系统（加速器）。<br><img src="/blog/img/2020/ILPDLP/vpu.png" alt="vpu_diagram"></p>
 
             
                 

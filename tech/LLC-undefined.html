@@ -170,7 +170,7 @@
             </div>
             <h2 class="post-title">缓存cache，末级缓存LLC 和 缓存一致性</h2>
             <div class="post-meta">
-                本文共计3602个字 |
+                本文共计5844个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
@@ -180,7 +180,8 @@
 <p>没想到还没写完第一句话，就发现需要大堆的名词解释，能忍受的估计都是同行哈哈。</p>
 <p>===============================</p>
 <h1 id="名词解释："><a href="#名词解释：" class="headerlink" title="名词解释："></a>名词解释：</h1><p><strong>cache block 高速缓存块</strong>：    缓存存储的基本单位。可能包含多个字节/字的数据。<br><strong>cache line 缓存行</strong>：    与缓存块相同（case line = case block）。 请注意，这与高速缓存的“Row（行）”不同，那个。<br><strong>cache set 缓存集</strong>：    缓存中的“行（row）”（再罗嗦一下不要和cache line弄混了，应该把case line这个历史名词去掉）。 每组的块数由高速缓存的布局确定（例如，直接映射，组关联或完全关联）。<br><strong>tag 标记（或标签）</strong>：    一组数据的唯一标识符。 由于不同的内存区域可能会映射到同一个块中，因此使用标签来区分它们。<br><strong>valid bit 有效位</strong>：    指示块中数据有效（1）还是无效（0）的信息位。<br><strong>Snoop filter 探听过滤器</strong>:<br>当特定缓存块上有总线事件时，所有侦听器（snoopers）都必须侦听总线事务。然后，侦听器查找其相应的缓存标记，以检查其是否具有相同的缓存块。在大多数情况下，缓存没有该缓存块，因为优化良好的并行程序不会在线程之间共享大量数据，这样的缓存依然进行标记查找就没必要了。除了没这个必要，更进一步的，标签查找会干扰处理器对缓存的访问，并导致额外的功耗。<br>减少不必要的监听的一种方法是使用探听过滤器。探听过滤器确定窥探者是否需要检查其缓存标签。探听过滤器是基于目录的结构，它监视所有一致性流量，以便跟踪高速缓存块的一致性状态。这意味着探听过滤器知道具有缓存块副本的缓存。因此，它可以防止不具有缓存块副本的缓存进行不必要的监听（因为没有必要又耗电）。<br>取决于侦听过滤器的位置，有三种类型的过滤器。一种是位于高速缓存侧的源过滤器，它在相干流量到达共享总线之前执行过滤。另一个是目标过滤器，它位于接收器缓存中，可以防止在接收器核心进行不必要的缓存标记查找，但是这种类型的过滤无法阻止来自源的初始一致性消息。最后，网络内过滤器可在共享总线内部动态修剪相干通信。<br>探听过滤器也分为包容性和独占性。包含性探听过滤器可跟踪高速缓存中高速缓存块的<strong>存在</strong>。但是，排他探听过滤器监视高速缓存中高速缓存块的<strong>不存在</strong>。换句话说，包含性探听过滤器中的命中意味着相应的缓存块由缓存保存（来吧，我这里有）。另一方面，排他侦听过滤器中的命中意味着没有缓存具有请求的缓存块(没有，不要再找我了)。</p>
-<p><strong>Mesh 网格</strong>: 英文解释为织物（fabric），您可以想象为经纬纵横的类似于纱布那样的二维阵列，形成全系统范围的互连网格。现在您将纱布里的纱换成电线更贴近一点，里面传递的是总线信号。<br><strong>Tile 磁性贴</strong>：　模块化IP块，可以在大型网格上多次复制。您直接理解为积木块也可以，它是小心调整后设计组合在一起的一组硬件IP，可以批量复制。<br><strong>Core Tile 内核磁性贴</strong>：　一种特定类型的硬件ＩＰ块，它融合了Intel的x86核心。<br><strong>IMC Tile ＩＭＣ（Intel Memory Controller）磁性贴</strong>：　一种特定类型的磁贴，包含了集成的内存控制器<br><strong>Caching/Home Agent (CHA) 缓存/本地代理</strong>: 位于核心磁贴中的一个单元，用于维持磁贴之间的缓存一致性。 CHA还与CMS（ＣＭＳ见下面）交互。<br><strong>Converged/Common Mesh Stop (CMS)　聚合/公用网格停靠站</strong>：　网格停靠站，用于连接磁性贴（Ｔｉｌｅ）和结构（ｆａｂｒｉｃ）</p>
+<p><strong>Mesh 网格</strong>: 英文解释为织物（fabric），您可以想象为经纬纵横的类似于纱布那样的二维阵列，形成全系统范围的互连网格。现在您将纱布里的纱换成电线更贴近一点，里面传递的是总线信号。<br><strong>Tile 磁性贴</strong>：　模块化IP块，可以在大型网格上多次复制。您直接理解为积木块也可以，它是小心调整后设计组合在一起的一组硬件IP，可以批量复制。<br><strong>Core Tile 内核磁性贴</strong>：　一种特定类型的硬件IP块，它融合了Intel的x86核心（也许别的处理器内核也是这样设计的？）。<br><strong>IMC Tile    IMC(Intel Memory Controller)磁性贴</strong>：　一种特定类型的磁贴，包含了集成的内存控制器<br><strong>Caching/Home Agent (CHA) 缓存/本地代理</strong>: 位于核心磁贴中的一个单元，用于维持磁贴之间的缓存一致性。 CHA还与CMS（CMS见下面）交互。<br><strong>Converged/Common Mesh Stop (CMS)　聚合/公用网格停靠站</strong>：　网格停靠站，用于连接磁性贴（Tile）和结构（fabric）</p>
+<p><strong>Capacity miss容量失效</strong><br>因为cache的容量限制，导致不能将一个程序的整个working set（工作集）读进cache，从而造成cache失效。这是cache失效的三大原因（容量、强制、冲突）之一。<br><strong>Compulsory miss强制失效</strong><br>有时称为首次引用失效。强制失效是一种肯定会发生的失效，这和cache机制本身有关，因为cache数据更新是基于局部性原理，基于历史数据的。数据事先从没使用过，也就没机会被cache。但有些情况也被称为强制失效，尽管它们不是第一次被引用的数据，比如对非写定址的cache同一位置重复写，以及对一个未被cache内存区域的存取。这是cache失效的三大原因（容量、强制、冲突）之一。<br><strong>Conflict miss 冲突失效</strong><br>由关联性的限制导致、而非容量限制造成的cache失效。这是cache失效的三大原因（容量、强制、冲突）之一。<br><strong>First-reference miss首次引用失效</strong><br>是强制失效的一种形式。见强制失效。<br><strong>Higher-level memory高层内存</strong><br>在多级内存系统中，距离CPU较近的内存称为高层内存。在x86系统中，也称为near memory。较高层内存通常<strong>可以</strong>充当较低层内存的Cache。<br><strong>Victim</strong><br>从cache移出一个line从而为新的数据腾出空间的过程我们称为Eviction（驱逐）。Eviction可以由用户发出的writeback-invalidate产生，被驱逐的line我们称为victim。<br><strong>Victim Writeback</strong><br>当victim line是dirty（“脏”）的时候，数据必须回写到下一级存储器（远端内存）中以维持内存的一致性。我们称这个过程为Victim Writeback。<br><strong>Victim Buffer</strong><br>保存victim直到它们回写完成的特殊buffer。Victim lines会被移到victim buffer，为新的数据腾出空间。</p>
 <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>最新设计中，缓存IP从CHA IP中分离出来。CHA含有缓存控制器和缓存一致性引擎，管理所有socket上的所有cache。CHA IP是SCF（Scalable Coherent Fabric）IP的一部分，SCF（可伸缩一致性结构）用于支持芯片设计（搭积木时的）结构一致性和即插即用。</p>
 <p>缓存IP（cache）是拥有下列功能模块的硬件IP，包括： 末级缓存（Last Layer Cache），探听过滤器（Snoop Filter）【SF又包含本地探听过滤器（LSF）和远程探听过滤器（RSF）】，以及相关逻辑。用于为SCF（Scalable Coherent Fabric）和 CHA IP之间提供数据缓存。</p>
 <p>每个数据entry包含数据阵列中的一个高速缓存块（64字节的block or line，这两个词在这里等价，详见前面名词解释部分），该缓存行（cache line，==缓存块）分两笔在两个连续周期中从数据接口CHA发送到LLC。</p>
@@ -200,12 +201,21 @@
 <p>由于（计算机系统常见的）时空局部性原理，上述情况经常发生。<br>• 总线带宽是共享内存多处理器中的宝贵财富<br>• 经验表明，无效（Invalidate）协议使用的带宽要少得多<br>于是下面仅考虑无效协议（Invalidate）的实施细节。</p>
 <p>在Invalidate和Update两种方案中，如果知道某个（些）缓存的值是否在别的缓存中有共享（复制），就可以避免发送不必要的消息。<br>无效描述假定高速缓存值更新已写入内存。如果我们使用“拷回”方案，则其他处理器可能会在缓存未命中时重新获取旧值。<br>我们需要一个协议来处理所有这一切。</p>
 <p>MESI就是这样一种实用的多处理器无效协议，该协议试图将总线使用率降到最低。<br>• 允许使用“回写”方案——即直到“脏”高速缓存行被替换之前才更新至主存<br>• 扩展常用的缓存标签，即无效标签和普通回写缓存中的“脏”标签。</p>
-<p>任何高速缓存行都可以处于4种状态之一（2比特）<br>• Modified 已修改 ——缓存行已修改，与主内存不同——是唯一的缓存副本。（多处理器“脏”）<br>• Exclusive 独占  ——高速缓存行与主内存相同，且是唯一的高速缓存副本<br>• Shared    共享  ——与主内存相同，但其他缓存中可能存在副本。<br>• Invalid   无效  ——行数据无效（就象在简单缓存中那样）</p>
+<p>任何高速缓存行都可以处于4种状态之一（2比特）<br>• <strong>Modified 已修改</strong> ——缓存行已修改，与主内存不同——是唯一的缓存副本。（多处理器“脏”）<br>• <strong>Exclusive 独占</strong>  ——高速缓存行与主内存相同，且是唯一的高速缓存副本<br>• <strong>Shared    共享</strong>  ——与主内存相同，但其他缓存中可能存在副本。<br>• <strong>Invalid   无效</strong>  ——行数据无效（就象在简单缓存中那样）</p>
 <p>高速缓存行的状态随内存访问事件而变化。<br>事件可能是<br>–由于本地处理器活动（即缓存访问）<br>–由于总线活动<br>-由于监听<br>仅当地址匹配时，缓存行的状态才会受到影响</p>
 <p>可以通过查看本地处理器的动作来非正式地描述操作<br>–读命中<br>–读未命中<br>–写命中<br>–写未命中</p>
 <p>正式的MESI操作请看状态转换图。</p>
 <p><img src="/blog/img/2020/Cache_Coherency/MESI_local.png" alt="local" title="local"><br>本地访问</p>
 <p><img src="/blog/img/2020/Cache_Coherency/MESI_remote.png" alt="remote" title="remote"><br>远程访问</p>
+<p>“伪相联Cache”，又是一个需要插队提前解释的，感觉像在写程序，先把函数都准备好，后面才好调用。</p>
+<h2 id="伪相联-Cache基本思想及工作原理"><a href="#伪相联-Cache基本思想及工作原理" class="headerlink" title="伪相联 Cache基本思想及工作原理"></a>伪相联 Cache基本思想及工作原理</h2><p>在逻辑上把直接映象 Cache的空间上下平分为两个区。对于任何一次访问，伪相联 Cache 先按直接映象 Cache的方式去处理。 若命中，则其访问过程与直接映象 Cache的情况一样。 若不命中，则再到另一区相应的位置去查找。若找到，则发生了伪命中，否则就只好访问下一级存储器。<br>伪相联 Cache 具有一快一慢两种命中时间，它们分别对应于正常命中和伪命中的情况。 图中绘出了它们的相对关系。<br><img src="/blog/img/2020/Cache_Coherency/pesuade_cache.jpg" alt="pesuade" title="pesuade"><br>使用伪相联技术存在一定的危险：如果直接映象 Cache 里的许多快速命中在伪相联 Cache 中变成慢速命中，那么这种优化措施反而会降低整体性能。<br>所以，要能够指出同一组中的两个块哪个为快速命中，哪个为慢速命中，这是很重要的。<br>一种简单的解决方法就是交换两个块的内容。</p>
+<h1 id="Cache-Miss的缓解"><a href="#Cache-Miss的缓解" class="headerlink" title="Cache Miss的缓解"></a>Cache Miss的缓解</h1><p><strong>提高相联度</strong>（cache相联度测量见知乎的这篇文章 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/242757851%EF%BC%89%E3%80%81">https://zhuanlan.zhihu.com/p/242757851）、</a> <strong>Victim Cache</strong> (见上面victim解释)、<strong>伪相联 Cache</strong> 等技术以及好的缓存替换算法都可降低缓存冲突失效，从而提高缓存命中率。</p>
+<h2 id="预取技术"><a href="#预取技术" class="headerlink" title="预取技术"></a>预取技术</h2><p>随着应用规模的不断扩大和上述技术的不断成熟，容量失效和强制性失效在总的缓存失效次数中所占比例越来越大，成为影响缓存性能的主要因素。预取技术可以通过计算和访存的重叠，隐藏因为缓存延时而引起的缓存失效，被认为是解决容量失效和强制性失效的有效手段。随着缓存技术的广泛应用，预取技术也在存储控制器、操作系统、数据库、网络、文件系统等应用中起到重要作用。</p>
+<h3 id="硬件预取"><a href="#硬件预取" class="headerlink" title="硬件预取"></a>硬件预取</h3><p>硬件预取是由硬件根据访存的历史信息，对未来可能的访存单元预先取入Cache，从而在数据真正被用到时不会造成Cache失效。但是由于只是基于访存的历史信息，硬件预取会取回大量无用的Cache块，占用访存带宽，还会导致严重的Cache污染问题。由于硬件预取是基于访存的历史信息来预测未来的访存模式，从而可以在数据使用之前将其从下一级的存储器中取回。</p>
+<h3 id="软件预取"><a href="#软件预取" class="headerlink" title="软件预取"></a>软件预取</h3><p>当代微处理器大都提供了预取指令来支持软件的预取。软件预取是指在编译时由编译器显示加入预取指令，提前将下一级存储器中的数据取回。因为加入了大量的预取指令，同时显示的预取指令需要计算出准确的预取地址，从而导致不能及时的发出预取指令以足够隐藏访存延时，影响了性能的提高。并且必须使额外的 预取指令开销不能超过预取所能带来的效益， 否则得不偿失。</p>
+<h3 id="软硬件结合"><a href="#软硬件结合" class="headerlink" title="软硬件结合"></a>软硬件结合</h3><p>考虑到硬件预取和软件预取的缺点，有不少学者提出用软硬件结合的方法来解决这些问题。基本方法都是围绕软件给予硬件一些关于程序的信息，克服单纯的硬件预取的盲目性，从而可以得到更高的性能，更具有吸引力。 如提出的GRP技术，它是由编译提供预取的时机、预取的步长、预取的元素数目等信息，由硬件完成预取动作。</p>
+<p>预取方案通常需要回答下面几个问题：<br>a. 什么时候进行预取；<br>b. 预取什么样的数据；<br>c. 预取到的数据放在什么位置。</p>
+<p>而如果没有解决好其中某些问题，则会导致：<br>a. 大量无用数据块的取回，以及由此导致的带宽浪费；<br>b. 预取的数据造成了将要使用数据的替换，造成 Cache性能的下降；<br>c. 预取时机过早或过晚，数据在没有使用前就被替换出去或者是要使用时还没有取回。</p>
 
             
                 
